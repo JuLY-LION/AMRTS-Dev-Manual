@@ -5,7 +5,7 @@
 
 #content_wrapper {
 	width: 67%;
-	height: 1280;
+	height: auto;
 	
 	border: 5px solid #b0b0b0;
 	border-radius: 10px;
@@ -43,8 +43,8 @@ h2 {
 	font-family: capture;
 }
 h3 {
-	color: #e0e0e0;
-	font-family: capture;
+	color: #ffffff;
+	font-family: droidbold;
 }
 a {
 	color: white;
@@ -55,6 +55,24 @@ a {
 a:visited {
 	border-left: 2px dashed #c080ff;
 	border-bottom: 2px dashed #c080ff;
+}
+a.bad {
+	color: white;
+	padding: 2px;
+	border-left: 2px dashed #ff4040;
+	border-bottom: 2px dashed #ff4040;
+}
+a.noborder {
+	color: auto;
+	padding: 0px;
+	border-left: 0px none #ffffff;
+	border-bottom: 0px none #ffffff;
+}
+
+div.topbutton{
+	position: absolute;
+	top: 32px;
+	left: 32px;
 }
 
 #armygreen {
@@ -91,4 +109,9 @@ a:visited {
 	padding: 2px;
 	border-left: 2px dashed #ff4040;
 	border-bottom: 2px dashed #ff4040;
+}
+
+#lrw {
+	padding: 0px;
+	border: 6px outset #204060;
 }
