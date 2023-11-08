@@ -1,0 +1,11 @@
+#content_wrapper {
+	width: 67%;
+	height: auto;
+	
+	border: 5px solid #b0b0b0;
+	border-radius: 10px;
+	margin: 20px auto;
+	padding: 10px;
+	background-image: url("images/if_interface_t_seamless_dark.png");
+	background-size: 1024px 1024px;
+}

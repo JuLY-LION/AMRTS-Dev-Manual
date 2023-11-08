@@ -1,29 +1,7 @@
-@font-face { font-family: droid; src: url('fonts/DroidSans.ttf'); } 
+@font-face { font-family: droid; src: url('fonts/DroidSans.ttf'); }
 @font-face { font-family: droidbold; font-weight: bold; src: url('fonts/DroidSans-Bold.ttf'); }
-@font-face { font-family: stencil; src: url('fonts/StencilStd.otf'); } 
+@font-face { font-family: stencil; src: url('fonts/StencilStd.otf'); }
 @font-face { font-family: capture; src: url('fonts/Capture-It.ttf'); }
-
-#content_wrapper {
-	width: 67%;
-	height: auto;
-	
-	border: 5px solid #b0b0b0;
-	border-radius: 10px;
-	margin: 20px auto;
-	padding: 10px;
-	background-image: url("images/if_interface_t_seamless_dark.png");
-	background-size: 1024px 1024px;
-}
-#heading {
-	width: 67%;
-	height: auto;
-	
-	border: 2px solid #b0b0b0;
-	border-radius: 4px;
-	margin: 0px auto;
-	padding: 2px 4px;
-	background-image: url("images/if_interface_bkgnd.png");
-}
 
 body {
 	background-image: url("images/prop_livingroom_wall_skybox.png");
@@ -75,6 +53,16 @@ div.topbutton{
 	left: 32px;
 }
 
+#heading {
+	width: 67%;
+	height: auto;
+	
+	border: 2px solid #b0b0b0;
+	border-radius: 4px;
+	margin: 0px auto;
+	padding: 2px 4px;
+	background-image: url("images/if_interface_bkgnd.png");
+}
 #armygreen {
 	color: #5ef241;
 }
