@@ -1,16 +1,48 @@
-<html>
-<head>
-<link rel="stylesheet" type="text/css" href="External1.css">
+<html><head>
+	<link rel="stylesheet" type="text/css" href="External1.css">
+	<title>Index</title>
 </head><body>
 
-<div id = "content_wrapper">
-<h1>Header1</h1>
-<h3>Header3</h3>
-<p>Paragraph</p>
-<p id="armygreen">Paragraph ID armygreen</p>
-<p>In-line <font id="armytan">paragraph</font> text</p>
-</div>
+	<div id = "content_wrapper">
+		<h1>Index</h1>
+		<h2>1.1 Welcome</h2>
+
+<p>Welcome to the Dark Reign 2 Construction Kit Manual. This manual will
+provide you with details on the Dark Reign 2 Editor, including tutorials on
+how to create your own multiplayer maps and single player missions.
+Additionally, we have included the Technical Reference Manual, which
+provides details for the Dark Reign 2 scripting language.</p>
+
+<h3>Accessing the Editor</h3>
+
+To access the Dark Reign 2 Editor you will need to make a custom shortcut.
+Right-click on the dr2.exe file in your installed folder of Dark Reign 2 and
+create a shortcut.  You will then need to right click the shortcut and
+select properties at the bottom.  Then select the Shortcut tab at the top.
+Then add the following information to the Target field:</p>
+
+<p id="codestring">-cmd:"gamegod.studiomode 1;sys.runcode studio"</p>
+
+<p>Do not replace the line.  Add the above information to the end.  It should
+end up looking like something like this:</p>
+
+<p id="codestring">"C:\Program Files\Dark Reign 2\dr2.exe" -cmd:"gamegod.studiomode 1;sys.runcode studio"</p>
+
+<p>You may also access the Editor directly through any mission. Activate the
+console with <font id="armygreen">CTRL+ALT+F10</font>, then type <font id="codestring">sys.runcode studio</font> to enter the
+Editor.</p>
+
+<h3>Sharing Your Work</h3>
+
+<p>After you've created a new map you'll want to share it with friends. Dark
+Reign 2 allows map transfers in the multiplayer lobby. All maps must be
+"packed" in .zwp format. To pack your maps, use the drpack program included
+on your Dark Reign 2 CD. For more information on this, consult the
+Editor_readme.txt found on the Dark Reign 2 CD.</p>
+
+<p>Be sure to check out <a id="badlink" target="_blank" href="http://www.pandemicstudios.com">Pandemic Studios</a> for new missions, mods and
+information on creating your own Dark Reign 2 maps!</p>
+	</div>
 
 
-</body>
-</html>
+</body></html>
