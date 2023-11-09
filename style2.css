@@ -41,6 +41,11 @@ a.noborder {
 dsb {
 	font-family: droidbold;
 }
+hl {
+	color: ffff80;
+	background-image: url("colors/darkgray_opacity50.png");
+	padding: 2px;
+}
 
 #badlink {
 	color: white;
