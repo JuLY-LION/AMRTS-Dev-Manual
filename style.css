@@ -2,6 +2,7 @@
 @font-face { font-family: droidbold; font-weight: bold; src: url('fonts/DroidSans-Bold.ttf'); }
 @font-face { font-family: stencil; src: url('fonts/StencilStd.otf'); }
 @font-face { font-family: capture; src: url('fonts/Capture-It.ttf'); }
+@font-face { font-family: gunplay; src: url('fonts/Gunplay-Rg.otf'); }
 
 body {
 	background-image: url("images/prop_livingroom_wall_skybox.png");
@@ -22,7 +23,7 @@ h2 {
 }
 h3 {
 	color: #ffffff;
-	font-family: droidbold;
+	font-family: gunplay;
 }
 a {
 	color: white;
@@ -47,20 +48,49 @@ a.noborder {
 	border-bottom: 0px none #ffffff;
 }
 
-div.topbutton{
+div.topbutton {
 	position: absolute;
 	top: 32px;
 	left: 32px;
 }
+iframe {
+	width: 100%;
+	height: 32px;
+	
+	border: 0px none;
+	margin: 0px auto;
+	padding: 0px;
+}
 
-#heading {
-	width: 67%;
-	height: auto;
+dsb {
+	font-family: droidbold;
+}
+code {
+	color: aqua;
+	background-image: url("colors/black_opacity50.png");
+	
+	font-family: "Lucida Console";
+	
+	padding: 2px;
+	border-radius: 4px;
+	border: 2px solid #202020;
+}
+hl {
+	color: ffff80;
+	background-image: url("colors/darkgray_opacity50.png");
+	padding: 2px;
+}
+
+#hf {
+	width: 100%;
+	height: 19px;
+	
+	font-family: droidbold;
 	
 	border: 2px solid #b0b0b0;
 	border-radius: 4px;
 	margin: 0px auto;
-	padding: 2px 4px;
+	padding: 4px;
 	background-image: url("images/if_interface_bkgnd.png");
 }
 #armygreen {
@@ -76,30 +106,16 @@ div.topbutton{
 	padding: 0px 4px;
 	border-radius: 1440px;
 }
-#codestring {
-	color: aqua;
-	background-image: url("colors/black_opacity50.png");
-	
-	font-family: "Lucida Console";
-	
-	padding: 2px;
-	border-radius: 4px;
-	border: 2px solid #202020;
-}
-#highlighter {
-	color: ffff80;
-	background-image: url("colors/darkgray_opacity50.png");
-	padding: 2px;
-}
-
 #badlink {
 	color: white;
 	padding: 2px;
 	border-left: 2px dashed #ff4040;
 	border-bottom: 2px dashed #ff4040;
 }
-
 #lrw {
 	padding: 0px;
 	border: 6px outset #204060;
+}
+#captureit {
+	font-family: capture;
 }

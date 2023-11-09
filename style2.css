@@ -1,0 +1,50 @@
+@font-face { font-family: droid; src: url('fonts/DroidSans.ttf'); }
+@font-face { font-family: droidbold; font-weight: bold; src: url('fonts/DroidSans-Bold.ttf'); }
+
+body {
+	color: white;
+	font-family: droid;
+	margin: 0px;
+}
+div {
+	width: 67%;
+	
+	border: 2px solid #b0b0b0;
+	border-radius: 4px;
+	margin: 0px auto;
+	padding: 4px;
+	background-image: url("images/if_interface_bkgnd.png");
+}
+a {
+	color: white;
+	padding: 2px;
+	border-left: 2px dashed #80c0ff;
+	border-bottom: 2px dashed #80c0ff;
+}
+a:visited {
+	border-left: 2px dashed #c080ff;
+	border-bottom: 2px dashed #c080ff;
+}
+a.bad {
+	color: white;
+	padding: 2px;
+	border-left: 2px dashed #ff4040;
+	border-bottom: 2px dashed #ff4040;
+}
+a.noborder {
+	color: auto;
+	padding: 0px;
+	border-left: 0px none #ffffff;
+	border-bottom: 0px none #ffffff;
+}
+
+dsb {
+	font-family: droidbold;
+}
+
+#badlink {
+	color: white;
+	padding: 2px;
+	border-left: 2px dashed #ff4040;
+	border-bottom: 2px dashed #ff4040;
+}
