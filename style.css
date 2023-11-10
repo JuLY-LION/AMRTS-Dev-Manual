@@ -68,7 +68,14 @@ dsb {
 hili {
 	color: ffff80;
 	background-image: url("colors/darkgray_opacity50.png");
-	padding: 2px;
+	padding: 2px 0px;
+}
+img.dl {
+	width:32px;
+	height:32px;
+	
+	position: relative;
+	top: 0px;
 }
 
 #hf {
@@ -118,4 +125,7 @@ hili {
 }
 #captureit {
 	font-family: capture;
+}
+#gray {
+	color: #c0c0c0;
 }
