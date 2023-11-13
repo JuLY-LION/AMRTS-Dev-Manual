@@ -3,20 +3,20 @@
 	<link rel="stylesheet" type="text/css" href="../wrapper.css">
 	<title>2-1</title>
 	<style>
-		th {
-			text-align: left;
-			padding: 0px 4px;
-			border:2px inset #000000;
-		}
-		td.r {
-			text-align: right;
-		}
 		table {
 			border:2px outset #000000;
 		}
+		th {
+			text-align: left;
+			padding: 0px 4px;
+			border: 2px inset #000000;
+		}
 		td {
-			border:2px inset #000000;
 			padding: 2px 4px;
+			border: 2px inset #000000;
+		}
+		td.r {
+			text-align: right;
 		}
 	</style>
 </head><body>
@@ -34,94 +34,69 @@
 		
 		<h1>Menu Tools</h1>
 		<h2>Basic Tools (2.1)</h2>
-		<h2 style="color:#ff8080;">Under construction! Come back later!</h2>
-		<h3>Header3</h3>
 		
-The tools menus are accessed by clicking the "Tools" button in the lower left corner.
+		<p>The menu tools are accessed by clicking the "Tools" button in the lower left corner.</p>
+		
+		<h3>New</h3>
+		
+		<p>Creates a new mission from scratch.</p>
+			<image src="c_images/new_mission.png">
+			<p>For <dsb>size</dsb>, enter a single numeric value. Size is measured in meters*. The map will be this size squared, so if you enter 500, the map will be 500x500 meters. Most maps included in AMRTS are around 1024x1024, although that includes unplayable areas, like the kitchen floor in mission 7. For reference:</p>
+		<table>
+			<tr>
+			<th>Camera and Movement</th><td>/bc_p/T1.x</td><td class="r">768x768</td>
+			</tr><tr>
+			<th>Behind the Tan Curtain</th><td>/story/S2.x</td><td class="r">992x992</td>
+			</tr><tr>
+			<th>Baths of Glory</th><td>/story/S10.x</td><td class="r">1024x1024</td>
+			</tr><tr>
+			<th>Flooded Follies</th><td>/gb/flooded.x</td><td class="r">1024x1024</td>
+			</tr><tr>
+			<th>DumDum Frenzy</th><td>/mp/2dumdums.x</td><td class="r">736x736</td>
+			</tr><tr>
+			<th>Take the 8-Train</th><td>/mp/8train.x</td><td class="r">1248x1248</td>
+			</tr><tr>
+			<th>Gehenna Conventions</th><td>(by TommyCD1)</td><td class="r">2048x2048</td>
+			</tr>
+		</table>
+		<! size="AA: 4.9cm 1.875in; AAA: 4.4cm 1.75in;">
+		<p>*What was considered a meter in DR2 obviously can't be measured the same in AMRTS, so the proper size is unknown.</p>
+		<!-- >
+		* AA battery tile = 3.26... cm / 1.286089 in
+		* AAA battery tile = 2.93... cm / 1.154856 in
+		* VHS tape tile = 6.23... cm / 2.454068 in
+		< -->
 
-<p id="gray">New
-Create a new map.
-	Size of Map</p>
-In this box, enter a single numeric value. Size is measured in meters. The map will be this size squared, so if you enter 500, the map will be 500x500 meters. Most multiplayer maps included in AMRTS are close to 1024x1024, although it that includes unplayable areas, like the kitchen floor in mission 7. For reference:<br><br>
+		The <dsb>world</dsb> you select will determine your enviroment tileset and placeable assets. Your default options are sandbox, yard, basement, kitchen, livingrm, bathroom, bedroom, and attic. (Shell is used for non-gameplay screens.) Select one of these worlds in the dropdown box.
+		<p><font id="insectred">TODO: Show screenshot of each world!</font></p>
+			
+		<h3>Load</h3>
+		Load an existing map
 
-<table>
-	<tr>
-    <th>Camera and Movement</th><td>/bc_p/T1.x</td><td class="r">768x768</td>
-	</tr><tr>
-    <th>Behind the Tan Curtain</th><td>/story/S2.x</td><td class="r">992x992</td>
-	</tr><tr>
-    <th>Baths of Glory</th><td>/story/S10.x</td><td class="r">1024x1024</td>
-	</tr><tr>
-    <th>Flooded Follies</th><td>/gb/flooded.x</td><td class="r">1024x1024</td>
-	</tr><tr>
-    <th>DumDum Frenzy</th><td>/mp/2dumdums.x</td><td class="r">736x736</td>
-	</tr><tr>
-    <th>Take the 8-Train</th><td>/mp/8train.x</td><td class="r">1248x1248</td>
-	</tr><tr>
-    <th>Gehenna Conventions</th><td>(by TommyCD1)</td><td class="r">2048x2048</td>
-	</tr>
-</table>
-<br><br>
+		<h3>Save</h3>
+		Save current map
 
-World<br><br>
-There are 6 different default tilesets you can use. A tileset is a set of textures that define the environment. The available tilesets are below. Type one of these names in the "World" box (if you have a patched version of DR2, there will be a pull-down selection box for "World").<br><br>
-sprawl
-deserto
-dome
-sigma
-sewer
-jungle
-gilwoch
-<br><br>
-Tools Menu<br><br>
-	Load
-Load an existing map<br><br>
+		<h3>Ruleset</h3>
+		This menu is used to set the default <dsb>ruleset</dsb> of the map. You probably know it better as a "gamemode". Select a ruleset from the dropdown menu. (AMRTS uses Protect HQ for standard multiplayer maps) You'll want to keep the result on none if you're creating a singleplayer mission, as you'll be either be picking out from the default objectives, or scripting your own later.
+		
+		<p><font id="insectred">TODO: List default rulesets and their win/elimination conditions!</font></p>
 
-Save
-Save current map<br><br>
+		<h3>Teams, LightTime, & Weather</h3>
+		a
+		<h3>Connected Regions</h3>
+		<p><font id="insectred">Clicking this gives you a cookie IRL.</font></p><! Display pathable areas based on traction type.>
 
-Mission<br><br>
-This menu is used to set the default ruleset of the map. Select a ruleset from the pulldown menu (DR2 uses Protect HQ for standard multiplayer maps). If "Fixed Ruleset" is on, the map will be locked with the selected ruleset and won't be playable with other rulesets.<br><br>
+		<h3>Minimap</h3>
+		Toggle the minimap in the studio. It's mostly non-functional in the current community versions.
+		
+		<h3>Option</h3>
+		Brings up the game options screen from the main menu, should you need it.
 
-    Gluttony: collect 30000 Taelon (or steal 1000)
-    Protect HQ: team loses if without a Command Center for five minutes
-    Blood Bath: kill 50 enemies
-    King of the Hill: build and defend the throne in the center of the map
-    Control Freak: control all five points
-    Deathmatch: destroy all enemies
-    Assault!: escort your Dezigner unit to the defended base<br><br>
-
-    Connected Regions
-    Display pathable areas based on traction type.<br><br>
-
-    Mesh
-    Toggle display options (generally set by video card)<br><br>
-
-    Terrain
-    Set water transparency, mirror, waves and cloud layer<br><br>
-
-    Graphics
-    Set fog depth, farplane, and additional options (generally set by video card)<br><br>
-
-    Video
-    Display Video Options screen<br><br>
-
-    Minimap
-    Toggle minimap in Studio (refresh to update in Studio)<br><br>
-
-    Play Mission
-    Load and play current map<br><br>
-
-    Exit Studio
-    Exit to Main Menu<br><br>
-
-    Tools
-    Close Tools menu
-
-
+		<h3>Play Mission, Main Menu, & Exit</h3>
+		a
+ 
+ 
+ 
 	</div>
 	<iframe src="../footer.html"></iframe>
-	
-
-
 </body></html>
