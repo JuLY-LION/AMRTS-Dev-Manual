@@ -1,0 +1,78 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>4-1</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	
+	
+	
+	
+	<div id = "content_wrapper">
+		
+		<h1>Creating a Multiplayer Map</h1>
+		<h2>Multiplayer Map Basics (4.2)</h2>
+		
+		<p> This section will take you through the steps of creating a playable, standard multiplayer map for Army Men RTS.</p>
+		
+		<h3>Your first map</h3>
+
+		<p>Go ahead and do the following:
+		<ol>
+			<li>Create a New map, choose a size and world (Section 2.1)
+			<li>Create the map's terrain and texture (Section 3.1)
+			<li>Add water if map requires water (Section 3.4)
+			<li>Place ambient objects (Section 3.2 Objects Menu).
+			<li>Color the map and apply additional textures (Sections 3.3 & 3.10)
+		</ol>
+		If you're already having trouble, step back and review chapters 2 and 3 before continuing.</p>
+
+		<p>You'll want to create a team for each player your map will support. What you name them won't better, but it might help to name them based on their cardinal location. (for example, "Team-NW") But just "team(x)" is fine.</p>
+
+		<p>Now we are going to mark the spots that are going to be the player's start locations. Hit the <dsb>[5]</dsb> key to get the Region menu. Left-click and drag on the terrain to create a region. It will look like a box. Make a small region at each start location define the box size, type a name in the field, then click "create". Your new Region should now appear in the list on the right of the screen. The center of the Region will be where the camera is looking at the start of the game, it will also be the spot where your starting rigs are spawned in. It's best to name the regions the same as your team names + "start". (like "team4_start")</p>
+
+		<p>Now, you'll need to go into each team's config and make some settings. Double click on the team name to get the team config menu. For EACH team do the following:</p>
+
+		<table>
+			<tr>
+			<td>Default Client</td><td>Disabled*</td>
+			</tr><tr>
+			<td>Avilable to Player</td><td>Enabled</td>
+			</tr><tr>
+			<td>Has Stats</td><td>Enabled</td>
+			</tr><tr>
+			<td>Requires AI</td><td>Disabled</td>
+			</tr><tr>
+			<td>Plastic:Electricity</td><td>2000:800**</td>
+			</tr><tr>
+			<td>Region</td><td>(Starting region)</td>
+			</tr><tr>
+			<td>Personality</td><td>None</td>
+			</tr><tr>
+			<td>Fixed Side</td><td>Enabled</td>
+			</tr><tr>
+			<td>Side</td><td>Army</td>
+			</tr><tr>
+			<td>Enable Type Filtering</td><td>Disabled</td>
+			</tr>
+		</table>
+		
+		<p>*Set this to disabled for all except any 1 team.<br>
+		**Recommended values for teams are 2,000P and 800E. But you may choose anything you feel is best for your map, like 2,500P and 1,000E if you want to speed up base building, or 2,000P and 200E if electricity is meant to be scarce. Heck, 100k each is also an option if you want to make a maxrush map. Regardless, make sure it's the same for all teams for balance.</p>
+
+		<p>Before you forget, double-check you set a start region for each playable team. (so team1's region would be the "team1_start" region) Do not forget this step! <hili>Neglecting to assign regions to your playable teams may result in <dsb>map crashes</dsb> while trying to load the map into the studio editor!</hili> If this happens to you, you could try assigning the regions in the mission's game.cfg, but you'll more likely just have to delete all your teams there and reload the map.</p>
+
+		<p>Finally, you need to set a default ruleset for the map. All of the standard multiplayer maps in AMRTS have "Protect HQ" as the default ruleset. (aside from King of the Hill) Click "Tools" in the lower left. Select "Ruleset" and "Protect HQ" from the dropdown box.)</p>
+
+		<p>Hopefully you've been saving your map perodically as you've been working on it. If not, it's a good habit when working on larger projects, especially beyond AMRTS. Quick-save your map with <dsb>Ctrl+S</dsb>. Save in the Multiplayer Missions folder, and your map should now show up on the menu when you run the game! Before distributing your map, you should zip the map folder with DrPacker or X File Utilities.</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+	
+
+
+</body></html>
