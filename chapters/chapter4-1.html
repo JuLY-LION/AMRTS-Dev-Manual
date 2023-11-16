@@ -2,6 +2,35 @@
 	<link rel="stylesheet" type="text/css" href="../style.css">
 	<link rel="stylesheet" type="text/css" href="../wrapper.css">
 	<title>4-1</title>
+	<style>
+		table {
+			border:2px outset #000000;
+		}
+		th {
+			text-align: left;
+			padding: 0px 4px;
+			border: 2px inset #000000;
+		}
+		td {
+			padding: 2px 4px;
+			border: 2px inset #000000;
+		}
+		td.r {
+			text-align: right;
+		}
+		#yes {
+			color: a0ffa0;
+		}
+		#no {
+			color: ffa0a0;
+		}
+		#plas {
+			color: ffffa0;
+		}
+		#elec {
+			color: c0c0ff;
+		}
+	</style>
 </head><body>
 	<iframe src="../header.html"></iframe>
 	<div class = "topbutton">
@@ -39,31 +68,31 @@
 		<p>Now, you'll need to go into each team's config and make some settings. Double click on the team name to get the team config menu. For EACH team do the following:</p>
 
 		<table>
-			<tr>
-			<td>Default Client</td><td>Disabled*</td>
+			<tr><font id=""></font>
+			<td>Default Client</td><td><font id="no">Disabled</font>*</td>
 			</tr><tr>
-			<td>Avilable to Player</td><td>Enabled</td>
+			<td>Avilable to Player</td><td><font id="yes">Enabled</font></td>
 			</tr><tr>
-			<td>Has Stats</td><td>Enabled</td>
+			<td>Has Stats</td><td><font id="yes">Enabled</font></td>
 			</tr><tr>
-			<td>Requires AI</td><td>Disabled</td>
+			<td>Requires AI</td><td><font id="no">Disabled</font></td>
 			</tr><tr>
-			<td>Plastic:Electricity</td><td>2000:800**</td>
+			<td>Plastic:Electricity</td><td><font id="plas">2000</font>:<font id="elec">800</font>**</td>
 			</tr><tr>
 			<td>Region</td><td>(Starting region)</td>
 			</tr><tr>
-			<td>Personality</td><td>None</td>
+			<td>Personality</td><td><font id="no">None</font></td>
 			</tr><tr>
-			<td>Fixed Side</td><td>Enabled</td>
+			<td>Fixed Side</td><td><font id="yes">Enabled</font></td>
 			</tr><tr>
 			<td>Side</td><td>Army</td>
 			</tr><tr>
-			<td>Enable Type Filtering</td><td>Disabled</td>
+			<td>Enable Type Filtering</td><td><font id="no">Disabled</font></td>
 			</tr>
 		</table>
 		
 		<p>*Set this to disabled for all except any 1 team.<br>
-		**Recommended values for teams are 2,000P and 800E. But you may choose anything you feel is best for your map, like 2,500P and 1,000E if you want to speed up base building, or 2,000P and 200E if electricity is meant to be scarce. Heck, 100k each is also an option if you want to make a maxrush map. Regardless, make sure it's the same for all teams for balance.</p>
+		**Recommended values for teams are <font id="plas">2,000</font>P and <font id="elec">800</font>E. But you may choose anything you feel is best for your map, like <font id="plas">2,500</font>P and <font id="elec">1,000</font>E if you want to speed up base building, or <font id="plas">2,000</font>P and <font id="elec">200</font>E if electricity is meant to be scarce. Heck, 100k each is also an option if you want to make a maxrush map. Regardless, make sure it's the same for all teams for balance.</p>
 
 		<p>Before you forget, double-check you set a start region for each playable team. (so team1's region would be the "team1_start" region) Do not forget this step! <hili>Neglecting to assign regions to your playable teams may result in <dsb>map crashes</dsb> while trying to load the map into the studio editor!</hili> If this happens to you, you could try assigning the regions in the mission's game.cfg, but you'll more likely just have to delete all your teams there and reload the map.</p>
 
