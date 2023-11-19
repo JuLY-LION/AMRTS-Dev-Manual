@@ -1,7 +1,7 @@
 <html><head>
 	<link rel="stylesheet" type="text/css" href="../style.css">
 	<link rel="stylesheet" type="text/css" href="../wrapper.css">
-	
+	<style>li{padding: 1px;}</style>
 	<title>2-2</title>
 </head><body>
 	<iframe src="../header.html"></iframe>
@@ -21,32 +21,36 @@
 		<h2 style="color:#ff8080;">Under construction! Come back later!</h2>
 		This section will explain the teams tool - used to create and edit teams - and how to use mission teams.
 		<h3>Creating and editing teams</h3>
-		<p>To create a new team, click "New", then give a name. (If you don't already see it, enable it in the tools menu.) To enter the setup menu for a team, double-click on the team's name.
-		
-		<h3>Editing a team</h3>
-		The setup menu includes:
+		<p>To create a new team, click "New", then give a name. (If you don't already see it, enable it in the tools menu.) To enter the setup menu for a team, double-click on the team's name.</p>
 
 		<h3>Name</h3>
 		<p>The name of the team. You should name it based on it's color or purpose if it's for great battle or special operation-type mission.</p>
 		
 		<h3>Color</h3>
-		<p>The color of the team stored as an RGB value.<br>a<br>(multiplayer set-up overrides this)</p>
+		<p>The color of the team stored as an RGB value. Multiplayer setup overrides this when Available to Players is enabled.</p>
+		<ul>
+			<li>The green army uses <font id="codestring" style="color:#5ef241;">Color(94, 242, 65);</font> (#5ef241)
+			<li>The tan army uses <font id="codestring" style="color:#fcc26b;">Color(252, 194, 107);</font> (#fcc26b)
+			<li>The ants use <font id="codestring" style="color:#b3321c;">Color(179, 50, 28);</font> (#b3321c)
+			<li>The cockroaches appear to be pre-colored, and won't be affected by their team color
+		</ul>
 		
 		<h3>Default Client</h3>
-		<p>Also known as Default Team. If enabled, you'll play as this team when the mission is played.</p>
+		<p>Also known as Default Team. If enabled, you'll control this team when the mission is played.</p>
 		<p>TommyCD1's patched Editor will ensure only 1 team can be set as the default client at a time. Having any other number will cause a crash when the map is played.</p>
 		
 		<h3>Available to Players</h3>
-		<p>Determines if players should be allowed to select this team slot in a multiplayer match.</p>
+		<p>Determines if players should be allowed to select this team slot in a multiplayer match. If you have a neutral team that isn't apart of any other team, like pre-placed ants that are hostile to all players, you'll want to disable this option.</p>
+		<p>You can disregard this for singleplayer missions.</p>
 		
 		<h3>Show in Debriefing</h3>
-		<p>Add details show this team's stats during the debriefing HasStats Display Statistics</p>
+		<p>Also called Display Statistics or Has Stats. Enable to show this team's stats during the debriefing.</p>
 		
 		<h3>Requires AI</h3>
-		<p>Used if any units on the team are ever controlled by scripting. This includes the player's units if moved in a cineractive.</p>
+		<p>Used if any units on the team are ever controlled by scripting. This includes the player's units if moved in a cineractive. This has no effect on the personality chosen.</p>
 		
 		<h3>Side</h3>
-		<p>Used to show if the team's army is comprised of plastic soldiers ("army") or ants. ("insect")</p>
+		<p>Used to show if the team's army is comprised of army soldiers ("army") or ants/cockroaches. ("insect")</p>
 		
 		<h3>Fixed Side</h3>
 		<p>Enable if team has pre-placed units. Disabling will spawn Sarge and a bulldozer in that team's starting region.</p>
@@ -57,14 +61,15 @@
 		<h3>Spawn Region</h3>
 		<p>Set this team's spawn region. Click the name above it to center your camera on the current section.</p>
 		
-		<h3>Personality</h3>
-		<p>The AI configuration to use for this team when not controled by a player.</p>
+		<h3>Personality (AI)</h3>
+		<p>The AI configuration to use for this team when not controled by a player. Your default options are None, gb, and default, the last of which is used on Multiplayer.</p>
 		
 		<h3>Camera Angle</h3>
-		<p>Color: team color (multiplayer set-up overrides this)</p>
+		<p>Supposedly sets the starting camera angle, but it doesn't have any effect once the mission loads in AMRTS.</p>
 		
 		<h3>Filtering</h3>
-		<p>Color: team color</p>
+		<p>Determines if the team should have limited access to units or structures. This is enabled for the player team in most of the story campaign, like in mission 4, where choppers are included in the map, (for the Tan) but they're filtered out for the player until mission 7.</p>
+		<p>Filtering out a unit-type for a team doesn't affect those units already placed on the map. Like mission 8, where the player hasn't unlocked the radio operator, but can still use the one placed on the map for paratroopers should they locate him.</p>
 		
 		<h3>Objectives</h3>
 		<p>Color: team color (multiplayer set-up overrides this)</p>
@@ -86,7 +91,7 @@
 
 <br>Start Camera Region: starting camera location (region name)
 
-<br>Angle: starting camera angle
+<br>Angle: 
 
 <br>Default AI: sets default ai
 
