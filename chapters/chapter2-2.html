@@ -23,17 +23,17 @@
 		<p>To create a new team, click "New", then give a name. (If you don't already see it, enable it in the tools menu.) To enter the setup menu for a team, double-click on the team's name.</p>
 
 		<h3>Name</h3>
-		<p>The name of the team. You should name it based on it's color or purpose if it's for great battle or special operation-type mission.</p>
+		<p>The name of the team. You should name it based on it's color or purpose if it's for a great battle or special operation-type mission.</p>
 		
 		<h3>Color</h3>
-		<p>The color of the team stored as an RGB value. Multiplayer setup overrides this when Available to Players is enabled.</p>
+		<p>The color of the team stored as an RGB value. A multiplayer match overrides this when Available to Players is enabled.</p>
 		<ul>
 			<li>The green army uses <font id="codestring" style="color:#5ef241;">Color(94, 242, 65);</font> (#5ef241)
 			<li>The tan army uses <font id="codestring" style="color:#fcc26b;">Color(252, 194, 107);</font> (#fcc26b)
 			<li>The ants use <font id="codestring" style="color:#b3321c;">Color(179, 50, 28);</font> (#b3321c)
-			<li>The cockroaches appear to be pre-colored, and won't be affected by their team color
+			<li>The cockroaches are pre-colored, and won't be affected by their team color
 		</ul>
-		<p>Your chosen color may look slightly different after taking the unit's texture and mission's lighting into account.</p>
+		<p>Your chosen color may look slightly desaturated from what it looks like in the color picker after taking the unit's texture and mission's lighting into account.</p>
 		
 		<h3>Default Client</h3>
 		<p>Also known as Default Team. If enabled, you'll control this team when the mission is played.</p>
@@ -83,7 +83,21 @@
 		</ul>
 		<p>There is no minimum or maximum amount of objectives a team can have enabled.</p>
 		
-
+		<h3>Misc</h3>
+		<ul>
+			<li><dsb>Relations</dsb> - Determines who that team is fighting against. Can be set in the <font id="armygreen">game.cfg</font> or studio console. <hili>Don't forget to set relations both ways!</hili>
+			<ul>
+				<li>"Ally" = <i>This team assists me and should be supported. I can see them through the shroud.</i>
+				<li>"Enemy" = <i>This team is hostile to me and should be attack. I'm alerted when they're spotted by my own units.</i>
+				<li>"Neutral" = <i>This team can't or won't assist me and can't be attacked. They don't appear as an enemy on the minimap.</i>
+			</ul>
+			<li><dsb>Knocked Out</dsb> - Determines if this team can't be given units. Requires Available to Players to be enabled to have any effect.
+			<li><dsb>Pain Current Cluster</dsb> - (Unknown function)
+			<li><dsb>Unique Script ID</dsb> - (Unknown function)
+			<li><dsb>Permanent Radar</dsb> - A team setting only found DR2's studio editor. If disabled, the team wouldn't always have a minimap for the mission. Not applicable to AMRTS.
+		</ul>
+		
+		
 		
 	</div>
 	<iframe src="../footer.html"></iframe>
