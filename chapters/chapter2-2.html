@@ -18,7 +18,6 @@
 		
 		<h1>Menu Tools</h1>
 		<h2>Team Tool (2.2)</h2>
-		<h2 style="color:#ff8080;">Under construction! Come back later!</h2>
 		This section will explain the teams tool - used to create and edit teams - and how to use mission teams.
 		<h3>Creating and editing teams</h3>
 		<p>To create a new team, click "New", then give a name. (If you don't already see it, enable it in the tools menu.) To enter the setup menu for a team, double-click on the team's name.</p>
@@ -34,6 +33,7 @@
 			<li>The ants use <font id="codestring" style="color:#b3321c;">Color(179, 50, 28);</font> (#b3321c)
 			<li>The cockroaches appear to be pre-colored, and won't be affected by their team color
 		</ul>
+		<p>Your chosen color may look slightly different after taking the unit's texture and mission's lighting into account.</p>
 		
 		<h3>Default Client</h3>
 		<p>Also known as Default Team. If enabled, you'll control this team when the mission is played.</p>
@@ -61,8 +61,8 @@
 		<h3>Spawn Region</h3>
 		<p>Set this team's spawn region. Click the name above it to center your camera on the current section.</p>
 		
-		<h3>Personality (AI)</h3>
-		<p>The AI configuration to use for this team when not controled by a player. Your default options are None, gb, and default, the last of which is used on Multiplayer.</p>
+		<h3>Personality</h3>
+		<p>Also called Default AI. This is the AI configuration to use for this team when not controled by a player. Your default options are None, gb, and default, the last of which is used in Multiplayer.</p>
 		
 		<h3>Camera Angle</h3>
 		<p>Supposedly sets the starting camera angle, but it doesn't have any effect once the mission loads in AMRTS.</p>
@@ -70,41 +70,21 @@
 		<h3>Filtering</h3>
 		<p>Determines if the team should have limited access to units or structures. This is enabled for the player team in most of the story campaign, like in mission 4, where choppers are included in the map, (for the Tan) but they're filtered out for the player until mission 7.</p>
 		<p>Filtering out a unit-type for a team doesn't affect those units already placed on the map. Like mission 8, where the player hasn't unlocked the radio operator, but can still use the one placed on the map for paratroopers should they locate him.</p>
+		<p>Below the "Enable Filtering" button is the list of all the options for army. For each team, a unit/structure that is <hili>highlighted</hili> is <font id="armygreen">available for use</font>. Anything <hili style="color:#e0e0e0;">not highlighted</hili> will be <font style="color:#f25e5e;">filtered out</font>, even for AI players.</p>
+		<!-- p>You'll notice some non-buildable units here, like Bullseye and Ammo Crates. This is for custom unit support in more advanced maps, where the units or structures are modified to allow building these in a barracks or bulldozer.</p -->
 		
 		<h3>Objectives</h3>
-		<p>Color: team color (multiplayer set-up overrides this)</p>
+		<p>The list of available objectives to toggle for the team. They cover much more than just win/loss conditions, minimap markers, and medal goals. Later chapters will go into much more details about objectives and objective scripting, but here's a few of the basics:</p>
+		<ul>
+			<li><dsb>common.killallenemy</dsb> - Once this team has no enemies with any units, they win and the game ends.
+			<li><dsb>common.gbgreen</dsb> - Once this team has no units and no allies with units, they lose and the game ends.
+			<li><dsb>common.gbtan</dsb> - Once this team has no large structures, they lose and the game ends.
+			<li><dsb>common.aivictory</dsb> - Wait until there are opposing human-controlled teams remaining AND no human-controlled enemies remaining, then this team wins and the game ends.<font id="gray"> [Citation needed]</font>
+		</ul>
+		<p>There is no minimum or maximum amount of objectives a team can have enabled.</p>
 		
 
-
-
-<br>: Player's team in a single player mission
-
-<br>: Turn off if team will be AI only
-
-<br>: show this team's stats during the debriefing
-
-<br>Permanent Radar: team always has a minimap
-
-<br>Requires AI: 
-
-<br>Resource Store: starting resource
-
-<br>Start Camera Region: starting camera location (region name)
-
-<br>Angle: 
-
-<br>Default AI: sets default ai
-
-<br>Fixed Side:  (i.e. a team that will always be Sprawlers or JDA; not used for standard multiplayer set-up)
-
-<br>Enable Type Filtering: Filter allowable builds for the team (not used in multiplayer)
-
-<br>Objectives: This tells the mission which script to start with. It is the link that tells the mission which script it should be looking at. Assign available objectives to the team. Usually, just a start objective is assigned.
-
-<br>The tools menus are accessed by clicking the "Tools" button in the lower left corner.</p>
+		
 	</div>
 	<iframe src="../footer.html"></iframe>
-	
-
-
 </body></html>
