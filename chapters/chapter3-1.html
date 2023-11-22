@@ -15,14 +15,13 @@
 	
 	<div id = "content_wrapper">
 		
-		<h1>Header1</h1>
+		<h1>Studio Panels</h1>
 		<h2>Terrain Panel (3.1)</h2>
-		<h2 style="color:#ff8080;">Under construction! Come back later!</h2>
 		
 		<p>The menus you'll be using most often (which will be referred to by this guide as panels for simplicity) are accessed with the 1 through 0 keys. Each key will bring up a different panel with a different studio function. This section will cover the Terrain panel.</p>
 		
 		<h3>Terrain geometry and texturing</h3>
-    	<p>This panel is used for doing two things: creating the terrain geometry, and texturing the terrain. All of the controls for doing these two things are on the same menu, but lets look at the processes separately.</p>
+    	<p>This panel is used for doing two things: creating the terrain geometry, and texturing the terrain. All of the controls for doing these two things are on the same panel, but lets look at the processes separately.</p>
 
 		<h3>Creating the terrain geometry</h3>
 		<p>When you move the mouse over the terrain, you'll see a "grid" cursor. Use <dsb>+/- keys on the numpad</dsb> to change the size of this grid. If you right click, you'll notice the grid changes colors: red, green, and yellow. The cursor has a different function depending on it's color.</p>
@@ -35,31 +34,30 @@
 		<p>We want red (change terrain geometry), so right click until the grid cursor is red. Now when you left click on the terrain, it will manipulate the terrain vertices. Terrain is ALWAYS manipulated at the vertices (corners). You can control how the terrain is manipulated in many ways. There are 3 basic techniques you'll use while creating a map.</p>
 
 		<h3>Raising</h3>
-		<p>Make sure the "Raise" button is depressed. Select "Bell" from the Deform menu. Left click on the terrain and it will rise. Lshift + Left-click, and the terrain will lower. Adjusting the "Scale" slider will affect the amount of 'pressure' the Grid cursor is applying to the terrain. Selecting "Flat" from the Deform menu will create hills with a flatter top. Note: The "Height" slider does nothing while in "Raise" mode.</p>
+		<p>Make sure the "Raise" button is depressed. Select "Bell" from the Deform box. Left click on the terrain and it will rise. Lshift + Left-click, and the terrain will lower. Adjusting the "Scale" slider will affect the amount of 'pressure' the Grid cursor is applying to the terrain. Selecting "Flat" from the Deform box will create hills with a flatter top. Note: The "Height" slider does nothing while in "Raise" mode.</p>
 
 		<h3>Painting</h3>
 		</h3>Click the "Raise" button so it is no longer depressed. This turns Raise mode off. Now when you left click the terrain, it will move all that terrain to the height specified in the "Height" box. To sample an existing height, move the grid cursor over some terrain and hit spacebar to 'eyedrop' that height. You may need to experiment to get just the right height you want (CTRL+Z to undo). In this mode "Bell" and "Flat" do indeed make slightly different geometry. If you want a completely flat surface, use "flat" while using this method. The "Scale" slider does nothing in this mode.</p>
 
 		<h3>Smoothing</h3>
-		</p>This "pinches" all terrain vertices together, producing a smoothing effect on the terrain. This is usually the last step, and is used to "clean up" and make hills and cliffs look more realistic. Select "Smooth" from the Deform menu (it doesn't matter if you are in Raise mode or not). Left click to smooth. Adjusting the "Scale" slider will change the 'pressure' of the smoothing process. For kicks, you can un-smooth terrain by holding down Lshift + Left-click.</p>
+		</p>This "pinches" all terrain vertices together, producing a smoothing effect on the terrain. This is usually the last step, and is used to "clean up" and make hills and cliffs look more realistic. Select "Smooth" from the Deform box (it doesn't matter if you are in Raise mode or not). Left click to smooth. Adjusting the "Scale" slider will change the 'pressure' of the smoothing process. For kicks, you can un-smooth terrain by holding down Lshift + Left-click.</p>
 
 		<p>When making a map, you will always be using these techniques or a combination of all of them to create your terrain geometry. There are countless ways you can use these techniques in combination. Keep practicing and experimenting! Remember, you can change the size of your grid cursor with +/- on the keypad.</p>
 
-
-    Texturing the Terrain
-
-    Right click until the Grid Cursor is green (paint texture mode).
-    A box in the lower right will show a list of all the textures in the current tileset. Select a texture and click on the terrain to paint! You can change the size of your grid with +/-.
-    Keep in mind that each texture has a traction type assigned to it, which will have an affect on the speed at which units move over it. These textures vary from world to world, but the tractions stay the same.
-
-    Base - no effect on movement
-    Slow - reduces speed for infantry and non-hovering vehicles
-    Fast - increases speed for infantry and non-hovering vehicles
-    Impassable - impassable to all non-flying units
-    Impassable_Air - impassable to all units, including air</p>
+		<h3>Texturing the Terrain</h3>
+		Right click until the Grid Cursor is green (paint texture mode). A box in the lower right will show a list of all the textures in the current tileset. Select a texture and click and drag around the tiles on the terrain to paint! You can change the size of your grid with +/-.
+		Keep in mind that each texture has a traction type assigned to it, which will have an affect on the speed at which units move over it. These textures vary from world to world, but the tractions stay the same.
+		<ul>
+			<li>Base - no effect on movement
+			<li>Slow - reduces speed for infantry and land vehicles
+			<li>Fast - increases speed for infantry and land vehicles (unused)
+			<li>Impassable - impassable to all non-flying units
+			<li>Impassable_Air - impassable to all units, including air
+		</ul>
+		</p>
+		
+		
+		
 	</div>
 	<iframe src="../footer.html"></iframe>
-	
-
-
 </body></html>
