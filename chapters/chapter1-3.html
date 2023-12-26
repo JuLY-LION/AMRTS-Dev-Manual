@@ -18,17 +18,9 @@
 		td.r {
 			text-align: right;
 		}
-		#yes {
-			color: a0ffa0;
-		}
-		#no {
-			color: ffa0a0;
-		}
-		#plas {
-			color: ffffa0;
-		}
-		#elec {
-			color: c0c0ff;
+		#hili {
+			color: ffff80;
+			background-image: url("../colors/darkgray_opacity50.png");
 		}
 	</style>
 </head><body>
@@ -47,31 +39,25 @@
 		<h1>Header1</h1>
 		<h2>Keyboard/Mouse Commands List</h2>
 		<h2 style="color:#ff8080;">Under construction! Come back later!</h2>
+		
 		<h3>Keyboard</h3>
-		<h3>Mouse</h3>
 		<table>
-			<tr><font id=""></font>
-			<td>CTRL+ALT+F10</td><td><font id="no">Bring up console</font></td>
+			<tr>
+			<td style="width:150px;">CTRL+ALT+F10</td><td style="width:250px;">Bring up console</td>
 			</tr><tr>
-			<td>CTRL+S</td><td><font id="yes">Quick-save map</font></td>
+			<td>CTRL+S</td><td>Quick-save map</td>
+			</tr><tr id="hili">
+			<td>CTRL+Down arrow</td><td>Zip object</td>
 			</tr><tr>
-			<td>Space</td><td><font id="yes">Eyedrop</font></td>
+			<td>Space</td><td>Eyedrop</td>
 			</tr><tr>
-			<td>F1-F6</td><td><font id="no">Change camera height</font></td>
+			<td>F1-F6</td><td>Change camera height</td>
 			</tr><tr>
-			<td>F</td><td><font id="plas">Freelook</font></td>
-			</tr><tr>
-			<td>Numpad Numbers</td><td>Rotate camera</td>
+			<td>Numpad numbers</td><td>Rotate camera</td>
 			</tr><tr>
 			<td>Numpad 5</td><td>Reset camera</td>
 			</tr><tr>
-			<td>Rclick+drag</td><td>Scroll</td>
-			</tr><tr>
-			<td>Lclick</td><td>Select</td>
-			</tr><tr>
-			<td>Shift+Lclick</td><td><font id="no">Select multiple</font></td>
-			</tr><tr>
-			<td>CTRL+Z / Backspace</td><td><font id="no">Undo</font></td>
+			<td>CTRL+Z / Backspace</td><td>Undo</td>
 			</tr><tr>
 			<td>Number keys</td><td>Studio Panels</td>
 			</tr><tr>
@@ -79,15 +65,26 @@
 			</tr><tr>
 			<td>Delete</td><td>Delete selected object(s)</td>
 			</tr><tr>
-			<td>ESC</td><td><font id="no">Cancel</font></td>
-			</tr><tr>
-			<td>CTRL+Down Arrow</td><td><font id="no">Zip object</font></td>
+			<td>ESC</td><td>Cancel</td>
 			</tr><tr>
 			<td>TAB</td><td>Toggle minimap</td>
 			</tr><tr>
 			<td>R</td><td>Refresh minimap</td>
 			</tr><tr>
 			<td>Enter</td><td>Execute</td>
+			</tr>
+		</table>
+		
+		<h3>Mouse</h3>
+		<table>
+			<tr>
+			<td style="width:150px;">Left click</td><td style="width:250px;">Select</td>
+			</tr><tr>
+			<td>Shift+Left click</td><td>Select multiple</td>
+			</tr><tr>
+			<td>Right click+Drag</td><td>Scroll</td>
+			</tr><tr>
+			<td>F+Drag</td><td>Freelook</td>
 			</tr>
 		</table>
 	</div>
