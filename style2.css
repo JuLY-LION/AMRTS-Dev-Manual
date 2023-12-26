@@ -17,7 +17,7 @@ div {
 }
 a {
 	color: white;
-	padding: 2px;
+	padding: 2px 0px;
 	border-left: 2px dashed #80c0ff;
 	border-bottom: 2px dashed #80c0ff;
 }
