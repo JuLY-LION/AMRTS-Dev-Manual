@@ -37,7 +37,7 @@ a:visited {
 }
 a.bad {
 	color: white;
-	padding: 2px;
+	padding: 2px 0px;
 	border-left: 2px dashed #ff4040;
 	border-bottom: 2px dashed #ff4040;
 }
@@ -115,7 +115,7 @@ img.dl {
 }
 #badlink {
 	color: white;
-	padding: 2px;
+	padding: 2px 0px;
 	border-left: 2px dashed #ff4040;
 	border-bottom: 2px dashed #ff4040;
 }
