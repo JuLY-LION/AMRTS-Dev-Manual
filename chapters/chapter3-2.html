@@ -34,13 +34,17 @@
 			<td>Ctrl+Down arrow</td><td class="r">Zips object to terrain, may adjust terrain to match*</td>
 			</tr>
 		</table>
-		<p>*In many cases, the terrain may be adjusted for the object, but not all objects do this. You can see this in several objects in the sandbox boot camp levels where they areare half-burried in the sand, but they still have to zipped to prevent the player's units from walking through them.</p>
-Zipping Objects
-Most ambient objects you place will need to be ZIPPED. Zipping locks the object onto the cluster of cells it covers, so that units will know to avoid them when pathing. To "zip" an object to the terrain, select it and hit CTRL+DOWN ARROW. You should see the object snap into place. If you save your map with un-zipped objects, you'll get a warning window upon save. This message will contain a unique number for all un-zipped objects. To easily find the un-zipped object, bring down the console and type "common.debug.lookat X", where "X" is the object number. Your view will snap to that object.<br><br>
+		<p>Zipping objects is very important to the level, so keep reading this section.</p>
+		<p>*In many cases, the terrain will be adjusted for the object, but not all objects do this. You can see this several times in the sandbox boot camp levels where objects are half-burried in the sand, but they still have to be zipped to prevent the player's units from walking through them.</p>
+		
+		<h3>Zipping Objects</h3>
+		Most ambient objects you place will need to be <dsb>zipped</dsb>. Zipping locks the object onto the cluster of cells it covers, so that units will know to avoid them when pathing. Think of it as zip-tying the object to the terrain. To "zip" an object to the terrain, select it and hit Ctrl+Down arrow. You should see the object snap into place.</p>
+		
+		<p>When you save your map with un-zipped objects, you'll get a warning window upon save. This message will contain a unique number for all un-zipped objects. To easily find the un-zipped object, bring down the console and type <font id="codestring">common.debug.lookat &lt;ID&gt;</font>, where ID is the object number. Your view will snap to that object.<br><br>
 
-NOTE: Leaving un-zipped objects is not fatal. It is common to leave objects un-zipped when they are not intended to block movement or line-of-sight.<br><br>
+		NOTE: Leaving un-zipped objects is not fatal. It is common to leave objects un-zipped when they are not intended to block movement or line-of-sight.<br><br>
 
-Also, there are three buttons at the bottom of this menu:
+		Also, there are three buttons at the bottom of this menu:
 
 Upgrade Buildings - Click while an upgradable building is selected. The building will be upgraded.
 Edit Footprint - Edits footprints of objects (JACKNOTE: MATT SHOULD ADD THIS SECTION)
