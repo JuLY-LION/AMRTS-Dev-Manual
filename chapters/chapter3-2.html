@@ -40,18 +40,18 @@
 		<h3>Zipping Objects</h3>
 		Most ambient objects you place will need to be <dsb>zipped</dsb>. Zipping locks the object onto the cluster of cells it covers, so that units will know to avoid them when pathing. Think of it as zip-tying the object to the terrain. To "zip" an object to the terrain, select it and hit Ctrl+Down arrow. You should see the object snap into place.</p>
 		
-		<p>When you save your map with un-zipped objects, you'll get a warning window upon save. This message will contain a unique number for all un-zipped objects. To easily find the un-zipped object, bring down the console and type <font id="codestring">common.debug.lookat &lt;ID&gt;</font>, where ID is the object number. Your view will snap to that object.<br><br>
+		<p>When you save your map with un-zipped objects, you'll get a warning window upon save. This message will contain a unique number for all un-zipped objects. To easily find the un-zipped object, bring down the console and type <font id="codestring">common.debug.lookat &lt;ID&gt;</font>, where ID is the object number. Your view will snap to that object.</p>
 
-		NOTE: Leaving un-zipped objects is not fatal. It is common to leave objects un-zipped when they are not intended to block movement or line-of-sight.<br><br>
+		<p>NOTE: Despite the warning and red text, <hili>leaving un-zipped objects is not fatal</hili>. It is common to leave objects un-zipped when they are not intended to block movement or line-of-sight.</p>
 
 		Also, there are three buttons at the bottom of this menu:
+		<ul>
+			<li>Upgrade Buildings - Click while an upgradable building is selected. The building will be upgraded if its team's filter types allow it. (See <a href="chapter2-2.html">chapter 2.2</a>)
+			<li>Edit Footprint - Edits the "footprint" of a object, which is data related to how it affects the world, like what tiles block line-of-sight. The footprint properties won't be covered in this chapter.
+			<li>Type Names - Toggles all object names between their language print names and their config type names.
+		</ul>
+		NOTE: When placing attack units (or anything that should be enemies/friends with anything else), be sure you are placing them on the correct team. When you are placing units, have the correct team highlighted in the "Team" menu (see section 3. for info on making teams). When placing ambient objects (trees, crates etc), it doesn't matter which team is selected.
 
-Upgrade Buildings - Click while an upgradable building is selected. The building will be upgraded.
-Edit Footprint - Edits footprints of objects (JACKNOTE: MATT SHOULD ADD THIS SECTION)
-Type Names - a naming convenience. Toggles all object names to their actual config names.<br><br>
-
-NOTE: When placing attack units (or anything that should be enemies/friends with anything else), be sure you are placing them on the correct team. When you are placing units, have the correct team highlighted in the "Team" menu (see section 3. for info on making teams). When placing ambient objects (trees, crates etc), it doesn't matter which team is selected.
-</p>
 	</div>
 	<iframe src="../footer.html"></iframe>
 	
