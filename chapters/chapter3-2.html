@@ -2,6 +2,7 @@
 	<link rel="stylesheet" type="text/css" href="../style.css">
 	<link rel="stylesheet" type="text/css" href="../wrapper.css">
 	<title>3-2</title>
+	<style></style>
 </head><body>
 	<iframe src="../header.html"></iframe>
 	<div class = "topbutton">
@@ -9,9 +10,6 @@
 			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
 		</a>
 	</div>
-	
-	
-	
 	
 	<div id = "content_wrapper">
 		
@@ -21,7 +19,7 @@
 		<p>This panel is used for placing all objects into the world. Open it with the 2 key.</p>
 		<h3>Header3</h3>
 		<p>The world's objects divided into categories for convenience. These are listed in the top box of the menu. Click the various categories to see all the objects you can place. Select "all assets" for a complete list of all placeable objects. Select the object you wish to place from the list. Left-click the terrain to place the object. You can manipulate the object in 3 basic ways. With the object selected:</p>
-		<table>
+		<!--table>
 			<tr>
 			<td>Alt+Left click+Vertical drag</td><td class="r">Rotate object on the Z axis</td>
 			</tr><tr>
@@ -33,7 +31,19 @@
 			</tr><tr>
 			<td>Ctrl+Down arrow</td><td class="r">Zips object to terrain, may adjust terrain to match*</td>
 			</tr>
-		</table>
+		</table-->
+		<ul>
+			<li><dsb>Alt+Left click+Vertical drag</dsb>
+			<br>Rotate object on the Z axis<br><br>
+			<li><dsb>Shift+Left Click+Vertical drag</dsb>
+			<br>Adjust height of object<br><br>
+			<li><dsb>Ctrl+Left click+Vertical/Horrizontal drag</dsb>
+			<br>Rotate object on X/Y axis<br><br>
+			<li><dsb>Up arrow/Down arrow</dsb>
+			<br>Fix height to terrain beneath it without zipping<br><br>
+			<li><dsb>Ctrl+Down arrow</dsb>
+			<br>Zips object to terrain, may adjust terrain to match*
+		</ul>
 		<p>Zipping objects is very important to the level, so keep reading this section.</p>
 		<p>*In many cases, the terrain will be adjusted for the object, but not all objects do this. You can see this several times in the sandbox boot camp levels where objects are half-burried in the sand, but they still have to be zipped to prevent the player's units from walking through them.</p>
 		
@@ -46,11 +56,11 @@
 
 		Also, there are three buttons at the bottom of this menu:
 		<ul>
-			<li>Upgrade Buildings - Click while an upgradable building is selected. The building will be upgraded if its team's filter types allow it. (See <a href="chapter2-2.html">chapter 2.2</a>)
-			<li>Edit Footprint - Edits the "footprint" of a object, which is data related to how it affects the world, like what tiles block line-of-sight. The footprint properties won't be covered in this chapter.
+			<li>Upgrade [Buildings] - Click while an upgradable building is selected. The building will be upgraded if its team's filter types allow it. (Backtrack to <a href="chapter2-2.html">chapter 2-2</a> if you need help)
+			<li>Edit FTP/Footprint - Edits the "footprint" of a object, which is data related to how it affects the world, like what tiles block line-of-sight. The footprint properties won't be covered in this chapter.
 			<li>Type Names - Toggles all object names between their language print names and their config type names.
 		</ul>
-		NOTE: When placing attack units (or anything that should be enemies/friends with anything else), be sure you are placing them on the correct team. When you are placing units, have the correct team highlighted in the "Team" menu (see section 3. for info on making teams). When placing ambient objects (trees, crates etc), it doesn't matter which team is selected.
+		This probably goes without saying, but when placing attack units (or anything that should be hostile/allied with anything else), be sure you are placing them on the correct team. When you are placing units, have the correct team highlighted in the "Team" menu. When placing ambient objects, (trees, buildings, resources, etc.) it doesn't matter which team is selected.
 
 	</div>
 	<iframe src="../footer.html"></iframe>
