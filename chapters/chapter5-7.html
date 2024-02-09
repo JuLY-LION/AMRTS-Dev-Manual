@@ -16,7 +16,7 @@
 		<h1>Header1</h1>
 		<h2>Variables (5.7)</h2>
 		<h2 style="color:#ff8080;">Under construction! Come back later!</h2>
-		<p>Variable integers can be used as a trigger when nothing else will fit the situation. They are usually used when an event on one team causes an event on another team, and none of the usual condition types are viable. Integers can be set to any whole number, but you might often find you just need to store a 0 or 1, like a switch. All the following commands are executed from an Action scope.</p>
+		<p>Variable integers can be used as a trigger when nothing else will fit the situation. They are usually used when an event on one team causes an event on another team, and none of the usual condition types are viable. Integers can be set to any whole number, but you might often find you just need to store a 0 or 1, like a switch. All the following commands are executed from an <dsb>Action</dsb> scope, with the exception of conditionals.</p>
 		
 		<h3>Creating and updating</h3>
 		<p>Give the variable a name. The &lt;num&gt; is the number value that the variable will start as. The command to create a variable is:</p>
@@ -27,7 +27,26 @@
 		<h3>Checking its value</h3>
 		<p>Of course, you're going to want to read the value of your variable. To use it in an conditional if statement, use this:</p>
 		<p id="codestring">Condition("If", "@.[varName]", "==", &lt;num&gt;);</p>
-		<p>Remember, = and == <hili>are not the same</hili>.</p>
+		<p>Remember, = and == <hili>are not the same</hili>. A single equals character is used as an assignment operator and a double equals is used as a relational operator. Or to put it more simplicy, = means set a new value, == means compare the current value.</p>
+		
+		<font id="insectred">TODO: Add a <a href="https://www.geeksforgeeks.org/cpp-relational-operators">C++ relational operator</a> table</font>
+		
+		<h3>Global Variables</h3>
+		<p>A global variable is something that every player's objectives can affect and see. Defining a global variables is done on StartActionClient(). For instance, in Control Freak, five global variables are set, one for each control point. All other teams can see these five variables, and if a team takes a control point, the objective records that teams name into the variable. These are the best way to get each team's scripts to communicate with one another. (Ex: ~.control.CP-A)</p>
+
+		<h3>Local Variables</h3>
+		<p>Local variables are variables only seen by the one team running a script. All other teams cannot see what one team's local variables are. These are used mostly for triggers, timers and the like. (Ex: @.control.CP-A)</p>
+
+		<h3>Special Variables</h3>
+		<p>If you want a team's specific name, listen up: @.engine.name gives the name of the team. All maps currently have teams named 'TeamX' where X is a number 1-8, except for assault, which has the team 'assault.' This variable can come in handy in all sorts of situations, such as Control Freak, which gives @.engine.name to a global variable, and checks to see if all five global variables for each control point are controlled by allies. In Assault, @.engine.name is used for the regions which a Dezigner piece is spawned.</p>
+
+		<p>CreateVarInteger: This creates an integer variable that stores whole numbers.
+
+		CreateVarFloat: This creates a floating-point variable, that can store any number or decimal.
+
+		CreateVarString: This creates a string variable that you can store text and/or numbers in.
+
+		NOTE: Variables can only have TWO periods in them, no more. (i.e. no @.ab.bc.cd, but @.ab.bc-cd will work)</p>
 	</div>
 	<iframe src="../footer.html"></iframe>
 	
