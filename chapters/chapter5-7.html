@@ -1,0 +1,48 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-7</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	
+	
+	
+	
+	<div id = "content_wrapper">
+		
+		<h1>Header1</h1>
+		<h2>Variables (5.7)</h2>
+		<h2 style="color:#ff8080;">Under construction! Come back later!</h2>
+		<p>Variable integers can be used as a trigger when nothing else will fit the situation. They are usually used when an event on one team causes an event on another team, and none of the usual condition types are viable. Integers can be set to any whole number, but you might often find you just need to store a 0 or 1, like a switch. All the following commands are executed from an Action scope.</p>
+		
+		<h3>Creating and updating</h3>
+		<p>Give the variable a name. The number is the value that the variable will start as. The command to create a variable is:</p>
+
+
+    CreateVarInteger("@.[var name]", 0); 
+
+
+ This command is put in the Action scope and is usually called in the starting objectives for a team (created at beginning of mission).
+
+To change the value of a var, the following command is used. The number is the new value to assign the var. This line goes in an Action scope.
+
+    Op("@.[var name]", "=", 1); 
+
+
+Finally, use a Condition statement to test when the var has been changed.
+
+    Condition("If", "@.[var name]", "==", 1); 
+
+
+The above condition would become true when the specified var's value has changed to 1. </p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+	
+
+
+</body></html>
