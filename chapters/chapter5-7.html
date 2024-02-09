@@ -11,8 +11,6 @@
 	</div>
 	
 	
-	
-	
 	<div id = "content_wrapper">
 		
 		<h1>Header1</h1>
@@ -21,28 +19,17 @@
 		<p>Variable integers can be used as a trigger when nothing else will fit the situation. They are usually used when an event on one team causes an event on another team, and none of the usual condition types are viable. Integers can be set to any whole number, but you might often find you just need to store a 0 or 1, like a switch. All the following commands are executed from an Action scope.</p>
 		
 		<h3>Creating and updating</h3>
-		<p>Give the variable a name. The number is the value that the variable will start as. The command to create a variable is:</p>
+		<p>Give the variable a name. The &lt;num&gt; is the number value that the variable will start as. The command to create a variable is:</p>
+		<p id="codestring">CreateVarInteger("@.[varName]", &lt;num&gt;);</p>
+		<p>When you're ready to change the value of a variable, the following command is used:</p>
+		<p id="codestring">Op("@.[varName]", "=", &lt;num&gt;);</p>
 
-
-    CreateVarInteger("@.[var name]", 0); 
-
-
- This command is put in the Action scope and is usually called in the starting objectives for a team (created at beginning of mission).
-
-To change the value of a var, the following command is used. The number is the new value to assign the var. This line goes in an Action scope.
-
-    Op("@.[var name]", "=", 1); 
-
-
-Finally, use a Condition statement to test when the var has been changed.
-
-    Condition("If", "@.[var name]", "==", 1); 
-
-
-The above condition would become true when the specified var's value has changed to 1. </p>
+		<h3>Checking its value</h3>
+		<p>Of course, you're going to want to read the value of your variable. To use it in an conditional if statement, use this:</p>
+		<p id="codestring">Condition("If", "@.[varName]", "==", &lt;num&gt;);</p>
+		<p>Remember, = and == <hili>are not the same</hili>.</p>
 	</div>
 	<iframe src="../footer.html"></iframe>
 	
-
 
 </body></html>
