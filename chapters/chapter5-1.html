@@ -1,0 +1,50 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-1</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	
+	
+	
+	
+	<div id = "content_wrapper">
+		
+		<h1>Header1</h1>
+		<h2>Header2</h2>
+		<h3>Scripting</h3>
+		<p>All scripting in DR2 is done with standard text files. You can make scripts in something as simple as Notepad, but we highly recommend a good text editor, such as Multi-Edit or Ultra-Edit. Each single player mission consists of several text files, made up of configs and scripts, that relate to and depend on each other. All together, they make up the instructions that the missions follows.</p>
+
+		<p>By then end of this section, you will have made a playable, scripted, single player map! Although it will be very simple, it should give you a good start into the world of scripting for DR2!</p>
+
+		<p>Create a map to use with the tutorial in the following sections. Give the map two teams, one for the player and one for the AI (use the names 'player' and 'ai')</p>
+
+		<p>In the player's team setup (double-click player's team name), make sure the following buttons are highlighted: Default Team, Avail to Players, Display Stats. Permanent Radar and Requires AI should not be highlighted (note, if you are creating a mission where any of the units on that team will be controlled by a script, Requires AI should be highlighted). Also, give the players team a start location.</p>
+
+		<p>In the AI team's setup, make sure the following is highlighted: Display Stats, Requires AI. Default Team, Perm Radar, and Avail to Players should not be highlighted.</p>
+
+		<p>If you're not sure how to do any of the above, see Section 2 and Section 4</p>
+
+		<h3>Setting Team Relations</h3>
+		<p>All created teams are neutral by default. Team relations are set using a console command. The syntax is:</p>
+
+		team.setrelation [team1] [team2] [enemy,neutral,ally]
+
+		<p>In our case, we want the two teams to be enemies. Open the console, and enter the following two commands:</p>
+
+		<p>team.setrelation player ai enemy</p>
+
+		<p>team.setrelation ai player enemy</p>
+
+		<p>Then save the map. Note that for each team, you have to set it's relation to every other team. (i.e. if you only executed the first of the two commands above, the player would be enemies with the AI, bu</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+	
+
+
+</body></html>
