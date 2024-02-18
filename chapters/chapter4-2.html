@@ -52,11 +52,11 @@
 		
 		<p>To the left is an example file. If you are having problems downloading, right click on it and select 'Save Target As...'</p>
 		
-		<p>To import your newly created heightmap, create a new map in the studio of the size and world you want, and then in the console (CTRL-ALT-F10) type: <font id="codestring">studio.importbitmap &lt;path&gt; [float]</font> where &lt;path&gt; is the location of the file, and [float] is the number, from -1 to 1, that correlates to how much the pixel's intensity affects the height on the map. I usually use .2 or .3, and make my image using the full spectrum from pitch black (0) to white (255). Here's an example:</p>
+		<p>To import your newly created heightmap, create a new map in the studio of the size and world you want, and then in the console (CTRL-ALT-F10) type: <code>studio.importbitmap &lt;path&gt; [float]</code> where &lt;path&gt; is the location of the file, and [float] is the number, from -1 to 1, that correlates to how much the pixel's intensity affects the height on the map. I usually use .2 or .3, and make my image using the full spectrum from pitch black (0) to white (255). Here's an example:</p>
 		
 		<p id="codestring">studio.importbitmap missions\studio\test_mission\heightmap.tga 0.25</p>
 		
-		<p>Remember that you can inverse the heights of your map, and you can using float values in the negative, such as -.2.</p>
+		<p>Remember that you can inverse the heights of your map, and you can using float values in the negative, such as -0.2.</p>
 		
 		<h3>Creating enough padding</h3>
 		

@@ -83,6 +83,16 @@ img.dl {
 	position: relative;
 	top: 0px;
 }
+code {
+	color: aqua;
+	background-image: url("colors/black_opacity50.png");
+	
+	font-family: "Lucida Console";
+	
+	padding: 2px;
+	border-radius: 4px;
+	border: 2px solid #202020;
+}
 
 #hf {
 	width: 100%;
