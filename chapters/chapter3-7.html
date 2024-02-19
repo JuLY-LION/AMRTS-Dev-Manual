@@ -1,0 +1,56 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>3-7</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	
+	
+	<div id = "content_wrapper">
+		<h1>Brushes</h1>
+		<h2>Curve Brush (3.7)</h2>
+		<image src="c_images/37-curves.png" style="float:left;padding:5;width:150px;height:363px;">
+		<p>Used to create cineractive curves. A Curve defines the path the camera will travel along during a cineractive, and also what the camera is focusing on.</p>
+		<p>First there are two fields and two buttons. The pulldown menu at the very top allows you to select any existing curves for editing. The field underneath that allows you to create a new curve from scratch by entering a new name. The two buttons:</p>
+		<p><dsb>Delete</dsb> - Delete the currently selected curve.<br>
+		<dsb>Show All</dsb> - <font id="insectred">TODO: What does this even do?</font></p>
+		<p>To create a curve, type a name in the field and press the Enter key. The name of the curve should appear in the pulldown menu and the listbox at the bottom. To begin editing a curve, simply select it from the pulldown menu. Now click on the terrain and it will begin setting down nodes for your curve.</p>
+		<p>Next there are four values listed: Time scale, strength, order, and start time. These are values that apply to the individual nodes in a curve, therefore whenever changing these values you must have the node(s) that you want changed SELECTED.</p>
+		<p><dsb>Time Scale:</dsb> The time it will take the camera to travel from the selected node to the next node in the curve.<br>
+		<dsb>Strength:</dsb> The "strength" of the node. The lower the value, the straighter the path to the next node.<br>
+		<dsb>Order:</dsb> The order of the node in the curve. (Order is automatically set in the order you place them.)<br>
+		<dsb>Start Time:</dsb> The time from the initial start of the curve until the selected node is reached. (This is automatically determined by the Time Scale values of each previous node.)</p>
+		<p>Next there is a row of seven more buttons:</p>
+		<p><dsb>Edit Focus Curve:</dsb> When depressed, the nodes you lay down will be assigned to the Focus Curve. This is the curve the camera is looking at while traveling along the main curve.<br>
+		<dsb>Loop:</dsb> Will turn the curve into a loop by connecting the first and last nodes of the curve.<br>
+		<dsb>Draw Lines:</dsb> When depressed, the literal path between nodes will be shown as a continuous line. The main curve is white, while the focus curve is blue.<br>
+		<dsb>Draw Normals:</dsb> Draws curve normals. Useful for debugging curves. Shows how "spread out" or "compressed" a curve is.<br>
+		<dsb>Create a new node[...]:</dsb> This will create new nodes for both the main and focus curves using the camera's current position as a reference.<br>
+		<dsb>Edit the position[...]:</dsb> This will allow you to edit the exact XYZ positioning of a selected node. Useful for minor adjustments or copying data from one node to another.<br>
+		<dsb>Smooth out the curve[...]:</dsb> This will adjust the time scale of every node in the curve so the curve has a constant velocity. This will only affect the main curve, not the focus curve!</p>
+		<p>Now we'll go through the process of creating a simple curve and using the in-studio preview tools to see what it will look like in the game.</p>
+		<p>First make sure all the options in the curves brush are in their default positions. Reload the studio if you need to.</p>
+		<ol>
+			<li>Create a curve (type in a name and press the Enter key).
+			<li>The curve will automatically be selected and ready for editing.
+			<li>To keep things simple, lay down just 2 nodes. You should end up with something that looks like a wavy string between two points.
+			<li>Lets make it a straight curve. Select both nodes, then type the value "0" in the "Strength" field. (Don't forget to apply your change by pressing Enter!)
+			<li>Now it should look like a perfectly straight line between two nodes.
+			<li>The curve is currently laying flush on the terrain. That won't look so good, so lets raise the curve's height a bit. Select both nodes on the curve, and use Lshift + Move mouse up/down, just like you would to an object. Raise both nodes of the curve about 10 meters off the ground.
+		</ol>
+		<p>So now you should have a straight line between two points that is raised off the ground.</p>
+		<p>Now we must make the focus curve. This is the curve the camera will be looking at from it's track along the main curve. Focus curves work just like the main curve, except instead of the camera traveling along it, it will be the camera's focal point traveling along it. Think of it as if there were a ball traveling along the focus curve, that is exactly where the camera will be looking as it travels along the main curve.
+		<br>Click the "edit focus curve" button. Now new nodes you lay down will be the focus curve. Lay two nodes down near the main curve. Your focus curve should look like a straight line between two points.</p>
+		<p>You should now have two curves total: the main curve suspended in the air, with a focus curve on the ground somewhere near it.</p>
+		<p>The controls along the bottom of the menu are for previewing your curves. Click on the Camera icon at the bottom of the menu. Use the VCR type controls to preview the curve. The shot you should get from the curve described above would be the camera traveling over the terrain looking downward towards the terrain. Use the "Current" slider to move to any point along the curve. Click the Camera icon again to exit preview mode.</p>
+		<p>See Section 5: <a href="chapters/chapter5-13.htm">Creating a Single Player Mission - Cineractives</a> for more detailed information on creating curves and cineractives.</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+	
+	
+</body></html>
