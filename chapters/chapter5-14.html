@@ -1,0 +1,334 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-14</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Creating a Single Player Mission</h1>
+		<h2>Scripting Cineractives (5.14)</h2>
+		<h3>Intro Cineractives</h3>
+		<p>We'll look at the first Boot Camp mission as an example for most of this section. Luckily, this mission contains all of its cineractive scripts in one file called "<dsb>objectives_cineractives.cfg</dsb>". Let's begin with how to even start a cineractive.</p>
+		<p><dsb>Starting the Cineractive Script</dsb>
+		<br>The first script heading looks like this:</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;CreateVarInteger("@.charge", 0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Cineractive()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{</p>
+		<p>The "<code>Cineractive</code>" action is what tells the game to enter cineractive mode. From there, the game will then execute each "At" block with their proper timings.</p>
+		<p><dsb>Timing</dsb>
+		<br>The "<code>At(0)</code>" means that this event will happen at 0 seconds into the cineractive. Everything listed within its set of brackets will occur in that instant.</p>
+		<p><dsb>Disabling Gameplay</dsb>
+		<br>The first thing you'll usually want to do is disable normal gameplay conditions.</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unpause();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DisableInput(1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DisableIFace(1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DisableShroud(1);</p>
+		<p>The first 4 lines after turn off various aspects of the game. "<code>DisableInput(1);</code>" disables the ability to use the interface or press any keybinds, "<code>DisableIFace(1);</code>" disables drawing the interface, and "<code>DisableShroud(1);</code>" disables the map shroud so that all units are always visible. At the end of the cineractive, these 3 things will automatically be turned back on. "<code>Unpause();</code>" ensures if the game was paused before the cineractive starts somehow, then it won't stay paused. Typically, this isn't needed for intro cineractives, but it's very important for cineractives that are triggered partway through gameplay, or when the game ends.</p>
+		<p><dsb>Fading</dsb>
+		<br>Next further down, you'll see the "<code>Fade()</code>" command being used:</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fade()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time(0, 3, 5);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direction("up");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>The Fade has 3 numbers listed in its "<code>Time</code>" field. In every Time field, there is a starting number that is implied. That number is the time at which the fade-out will begin, and it is always 0. The first number that appears is the time when the fade-out will end. In this case it is 0. So immediately when triggering the fade the screen will be black. The next number, 3, specifies when the fade-in will begin. And the last number, 5, specifies when the fade-in will end, returning us to an un-obscured view. The "<code>Direction</code>" field specifies whether we're going from light-to-dark-to-light or dark-to-light-to-dark. We will always be using the first method, so always keep the direction "<code>up</code>".</p>
+		<p>What this all means, is that when this fade is used, the screen will be all black right away. Then, 3 seconds later, the screen will being to fade in. Finally, 2 seconds later, the fade-in will be complete and the game view will be completely unobstructed. This is how you have an intro cutscene that slowly fades away from black, during which you can do many things, such as use voice overs or place text on the screen.</p>
+		<p><dsb>Printing Text</dsb>
+		<br>Does your mission have a name? You can show it to the player using the "<code>Text()</code>" command:</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time(1, 3, 4);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direction("up");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text("#shell.campaign.boot.title");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Font("Debriefing");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pos(0.5, 0.35);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time(1, 3, 4);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direction("up");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text("#missions.bc_p.t01.description");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Font("Movie");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pos(0.5, 0.42);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>You should recognize the "<code>Time</code>" and "<code>Direction</code>" fields from Fade. They operate exactly the same here. From the "<code>At</code>" timing the "<code>Text</code>" command is used, the text will fade in over one second, hold for two seconds, then fade away over one second. "<code>Text</code>" is, of course, the text that is written. Here, it is using a <mark>localization key</mark>. That is, it will automatically output a given phrase based on the language the game is set to. If you simply want to use a phrase that already exists in the game, this is the way to go. A list of keys can be found <a id="badlink" target="_blank" href="http://www.pandemicstudios.com">here</a>.</p>
+		<p>Next is "<code>Font</code>", which should be self explanitory, followed by "<code>Pos</code>". There are three basic fonts to choose from; "<code>System</code>" which is the smallest font used for pretty much everything, "<code>Debriefing</code>" which is the slightly larger text used in the main menu, and "<code>Movie</code>" which is the largest text used exclusively for cineractives. The position only matters if your map has a subtitle, or you need multiple lines of text. Otherwise, Pos can be excluded and the text will automatically be centered for you.</p>
+		<p><dsb>Playing Music</dsb>
+		<br>In Army Men RTS, the music does not play on its own. Instead, you must specify when it starts, and what playlist to use. Let's take a look:</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.setfixedvolume 1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.loadtrack t01_intro.mp3");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.removeactive 1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.setfixedvolume 0");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.addtrack amb_bootcamp.mp3");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.play");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>Cineractives don't support any native commands for music, so you'll need to use the "<code>Action()</code>" block instead. This cineractive has a custom backing track that is meant to play throughout. Let's go through each command and see how this is pulled off.</p>
+		<ol>
+			<li><code>Cmd("sound.player.setfixedvolume 1");</code> — This command enforces the game volume to the given level, regardless of the player's settings. It accepts a decimal between 0 and 1 inclusive, so 1 means the track will play at maximum volume.
+			<li><code>Cmd("sound.player.loadtrack t01_intro.mp3");</code> — This command adds a given audio track to the playlist. It will also increment the playlist to the added song immediately. If you have a custom mix for your cineractive, this is how you would queue it.
+			<li><code>Cmd("sound.player.removeactive 1");</code> — This command will remove the current audio track from the playlist, but will not interrupt playback of it. This way, once your cineractive is over, the custom music will not play again once the playlist loops back around.
+			<li><code>Cmd("sound.player.setfixedvolume 0");</code> — This command releases control of the game volume. It does not take effect until the next track plays, so you don't have to worry about interrupting your custom audio track.
+			<li><code>Cmd("sound.player.addtrack amb_bootcamp.mp3");</code> — This command will add a given audio track to the playlist. However, it will queue it, rather than play immediately. If you have custom music for your mission, you can use this method.
+			<li><code>Cmd("sound.player.play");</code> — This will begin audio playback.
+		</ol>
+		<p>Let's say that you don't have any custom music for your mission. In that case, things are a lot simplier:</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.clear");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("exec music_common_list_2.cfg");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.play");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>As you can see, this requires only three commands. "<code>sound.player.clear</code>" will clear the playlist. It shouldn't be necessary, but better safe than sorry. "<code>exec music_common_list_2.cfg</code>" executes a given .cfg file. In this case, this is a presupplied file that adds all eight default music tracks in some order. Some tracks start slowly with a given mood, while others are more boisterous.</p>
+		<p><dsb>Triggering the Camera Path</dsb>
+		<br>Further down a bit, you'll see a script being executed, but let's save that for later. For now let's look at the camera path. Use the "<code>SetBookmark</code>" command, then specify the name of the camera path that you want.</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(3)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SetBookmark()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name("intro");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>This will start the camera path at 3 seconds into the cineractive. Note that the camera will be put at the beginning of the path, not 3 seconds into it.</p>
+		<p>Note that a camera path does not have to be the exact length of a shot. You can switch bookmarks at any time, or if your bookmark ends before your cineractive is finished, then the camera will simply remain at the ending point and hold it until the next instruction is given.</p>
+		<p><dsb>Letterboxing</dsb>
+		<br>Let's take a look at letterboxing. Letterboxing the is black bars at the top and bottom of the screen, meant to keep the framing identical across any resolution a player might be using.</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Letterbox()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time(0, 20.5, 21.5);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direction("down");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>Letterboxing uses the same "<code>Time</code>" and "<code>Direction</code>" fields as both Fade and Text. In this case, the letterbox doesn't need to fade in as it is triggered while the screen is still black. So the first number is usually 0. The second number is how long the letterbox will remain on screen, typically the length of the cutscene, and the third number is how long the letterbox will take to fade away.</p>
+		<p>Here's an easy way to calculate how long a letterbox should last for: First, write down the At time the letterbox is triggered. Then, once your cineractive is finished, write down the At time that you use the "<code>EndCineractive</code>" command. Now, subtract the At time of the letterbox from the At time of the "<code>EndCineractive</code>" command. This will result in the third number of the Time field. To get the second, simply subtract the number of seconds you want the letterbox to fade over from the third number.</p>
+		<p>So for example, let's say you trigger your letterbox 3 seconds into your cutscene, and your cutscene ends after 42 seconds. You would subtract 3 from 42 to get 39, then assuming you want the letterbox to go away over 1 second, subtract 1 to get 38. This would result in a letterbox command that looks something like this.</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;Cineractive()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(3)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Letterbox()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time(0, 38, 39);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direction("down");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(42)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EndCineractive();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p><dsb>Using Actions</dsb>
+		<br>Console commands aren't the only things you can use with actions. Let's rewind and look back at that script we skipped over.</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExecuteScript("chinook1", "unit.move.spawntospline")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.type", "=", "army.unit.fakechinook");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.tag", "=", "chinook1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.curve", "=", "chinook1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.useroll", "=", 1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>You'll remember from Chapter 9: <a href="chapter5-9.html">Scripting Attacks</a> when we looked at using scripts how they should function. As you can see, we are executing a script just like how we used them for control the computer's attacks. As a matter of fact, any actions that you can do with a regular objective script can be performed in a cineractive this way. For example, scrolling down a little further, you can see this being used to trigger a game message as we went over in Chapter 6: <a href="chapter5-6.html">Messages / Objectives</a>.</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(8)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GameMessage()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message("msg_intro1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p><dsb>Triggering Scripts With Vars</dsb>
+		<br>However, there is one caveat to all this. That is, the cineractive that is currently running is being run from the team that called it. This means that, effectively, any actions you call on will be carried out by the team running the cineractive. Basically, who is the team that triggered the cineractive? Any actions taken will be as if that team triggered an objective. This means specifically any units you spawn will be assigned to that specific team, and any units you try to order around must belong to the team running the script. So let's say for example, the player is running the intro cutscene. You could spawn the player's units and move them around as such. But what if you want to move someone else's stuff? What if you wanted some Tan units to walk by? This is where what we learned in Chapter 7: <a href="chapter5-7.html">Variables</a> comes into play.</p>
+		<p>So far we've been looking exclusively at the intro cineractive for Boot Camp mission 1. Scroll down further to the "<dsb>cineractive_group3</dsb>" script heading. This is the cutscene that spawns some Tan grunts to come attack some Green grunts.</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fade()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time(1, 2, 3);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direction("up");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("@.charge", "=", 1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>Here you can see the team var "<code>charge</code>" being set to 1. Now let's take a look at the Tan's objectives located in the file "<dsb>objectives_tan.cfg</dsb>".</p>
+		<p id="codestring">CreateObjectType("objective_charge", "Objective")<br>
+{<br>
+&nbsp;&nbsp;GameObj();<br>
+&nbsp;&nbsp;ObjectiveObj()<br><br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Condition("VarConstInteger", "@Green.charge", "==", 1);<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ExecuteScript("3e1", "squad.move.spawntoregion")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.region.src", "=", "3e1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.region.dst", "=", "3e1go");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.types", "=", "grunt");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.formation", "=", "Basic");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.direction", "=", 90);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>As you can see, the Tan are watching the Green team's "<code>charge</code>" var. When it is 1, then the Tan team is told to execute several scripts. Using this method, you can assign several objectives to any team you want, while retaining control over when they are executed during cineractives.</p>
+		<p><dsb>Blending from Cineractive to Gameplay</dsb>
+		<br>Once you've done and shown everything you need to, there is one more thing to do before ending the cineractive.</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(23.5)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DefaultCamera(1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pan()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Region("start");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TrackTerrain(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time(1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>This is the "<code>DefaultCamera</code>" command. By default, it will simply reset the camera to how it was before the cineractive started. But you can use the settings of "<code>Pan</code>" to control how that is done, or even what location to reset to.</p>
+		<p>Under Pan, you see three settings. The "<code>Region</code>" fields specifies which region the camera should return to. Usually this is the player's spawn, but you can pan to any arbitrary region. While the camera is panning, it will consider the height of the terrain and adjust itself accordingly. You can disable this behavior by setting "<code>TrackTerrain</code>" to 0. This way, the camera will seamlessly travel regardless of what's inbetween the start and end positions. Lastly, the "<code>Time</code>" field should be self explanitory. Use it to specify how long, in seconds, the pan will take.</p>
+		<p>By the way, this would be a good time to use the "<code>DisableInput(0);</code>", "<code>DisableIFace(0);</code>", and "<code>DisableShroud(0);</code>" commands. This is automatically done for you once the cineractive ends, but doing them here looks the most natural as the camera fades back to regular gameplay.</p>
+		<p><dsb>Ending the Cineractive</dsb>
+		<br>The final step!</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(24.5)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EndCineractive();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NewObjective("objective_start_green");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>The "<code>EndCineractive</code>" will exit cineractive mode and return gameplay to normal. It will also re-enable the interface, shroud, and player's input if they haven't been by now.</p>
+		<h3>Outro Cineractives</h3>
+		<p>For most missions, just an intro cutscene is enough. You can use it to signify what the player needs to do, such as through voice over, or simply displaying a key area on screen. Otherwise, you might also want an outro scene. This could either be showing off the player's handiwork, or if the player has failed, can show how or why they failed.</p>
+		<p>For the most part, this cutscene is scripted in the same way as the intro one. The main differences will be with the fade-in, and what happens after the fade-out.</p>
+		<p><dsb>Starting the Cutscene</dsb>
+		<br>While we're still looking at the first Boot Camp mission, scroll down to the script heading "<dsb>cineractive_group1</dsb>" and find the "<code>Fade</code>" command being used.</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fade()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time(1, 2, 3);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direction("up");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.fade 1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>This time, the first "<code>Time</code>" number is 1. This will mean that once the fade is triggered, the screen will fade-out over the duration of 1 second. Then it proceeds as it would otherwise. The screen will remain black for 1 second, then fade-in over 1 more second. This means that you will fade to black, then fade back in over the course of 3 seconds total.</p>
+		<p>As for the Action command, that is executing a console command to fade-out the music along with the fade to black. Whether you want to do that is up to you, but it's a good idea if your cutscene has voice over that needs to be heard.</p>
+		<p><dsb>Ending the Cutscene</dsb>
+		<br>An outro cineractive needs to end in one of two ways, either the player wins or loses. Let's take a look at how this works. Scroll all the way down to the end of the script heading "<dsb>cineractive_outro</dsb>", which is conveniently at the end of the whole file. It will look something like this:</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(13)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fade()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time(2, 5, 5);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direction("up");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(15.5)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Win();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>Here, the Fade looks a bit different. The first number is 2, meaning the screen will fade to black over 2 seconds. However, the next two numbers are both 5. This means the screen will remain black for 3 full seconds, then simply cut back to full view. We can use these 3 seconds to end the mission however we wish. In this case, we use the "<code>Win();</code>" action, which will of course make the team running the cineractive instantly obtain victory. If this is a cutscene after losing, then you should use "<code>Lose();</code>" instead. In either case, we trigger this command 2.5 seconds after we trigger the fade, giving the screen enough time to fade to black. You may also want to fade the music too, since it does not lower in volume during a fade on its own.</p>
+		<p>Remember! The team that is running the cineractive script is the team that is carrying out all of the actions within! If the player's own team isn't the one running the script, then the Win and Lose commands may not behave as expected. Also, you may notice that the Boot Camp missions have either "Campaign" or "Shell" located within their Win commands. In short, this tells the game how it should return to the main menu. If you're creating a custom mission, don't try to use these unless you know what you're doing, as it is very likely to crash the game.</p>
+		<h3>Midway Cineractives</h3>
+		<p><dsb>Starting the Cutscene</dsb>
+		<br>The final kind of cineractive you'll use is one that is triggered only partway through the mission. Most often, this is just used to signify the player when they've either found something important, or their win condition has changed. Like before, the only differences in scripting them is using a different fade-in and fade-out. Unfortunately, Boot Camp doesn't contain any good examples, so let's take a look at the midway cineractive of Mission 15. You can find it under the script heading "<dsb>cineractive_mid</dsb>" in the file "<dsb>objective_cineractive.cfg</dsb>". It is located at the very end.</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;Cineractive()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fade()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time(1, 2, 3);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direction("up");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action()<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.fade 2");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DisableInput(1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pause();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DisableIFace(1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DisableShroud(1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Letterbox()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time(0, 15.5, 15.5);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direction("down");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SetBookmark()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name("mid");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>Let's break this down step by step. First, we trigger a fade. The fade-out occurs over 1 second, holds for 1 second, then fades back in over 1 more second. This is 3 seconds total where the screen will fade to black, then fade back up again. The music is also faded away during this time. Next, we disable the player's ability to make inputs. For this cutscene specifically, we also manually pause the game. This is of course stop any activity that is happening while we play our cutscene. It is helpful for returning control to the player in the exact same game state when control was taken away. Just don't forget to unpause later. Lastly, after two seconds have passed and the fade begins to fade back up from black, we disable the interface and terrain shroud. We also setup a letterbox and start our camera path at this time.</p>
+		<p><dsb>Ending the Cutscene</dsb>
+		<br>Overall, this is pretty much the same beginning as an outro cutscene. But let's take a look at ending our cutscene now. Scroll down to the end of the file.</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(16)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fade()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time(1, 2, 3);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Direction("up");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(17.5)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DefaultCamera();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DisableIFace(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DisableInput(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DisableShroud(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(18)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unpause();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At(19)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EndCineractive();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.play");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+		<p>First, we trigger another fade. This fade is identical to the fade that brought us into the cutscene, a slow fade to black then back again over 3 seconds. Then, a second and a half later, we renable everything we disabled from the player. We do this now rather than letting the "<code>EndCineractive</code>" command do this naturally because this way our interface and controls will also appear to fade in with the screen. Otherwise, it would all appear immediately as soon as the cineractive ends. Then, half a second later, we remember to unpause the game. We paused it when the cutscene started, remember? Lastly, we end the cineractive, along with restarting the music that we also killed when starting the script.</p>
+		<p>Notice that this time, the "<code>DefaultCamera</code>" command has no fields listed, nor is it set to 1. The difference is that this will return the camera to exactly how the player left it when the cineractive was triggered. In most cases, this is desired over forcing the camera to pan to some spot they weren't focused on before. It is up to your own discretion which is better to use.</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>
