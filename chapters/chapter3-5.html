@@ -17,14 +17,14 @@
 		
 		<h1>Studio Panels</h1>
 		<h2>Region Panel (3.5)</h2>
-		<p>Creates Regions. Regions are usually used to 'mark' an area on the map and they are used for many different purposes.</p>
+		<p>Creates Regions. Regions are usually used to mark an area on the map and they are used for many different purposes.</p>
 		
 		<h3>Handling regions</h3>
 		To create a region, define the area that will be the region by Lclick+drag on the terrain. Type a name in the small box above the create button, then click that button to create it. Your new region should now appear on the list. To delete a region, select it from the list and click "delete".</p>
 
 		<p>To modify an existing region, select it from the list. The corners of the region will be highlighted. You can only resize a region by dragging the corners. Left click+drag the corners of the region to resize it. When finished, click "Apply".</p>
 		
-		<p>Some regions cause special behavior during gameplay based on what you name them. For example, naming a region "camera::block0" will prevent the camera's center point from moving into the region, likely to stop it from going out-of-bounds.</p>
+		<p>Some regions cause special behavior during gameplay based on what you name them. For example, naming a region <!-- "camera::block0" will prevent the camera's center point from moving into the region,--> "<dsb>camera::bounds</dsb>" will convine the camera's center point from moving outside this region, likely to stop it from going out-of-bounds.</p>
 		
 		<p><font id="insectred">TODO: List all special region names.</font></p>
 	</div>
