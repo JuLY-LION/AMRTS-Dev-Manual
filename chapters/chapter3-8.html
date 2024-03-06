@@ -1,0 +1,33 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>3-8</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Brushes</h1>
+		<h2>Trails Brush (3.8)</h2>
+		<image src="c_images/38-trails.png" style="float:left;padding-right:5;padding-bottom:5;width:150px;height:363px;">
+		<p>Used to create a set of waypoints for AI units to follow. The trail can then be referred to in a <a href="chapter5-1.html">game script</a>.</p>
+		<p>To begin creating a new trail, left click on the terrain to place down way points. Right click to delete the most recent way point. When you've finished, enter a name for the trail in the text field and click "create".</p>
+		<p>To modify an existing trail, double click on it on the list. This will recreate the trail, allowing you to left click to add new way points, or right click to delete the previous ones. To save your changes, click "apply".</p>
+		<p>There are three types of trails you can create. To change which type a trail is, click on the pull down menu while editing the trail.</p>
+		<ul style="list-style-position:inside">
+			<li><dsb>One Way</dsb> - Units will always follow this trail in the order the way points are created.
+			<li><dsb>Two Way</dsb> - Like One Way, but when the unit is told to "enter" the trail, if it is currently closer to the end of the trail than the beginning, it will choose to follow the trail in reverse order.
+			<li><dsb>Looping</dsb> - This trail's final way point will connect back to its initial way point, creating an infinite loop.
+		</ul>
+		<h3>Additional Notes</h3>
+		<ul style="list-style-position:inside">
+			<li>Trails can be assigned to a specific team, just like objects can. If a team is selected on the Teams tools, new trails will be assigned to said team, and only that team's trails will appear on the list of trails. However, any team's trails can be called on by any team. Trails can also not be assigned to any team. So the only benefit you'd get from assigning trails to teams is the convenience of organization within the studio.
+			<li>When orderer to enter a looping trail, units will still travel the trail's way points in order, starting with the first. The direction your trail goes in matters!
+			<li>While it is possible for two trails' way points to share coordinates, this is not recommended, as it can very often cause AI units to fail.
+		</ul>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>

@@ -1,0 +1,28 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>3-6</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<!-- p>need to define a height for the <div> or else having the image float causes it to escape the wrapper</p-->
+	<div id = "content_wrapper" style="height:498px">
+		<h1>Brushes</h1>
+		<h2>Tags Brush (3.6)</h2>
+		<image src="c_images/36-tags.png" style="float:left;padding-right:5;padding-bottom:5;width:150px;height:363px;">
+		<p>Places any number of objects into a "Tag". The tag can then be referred to in a <a href="chapter5-1.html">game script</a>.</p>
+		<p>To create a tag, select the object(s) that will be in the tag (hold left shift to select multiple objects). Then type the name of the tag in the text field and click "create".</p>
+		<p>To add objects to an existing tag, select the name of the tag from the list. All objects in that tag should now be selected. Hold left shift and select the additional object(s). Click "Apply". Unfortunately, there is no way to remove an Object from a tag (if you have an unwanted object in a tag, you'll need to delete the tag and re-create it).</p>
+		<h3>Additional Notes</h3>
+		<ul style="list-style-position:inside">
+			<li>A unit can belong to multiple tags at once.
+			<li>A tag can be empty and contain no units at all.
+			<li>If you call on a tag in game script that doesn't exist, the game may crash. Likewise, trying to append units to a nonexistant tag via game script crashes in some cases, others not. If you're unsure, create an empty target tag to refer to later.
+		</ul>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>
