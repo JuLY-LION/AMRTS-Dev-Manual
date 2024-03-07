@@ -1,0 +1,42 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-2</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Creating a Single Player Mission</h1>
+		<h2>Mission File Structure (5.2)</h2>
+		<p>This section will explain all the files that are created when you save a map, as well as describe which text files you will need to create to begin scripting.</p>
+		<p>When you save a map, it creates the following files:</p>
+		<ul>
+			<li><dsb>game.cfg</dsb> - Contains any data that isn't object related. (Teams, weather, light time, team relations…)
+			<li><dsb>objects.cfg</dsb> - Contains data about all objects in the environment. (Including regions, curves, paths, tags etc.)
+			<li><dsb>terrain.blk</dsb> - Terrain geometry, texture, and paint information.
+			<li><dsb>terrain.tga</dsb> - Truevision TGA file that will be used as the mini-map.
+		</ul>
+		<p>Next come the text files you need to create to get ready to script. There are two files that every mission looks for when it is loaded to see if there is a script to run. These two files provide "pointer" information for the mission. That is, they point to all the other configuration and script files the mission will be reading from. They are:</p>
+		<ul>
+			<li><dsb>strategic.cfg</dsb> - The pointer file for AI configs. (Standard attack scripts, recruit types, base orderers…)
+			<li><dsb>types_mission.cfg</dsb> - The pointer file for all other scripts. (Enemy and player objectives, cineractives, custom unit configs…)
+		</ul>
+		<p>Create two empty text files ("<dsb>strategic.cfg</dsb>" and "<dsb>types_mission.cfg</dsb>") and place them in your mission folder. Now, exactly what these files point to will depend on the mission and what you are trying to do, so keep these two files opened on hand, as well be adding to them as we require more files to be accessed.</p>
+		<p>Next, we'll create the text files that will hold your actual script. From here on out, you can name your text files whatever you want, but we'll be roughly following the way it was done in AMRTS. The following is assuming there will be two teams, a player and an AI. Create three text files in your mission folder, name them "<dsb>objective_start.cfg</dsb>", "<dsb>objective_ai.cfg</dsb>", and "<dsb>objective_player.cfg</dsb>".</p>
+		<ul>
+			<li><dsb>objective_start.cfg</dsb> - Contains the initial scripts for the player and AI, which are the "link" scripts that are specified within the Studio.<br>
+			<li><dsb>objective_player.cfg</dsb> - Contains all script for the player's team.<br>
+			<li><dsb>objective_ai.cfg</dsb> - Contains all script for the AI team.
+		</ul>
+		<p>Now, we've added these files to the folder, but the game won't know they are there unless we include them in the pointer file, <dsb>types_mission.cfg</dsb>. You can do this by adding the following lines to said file:</p>
+		<p id="codestring">#include "objective_start.cfg"<br>
+#include "objective_ai.cfg"<br>
+#include "objective_player.cfg"</p>
+		<p>Now save your changes to the file. The game will now know to look inside these files for scripts.</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>
