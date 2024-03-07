@@ -1,0 +1,75 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-3</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Creating a Single Player Mission</h1>
+		<h2>Scripting Basics (5.3)</h2>
+		<p>If you have any previous programming or scripting experience, the following should come naturally to you. If you don't, it may be very difficult at first but don't give up, it not so hard with some practice. If you find yourself totally lost, try to find a friend or a <a id="greenlink" href="https://www.clanexf.com/forums/">forum</a> that can help you out. After you read the following sections, the greatest piece of advice to offer is to unzip the single player missions that came with AMRTS, and dive into the .cfgs and see how things are done firsthand!</p>
+		<p>Each basic script or instruction (herein called "Objective"), consists of two basic parts-the "Condition" statement, and the "Action" statement. When all conditions in the Condition statement are met, or are true, then the instructions in the Action statement are carried out. The script is saying "If this is true (condition), then do this (action)". If the conditions in the Condition statement are not true, it will wait indefinitly until they are true (or the objective is abandoned). After the Condition has become true, and the Action has been carried out, the objective will unload itself from memory and will never be carried out again (unless it is re-loaded in another objective).</p>
+		<p>Below is the basic structure of an Objective:</p>
+		<p id="codestring">CreateObjectType("<mark>[objective name]</mark>", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("<mark>[type]</mark>")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[condition]</mark>;<br>
+&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>"<code><mark>[objective name]</mark></code>" will be different for each objective you make. Each must have a unique name. The word next to it "<code>Objective</code>" is its class and will never change.</p>
+		<p>The condition goes between the brackets under <code>Condition()</code> and the action goes between the brackets under <code>Action()</code>. Note the bracket structure. Brackets divide the statement down into smaller and smaller units. Notice that the entire statement is enclosed in the two outermost brackets (top and bottom ones) inside the "<code>CreateObjectType</code>" statement. Within those, there is two more statements; Namely "<code>Condition()</code>" and "<code>Action()</code>". Also note that every statement either opens with brackets or ends with a semi-colon. Mistakes as simple as a wrong bracket or missing semi-colon will crash the game!</p>
+		<p>Now, we are going to add two Objectives to the file <dsb>objective_start.cfg</dsb>. Open that file then copy and paste the following into it:</p>
+		<p id="codestring">CreateObjectType("objective_start_player", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("TRUE");<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;NewObjective("objective_player_at_goal");<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>This will be the initial script for the player team. TRUE is a type of condition. It means the condition will automatically be true whenever it is loaded, and immediately carry out the Action statement. Since the statement doesn't need any more information, there are no brackets needed in the condition statement. (The semi-colon after <code>("TRUE")</code> shows that the Condition statement is over.) "<code>NewObjective</code>" is our script command that loads a new objective. You can call a NewObjective in any Action scope anywhere in your scripts. "<code>objective_player_at_goal</code>" is an objective we will create later, but keep the line there for now.</p>
+		<p>Now let's add the AI team's initial objective to the same file.</p>
+		<p id="codestring">CreateObjectType("objective_start_AI", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("TRUE");<br><br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;NewObjective("objective_attack_player");<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>Now lets create the missing objectives we are referring to in our script. (<code>objective_player_at_goal</code> and <code>objective_attack_player</code>) Open "<dsb>objectives_player.cfg</dsb>" and add the following and save:</p>
+		<p id="codestring">CreateObjectType("objective_player_at_goal", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("TRUE");<br>
+&nbsp;&nbsp;Action();<br>
+}</p>
+		<p>Then also add the following to "<dsb>objectives_ai.cfg</dsb>":</p>
+		<p id="codestring">CreateObjectType("objective_attack_player", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("TRUE");<br>
+&nbsp;&nbsp;Action();<br>
+}</p>
+		<p>Now, we need to tell the Editor that these Objectives are going to be the initial Objectives for the each team. Load your map in the studio. Double-click on the player's team in the teams tool of the studio. On the right side you'll see a large list labeled "Mission Objectives". This lists all of the Objectives it can currently read from all your .cfg files. The Objectve we just created, "<code>objective_start_player</code>", should now be on this list. Highlight "<code>objective_start_player</code>" on the list, and click "Done". Now go ahead and assign "<code>objective_start_AI</code>" to the AI team, then save your map. Now the game knows to look at this objective first thing when the map loads up!</p>
+		<p>As you probably noticed there are no conditions or actions, we will add these later. Your map should now load correctly in the game. Nothing will happen, but if it loads without crashing you've done everything correctly.</p>
+		<p>If you get a "unknown objective" error, that means the script cannot find the objective that it's asking for. Either your #include settings are off in <dsb>types_missions.cfg</dsb>, or you've made a typo with the objective names. If you get errors like "expected } but found ;" (symbols may vary), you've made a typo in your script or there is a syntax mistake in your script.</p>
+		<p>To sum up what we've covered, this is what happened in the game's logic: First the map was loaded. The game noticed <dsb>types_mission.cfg</dsb> and <dsb>strategic.cfg</dsb> in the mission folder and read the files. The game included all the .cfg files specified in these files:</p>
+		<ul>
+			<li><dsb>objective_start.cfg</dsb><br>
+			<li><dsb>objective_player.cfg</dsb><br>
+			<li><dsb>objective_ai.cfg</dsb><br>
+		</ul>
+		<p>Then the game looked at the Team config settings for it's initial objectives. The player's team specified "objective_start_player". The game then searched all the .cfg files included in <dsb>types_mission.cfg</dsb> for "objective_start_player" and found it in the file <dsb>objective_start.cfg</dsb>. "<code>Objective_start_player</code>" had a TRUE condition, so it immediately carried out the action of loading the new objective "<code>objective_player_at_goal</code>". Again, the game searched all the .cfg's for "<code>objective_player_at_goal</code>" and found it. The condition was TRUE, but nothing happened since there was no Action specified. Since we set up the AI side like the player's, the same process happened there.</p>
+		<p>So, as you can see if an Objective is anywhere in the included .cfg's in types_mission.cfg, the game will find it. So, you could have everything we have in <dsb>objective_start.cfg</dsb>, <dsb>objective_ai.cfg</dsb>, and <dsb>objective_player.cfg</dsb> in one file if you wanted, but that could get really confusing to read and navigate. You can structure it however you wish. The structure presented in this doc is how the Army Men devs found to be the easiest to work with and organize.</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>

@@ -1,0 +1,102 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-4</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Creating a Single Player Mission</h1>
+		<h2>Win/Lose Conditions (5.4)</h2>
+		<p>Lets make our mission winnable by adding a Win condition. If you haven't given the player any units to start with, do so now (place a couple units on the player's team near the player's start location). Place all of the player's starting units into a Tag (see Section 3.6: <a href="chapter3-6.html">Tags Brush</a>). Name the tag "<code>players_units</code>".</p>
+		<p>Lets say that the player needs to move his troops to a specific spot to win the mission. Create a Region somewhere near the player's start location. Name it "<code>goal</code>". Make it large enough to fit a few units inside. (see Section 3.5: <a href="chapter3-5.html">Regions Brush</a>). This will be where the player needs to go to win. You may want to paint or color the area under the region, or place an object there, so you can tell where it is in the game.</p>
+		<p> Now lets alter the "<code>objective_player_at_goal</code>" objective, so that it will test when the player is in the "<code>goal</code>" region, and give the Win screen when they are. There is a condition type for just this type of thing called "<code>InRegion</code>". Open "<dsb>objective_player.cfg</dsb>". Change the condition statement of the Objective to the following:</p>
+		<p id="codestring">&nbsp;&nbsp;Condition("InRegion")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Region("goal");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Tag("players_units")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operator(">");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}</p>
+			<p>…and replace the action statement with:</p>
+			<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Win();<br>
+&nbsp;&nbsp;}</p>
+		<p>Your objective should now look just like this:</p>
+		<p id="codestring">CreateObjectType("objective_player_at_goal", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("InRegion")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Region("goal");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Tag("players_units")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operator(">");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Win();<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>The condition type InRegion calls for several bits of info as you can see. "<code>Region</code>" is the region to be tested. "<code>Tag</code>" is which tag will be tested. Then the tag wants input of its own, being "<code>Amount</code>" and "<code>Operator</code>". The example above is saying "greater than zero", or in other words "one or more" - "is there one or more object from this tag in the region?". (You can change the Amount and Operator values to suit many purposes. Amount can be any number. Operator will most often be either <code>&lt;</code> (less than), <code>&gt;</code> (greater than), or <code>==</code> (equal to / is).</p>
+		<p>The command to give the victory screen is simply <code>Win();</code>. Now load up your mission in the game. When you move your starting troops into the goal area, you should get the Victory screen. If you don't, go back and make sure you did everything correctly.</p>
+		<p>Our mission seems a bit easy, don't you think? Let's make a way to lose. First, place some enemies near the start location. Make sure to place them far away from the players units enough so they can't be seen immediately when starting gameplay. (We will move them in script.) Make the enemy force roughly match your player force. Now place all the enemy units into a tag and call it "<code>enemy_units</code>". Now let's make the player lose if all their units get destroyed before they can reach the goal.</p>
+		<p>Now we'll edit the AI's objective "<code>objective_attack_player</code>". Open <dsb>objective_ai.cfg</dsb> and replace the current <code>objective_attack_player</code> objective with this one:</p>
+		<p id="codestring">CreateObjectType("objective_attack_player", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("TRUE");<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ExecuteScript("attack1", "squad.move.tagtoregion")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.tag", "=", "enemy_units");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.region", "=", "goal");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>"<code>ExecuteScript</code>" is a command that will execute a pre-made script. "<code>attack1</code>" is the unique name of this instance of the script (you can name it whatever you want, as long as it's unique from any other ExecuteScript commands in the rest of your mission). "<code>squad.move.tagtoregion</code>" is a pre-made script, and is one of many that were created while designing the game. However, the "<code>squad.move.tagtoregion</code>" script is not yet loaded into memory. So we'll have to #include it just like we do with our custom text files. To do this, add this line to your <dsb>strategic.cfg</dsb> file:
+		<p id="codestring">#include "squad_move_tagtoregion.cfg"</p>
+		<p>Now, the <code>squad.move.tagtoregion</code> script calls for two bits of info: the tag source, and the region destination (%.tag, %.region). So this script is telling the tag "<code>enemy_units</code>" to move to the region "<code>goal</code>". Now when you load your map, the enemy troops should now run towards the goal area and engage the player's units should they encounter each other. This will happen immdiately when starting the mission.</p>
+		<p>Now we need the condition that will make the player get the Defeat screen if all their units get destroyed. Open <dsb>objective_start.cfg</dsb>. In the Action scope of "<code>objective_start_player</code>", add the line:</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;NewObjective("objective_player_defeat");</p>
+		<p>The entire objective should now look like this:</p>
+		<p id="codestring">CreateObjectType("objective_start_player", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("TRUE");<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;NewObjective("objective_player_at_goal");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;NewObjective("objective_player_defeat");<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>Now open <dsb>objectives_player.cfg</dsb> and add the "<code>objective_player_defeat</code>" objective:</p>
+		<p id="codestring">CreateObjectType("objective_player_defeat", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("TagCount")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Tag("players_units")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operator("==");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Lose();<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>"<code>TagCount</code>" is a condition type that can test how many objects of a certain tag there is in the world at a given time. TagCount calls for which tag to test, then has Operator &amp; Amount variables. The operator "<code>==</code>" means "equal to", or "is"; So it's asking "Is the amount of objects in the Tag "<code>players_units</code>" zero?" <code>Lose();</code> is the script command to give the Defeat screen.</p>
+		<p>Try the mission in the game. Allow the enemy to kill all your units, you should get the Defeat screen.</p>
+		<p>This concludes the creation of the tutorial map! You should now have a mission that you can win and lose.</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>

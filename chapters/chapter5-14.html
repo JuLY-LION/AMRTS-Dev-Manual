@@ -81,12 +81,12 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
 		<p>Cineractives don't support any native commands for music, so you'll need to use the "<code>Action()</code>" block instead. This cineractive has a custom backing track that is meant to play throughout. Let's go through each command and see how this is pulled off.</p>
 		<ol>
-			<li><code>Cmd("sound.player.setfixedvolume 1");</code> — This command enforces the game volume to the given level, regardless of the player's settings. It accepts a decimal between 0 and 1 inclusive, so 1 means the track will play at maximum volume.
-			<li><code>Cmd("sound.player.loadtrack t01_intro.mp3");</code> — This command adds a given audio track to the playlist. It will also increment the playlist to the added song immediately. If you have a custom mix for your cineractive, this is how you would queue it.
-			<li><code>Cmd("sound.player.removeactive 1");</code> — This command will remove the current audio track from the playlist, but will not interrupt playback of it. This way, once your cineractive is over, the custom music will not play again once the playlist loops back around.
-			<li><code>Cmd("sound.player.setfixedvolume 0");</code> — This command releases control of the game volume. It does not take effect until the next track plays, so you don't have to worry about interrupting your custom audio track.
-			<li><code>Cmd("sound.player.addtrack amb_bootcamp.mp3");</code> — This command will add a given audio track to the playlist. However, it will queue it, rather than play immediately. If you have custom music for your mission, you can use this method.
-			<li><code>Cmd("sound.player.play");</code> — This will begin audio playback.
+			<li><code>Cmd("sound.player.setfixedvolume 1");</code> - This command enforces the game volume to the given level, regardless of the player's settings. It accepts a decimal between 0 and 1 inclusive, so 1 means the track will play at maximum volume.
+			<li><code>Cmd("sound.player.loadtrack t01_intro.mp3");</code> - This command adds a given audio track to the playlist. It will also increment the playlist to the added song immediately. If you have a custom mix for your cineractive, this is how you would queue it.
+			<li><code>Cmd("sound.player.removeactive 1");</code> - This command will remove the current audio track from the playlist, but will not interrupt playback of it. This way, once your cineractive is over, the custom music will not play again once the playlist loops back around.
+			<li><code>Cmd("sound.player.setfixedvolume 0");</code> - This command releases control of the game volume. It does not take effect until the next track plays, so you don't have to worry about interrupting your custom audio track.
+			<li><code>Cmd("sound.player.addtrack amb_bootcamp.mp3");</code> - This command will add a given audio track to the playlist. However, it will queue it, rather than play immediately. If you have custom music for your mission, you can use this method.
+			<li><code>Cmd("sound.player.play");</code> - This will begin audio playback.
 		</ol>
 		<p>Let's say that you don't have any custom music for your mission. In that case, things are a lot simplier:</p>
 		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action()<br>
