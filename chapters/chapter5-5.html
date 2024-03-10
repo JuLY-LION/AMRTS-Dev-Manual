@@ -1,0 +1,111 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-5</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Creating a Single Player Mission</h1>
+		<h2>Common Objective Condition Examples (5.5)</h2>
+		<p>The following section will provide more help on how to do the most common things that a single player mission requires that weren't covered in the previous chapter. It is by no means comprehensive, and is only to provide some extra help and examples.</p>
+		<p><dsb>TRUE</dsb> - Condition becomes true when objective is loaded, executing the Action immediately.</p>
+		<p><dsb>NOT</dsb> - This condition becomes true or false in negation to its sub-condition. For example:</p>
+		<p id="codestring">CreateObjectType("<mark>[objective name]</mark>"), "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("NOT")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Condition("InRegion")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Region("Green_base");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tag("sarge")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operator(">");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>Within the NOT condition is another condition running an InRegion check. In this case, we are testing to see when a particular object is NOT in that region. The action would be triggered as soon as the tag "<code>sarge</code>" left the region. NOT can be used with any Condition Type.</p>
+		<p><dsb>AND</dsb> - Requires two or more sub-conditions to become true simultaneously before executing the Action scope.</p>
+		<p id="codestring">CreateObjectType("<mark>[objective name]</mark>", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("AND")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Condition("TagCount")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tag("enemy_units")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operator("==");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Condition("InRegion")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Region("goal");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tag("players_units")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operator(">");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>In this example, both the TagCount (Are all units tagged "<code>enemy_units</code>" dead?) and InRegion (Is at least one unit tagged "<code>player_units</code>" in the region "<code>goal</code>"?) checks have to become true to make the entire condition true.</p>
+		<p><dsb>OR</dsb> - Condition will become true if ANY ONE sub-conditions become true.</p>
+		<p id="codestring">CreateObjectType("<mark>[objective name]</mark>", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("OR")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Condition("TagCount")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tag("enemy_units")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operator("==");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Condition("InRegion")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Region("goal");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tag("players_units")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operator(">");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>In this example, if the TagCount check become true, the entire condition will be true, regardless of if the InRegion is true or false. This goes vice versa for InRegion becoming true as well.</p>
+		<p><dsb>TIMER</dsb> - Condition becomes true after the specified time has elapsed (in seconds). If you enter two values in the Time() line, i.e. Time(60, 120), it will trigger at a random time between those intervals.</p>
+		<p id="codestring">CreateObjectType("<mark>[objective_name]</mark>", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("Timer")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Time(60);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>These are the most common condition types, but there are several more that are handy. See the <a id="greenlink" href="https://pandemic.bzscrap.org/dr2/tools/const_kit/manual/types/objectiveobj.html">DR2 Technical Reference Manual</a> for more info.</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>

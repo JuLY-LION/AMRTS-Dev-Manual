@@ -1,0 +1,186 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-6</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Creating a Single Player Mission</h1>
+		<h2>Messages/Objectives (5.6)</h2>
+		<h3>Display Objectives</h3>
+		<p>This section will describe how to make the objectives that are displayed in the pause window that tell you what your mission objectives are, as well as tools you have to guide a player to what they are supposed to do.</p>
+		<p> The script command to manipulate objectives is called "DisplayObjective". All of the following lines would be placed inside an Action scope. To add a new display objective, use the "<code>Add</code>" argument:</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DisplayObjective("Add", "<mark>[name of display objective]</mark>")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text("<mark>[text that will be displayed]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}</p>
+		<p>"<mark>name of display objective</mark>" is the name you are giving the objective as far as the script is concerned (it won't be displayed in game). "<code>Text</code>" is what is actually shown in the pause window.</p>
+		<p>To remove a display objective, use the "<code>Remove</code>" argument instead:</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DisplayObjective("Remove", "<mark>[name of display objective]</mark>");<br>
+&nbsp;&nbsp;}</p>
+		<p>This will remove the objective text from the pause window.</p>
+		<p>Below is an example of the DisplayObjective command in a complete objective.</p>
+		<p id="codestring">CreateObjectType("objective_destroy_base", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("TRUE");<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DisplayObjective("Add", "destroy_enemy_base")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text("Destroy the enemy base before they can fortify");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<h3>Objective Icons</h3>
+		<p>As a map maker you are also able to place a red 'X' on the mini-map. This is useful for directing players to a specific spot on the map if they don't or can't read your objectives.</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;CreateObjectiveIcon("<mark>[icon name]</mark>", "<mark>[region name]</mark>");<br>
+&nbsp;&nbsp;}</p>
+		<p>"<code><mark>[icon name]</mark></code>" refers to the unique script name for the icon. If you want to remove it at a later point, this is how you would reference it. "<code><mark>[region name]</mark></code>" is the name of a region that you will create on the map. This will mark the rough location on the mini-map, so your region doesn't need to be particularly precise.</p>
+		<p>To remove an icon, you simply need to use the following command:</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DeleteObjectiveIcon("<mark>[icon name]</mark>");<br>
+&nbsp;&nbsp;}</p>
+		<h3>Game Messages</h3>
+		<p>Game messages are used to play sound events and to print messages to chat. The use of game messages requires an additional .cfg file, and an inclusion of that file in <dsb>types_mission.cfg</dsb>. Create a text file called "<dsb>types_game_messages.cfg</dsb>" and put it in your mission folder. Then, open your <dsb>types_mission.cfg</dsb> and add this line:</p>
+		<p id="codestring">#include "types_game_messages.cfg"</p>
+		<p>This text file will contain all your custom messages to be used. Each one should contain three statements: "<code>Interval</code>", "<code>Sound</code>", and "<code>Message</code>".</p>
+		<p id="codestring">ConfigureGameMessage("<mark>[message name]</mark>")<br>
+{<br>
+&nbsp;&nbsp;Interval()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("Interval::None");<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Sound();<br>
+&nbsp;&nbsp;Message();<br>
+}</p>
+		<p>The <code>Interval</code> determines how often the sound is able to be played in sequence. For the most part, you'll always want to keep it set as "<code>Interval::None</code>". The <code>Sound</code> is, as it suggests, the sound that is played when the message occurs. Let's take a look:</p>
+		<p id="codestring">&nbsp;&nbsp;Sound()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("Sound::Stream");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Add("<mark>[sound file name]</mark>");<br>
+&nbsp;&nbsp;}</p>
+		<p>Again, just like with the Interval, you should always leave the sound type set as "<code>Sound::Stream</code>". Basically it means the sound will be played immediately regardless of any other messages currently playing, such as your units talking to you. "<code><mark>[sound file name]</mark></code>" is the filename of the sound you want to play. It can be .WAV or .MP3 format. If it's a custom sound file, don't forget to put it in your mission folder.</p>
+		<p>Now let's take a look at <code>Message</code>:</p>
+		<p id="codestring">&nbsp;&nbsp;Message()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("Message::Console");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Add("<mark>[Message text that will be displayed]</mark>");<br>
+&nbsp;&nbsp;}</p>
+		<p>Once more, leave the type set to "<code>Message::Console</code>". This prints the text in green to the chat. "<code><mark>[Message text that will be displayed]</mark></code>" will be printed to chat. Keep in mind that normally chat only exists in multiplayer.</p>
+		<p>Messages can also use both sound and text at the same time.</p>
+		<p id="codestring">ConfigureGameMessage("<mark>[message name]</mark>")<br>
+{<br>
+&nbsp;&nbsp;Interval()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("Interval::None");<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Sound()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("Sound::Stream");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Add("<mark>[sound file name]</mark>");<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Message()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("Message::Console");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Add("<mark>[Message text that will be displayed]</mark>");<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>The command to make the Game Messages play will be executed in your mission script (such as <dsb>objectives_player.cfg</dsb> or cineractives) in an action scope.</p>
+		<p id="codestring">CreateObjectType("<mark>[objective_name]</mark>", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("<mark>[type]</mark>")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[condition]</mark>;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GameMessage()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message("<mark>[message name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<h3>Location Messages</h3>
+		<p>Location messages are similar to game messages, except they are also able to mark areas on the map. This appears as the flashing rings on the mini-map that usually occur when things happen such as enemies being spotted or heroes getting wounded. Region messages are also configured in the file <dsb>types_game_messages.cfg</dsb> (if you haven't made this file, do so now and include it in <dsb>types_mission.cfg</dsb>).</p>
+		<p>Location messages use the same "<code>Interval</code>", "<code>Sound</code>", and "<code>Message</code>" statements as regular game messages, with three additional statements to use, being "<code>EnableBlip</code>", "<code>PersistentBlip</code>", and "<code>BlipColor</code>". Here's the configuration for a location message:</p>
+		<p id="codestring">ConfigureLocationMessage("<mark>[message name]</mark>")<br>
+{<br>
+&nbsp;&nbsp;Interval()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("Interval::None");<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Sound();<br>
+&nbsp;&nbsp;Message();<br>
+<br>
+&nbsp;&nbsp;EnableBlip(1);<br>
+&nbsp;&nbsp;PersistentBlip(4);<br>
+&nbsp;&nbsp;BlipColor(0, 255, 0);<br>
+}</p>
+		<p>A location message's three statements all relate to the ring, or "blip", that is drawn on the mini-map. "<code>EnableBlip</code>" simply enables or disables the blip from being drawn. It is defaulted to 0, so make sure to set it to 1. "<code>PersistentBlip</code>" defines how long the blip will linger on the map, in seconds, before it begins to fade away. "<code>BlipColor</code>" is also pretty self-explanatory. It defines the RGB values that the blip will be drawn with.</p>
+		<p>Location messages are also very similar to game messages in how they are executed as well.</p>
+		<p id="codestring">CreateObjectType("<mark>[objective_name]</mark>", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("<mark>[type]</mark>")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[condition]</mark>;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;RegionMessage()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Region("<mark>[region name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message("<mark>[message name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>Like with Objective Icons, "<code><mark>[region name]</mark></code>" refers to the name of a region on the map. The blip will appear in that location on the mini-map.</p>
+		<p>While location messages are largely obseleted by objective icons, they still have some use. One common way they used to be used was to create a contantly blinking marker on the mini-map. This can be done using an objective that loops while triggering the message each iteration.</p>
+		<p id="codestring">CreateObjectType("location_message1", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("Timer")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Time(1.5);<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;RegionMessage()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Region("<mark>[region name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Message("<mark>[message name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;NewObjective("location_message1");<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>In this example, the objective "<code>location_message1</code>" will run every 1.5 seconds. When it does, it will trigger a location message, then point back to itself using NewObjective. Remember though that this loop will be infinite. To cancel it, you'd have to use a second objective armed with the "<code>ObjectiveAbandoned</code>" command:</p>
+		<p id="codestring">CreateObjectType("location_message2", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition(<mark>[type]</mark>)<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[condition]</mark>;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ObjectiveAbandoned("location_message1");<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>These are the basics in telling a player their objective. For multiplayer, where each player can have a unique objective, things get a little more versatile, but also more complicated. See Section 7.1: <a id="badlink" href="chapter7-1.html">Mods and Rulesets - Getting Started</a> for more information.
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>
