@@ -2,6 +2,28 @@
 	<link rel="stylesheet" type="text/css" href="../style.css">
 	<link rel="stylesheet" type="text/css" href="../wrapper.css">
 	<title>5-7</title>
+	<style>
+		table {
+			border:2px outset #000000;
+		}
+		th {
+			text-align: center;
+			padding: 0px 4px;
+			border: 2px inset #000000;
+			color: ffff80;
+			background-image: url("../colors/darkgray_opacity50.png");
+		}
+		td {
+			padding: 2px 4px;
+			border: 2px inset #000000;
+		}
+		td.r {
+			color: aqua;
+			background-image: url("../colors/black_opacity50.png");
+			font-family: "Lucida Console";
+			text-align: center;
+		}
+	</style>
 </head><body>
 	<iframe src="../header.html"></iframe>
 	<div class = "topbutton">
@@ -9,46 +31,175 @@
 			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
 		</a>
 	</div>
-	
-	
 	<div id = "content_wrapper">
-		
-		<h1>Header1</h1>
+		<h1>Creating a Single Player Mission</h1>
 		<h2>Variables (5.7)</h2>
-		<h2 style="color:#ff8080;">Under construction! Come back later!</h2>
-		<p>Variable integers can be used as a trigger when nothing else will fit the situation. They are usually used when an event on one team causes an event on another team, and none of the usual condition types are viable. Integers can be set to any whole number, but you might often find you just need to store a 0 or 1, like a switch. All the following commands are executed from an <dsb>Action</dsb> scope, with the exception of conditionals.</p>
-		
-		<h3>Creating and updating</h3>
-		<p>Give the variable a name. The &lt;num&gt; is the number value that the variable will start as. The command to create a variable is:</p>
-		<p id="codestring">CreateVarInteger("@.[varName]", &lt;num&gt;);</p>
-		<p>When you're ready to change the value of a variable, the following command is used:</p>
-		<p id="codestring">Op("@.[varName]", "=", &lt;num&gt;);</p>
-
-		<h3>Checking its value</h3>
-		<p>Of course, you're going to want to read the value of your variable. To use it in an conditional if statement, use this:</p>
-		<p id="codestring">Condition("If", "@.[varName]", "==", &lt;num&gt;);</p>
-		<p>Remember, = and == <hili>are not the same</hili>. A single equals character is used as an assignment operator and a double equals is used as a relational operator. Or to put it more simplicy, = means set a new value, == means compare the current value.</p>
-		
-		<font id="insectred">TODO: Add a <a href="https://www.geeksforgeeks.org/cpp-relational-operators">C++ relational operator</a> table</font>
-		
-		<h3>Global Variables</h3>
-		<p>A global variable is something that every player's objectives can affect and see. Defining a global variables is done on StartActionClient(). For instance, in Control Freak, five global variables are set, one for each control point. All other teams can see these five variables, and if a team takes a control point, the objective records that teams name into the variable. These are the best way to get each team's scripts to communicate with one another. (Ex: ~.control.CP-A)</p>
-
-		<h3>Local Variables</h3>
-		<p>Local variables are variables only seen by the one team running a script. All other teams cannot see what one team's local variables are. These are used mostly for triggers, timers and the like. (Ex: @.control.CP-A)</p>
-
-		<h3>Special Variables</h3>
-		<p>If you want a team's specific name, listen up: @.engine.name gives the name of the team. All maps currently have teams named 'TeamX' where X is a number 1-8, except for assault, which has the team 'assault.' This variable can come in handy in all sorts of situations, such as Control Freak, which gives @.engine.name to a global variable, and checks to see if all five global variables for each control point are controlled by allies. In Assault, @.engine.name is used for the regions which a Dezigner piece is spawned.</p>
-
-		<p>CreateVarInteger: This creates an integer variable that stores whole numbers.
-
-		CreateVarFloat: This creates a floating-point variable, that can store any number or decimal.
-
-		CreateVarString: This creates a string variable that you can store text and/or numbers in.
-
-		NOTE: Variables can only have TWO periods in them, no more. (i.e. no @.ab.bc.cd, but @.ab.bc-cd will work)</p>
+		<h3>Integers</h3>
+		<p>In general, variables are very useful. They let you store information or the state of the game in various ways. Most often though, you'll simply use them for communicating information between teams. There are three kinds of variables to use: Integers, floats, and strings. Let's start off with the simplest: integers. To create an integer variable, use an action statement with this command:</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;CreateVarInteger("@.<mark>[var name]</mark>", <mark>[initial value]</mark>, <mark>[lower bounds]</mark>, <mark>[upper bounds]</mark>);<br>
+&nbsp;&nbsp;}</p>
+		<p>This will create an integer variable. Integers store a whole number, either positive or negative. These can be used to count things, but more often then not you will be using them as a "pseudo-boolean" when nothing else will fit the situation.</p>
+		<p>A variable created this way will have two parts to its reference name. The first part is simply the name of the team that created it; That is, the team running the objective. "<code><mark>var name</mark></code>" is the second half of the name. So for example, the team "<code>Team3</code>" would create a var named "<code>@Team3.counter</code>". Variables can only have TWO periods in the name, no more (i.e. <code>@.ab.bc-cd</code> will work, but <code>@.ab.bc.cd</code> will not).</p>
+		<p>"<code><mark>initial value</mark></code>" is the value the variable starts at. For integers, this is 0 by default. "<code><mark>lower bounds</mark></code>" and "<code><mark>upper bounds</mark></code>" are the lowest and highest values a variable can reach via operation. Integers are stored internally as a signed 32-bit value: In layman's terms, that means the default upper and lower bounds are 2,147,483,647 and -2,147,483,648 respectively, much more than you should ever need to work with.</p>
+		<p>So for example, if you wanted an integer that starts at 5 and is clamped to the values -5 to 20, you would use a command like this:</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;CreateVarInteger("@.counter", 5, -5, 20);<br>
+&nbsp;&nbsp;}</p>
+		<p>The initial value and both bounds can be omitted as well, so in this example:</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;CreateVarInteger("@.myvar");<br>
+&nbsp;&nbsp;}</p>
+		<p>You would create a integer called "myvar" which starts out as 0, and can increase or decrease as much as needed.</p>
+		<h3>Floats</h3>
+		<p>Floats, like Integers, store a number. They have a decimal component, and are most often used for timers. To create a float, you would use the following command:</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;CreateVarFloat("@.<mark>[var name]</mark>", <mark>[initial value]</mark>, <mark>[lower bounds]</mark>, <mark>[upper bounds]</mark>);<br>
+&nbsp;&nbsp;}</p>
+		<p>Like with integers, when creating a float you may choose to exclude an intial value and/or bounds.</p>
+		<h3>Strings</h3>
+		<p>While integers and floats deal with numbers, a string variable will store a string of characters. That is, it will store a line of text. Strings are almost exclusively used to deal with interface elements; Their most common use case is to associate a game message with them. This will make a game messages that prints the content of the string, which can be updated according to the game state. Creating a string uses the following command:</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;CreateVarString("@.<mark>[var name]</mark>", "<mark>[initial value]</mark>");<br>
+&nbsp;&nbsp;}</p>
+		<p>Unlike the previous two variables, strings do not have a default value, and also do not have upper or lower bounds. Also, unlike integers and floats, a string's value MUST always be enclosed by <code>""</code> quotation marks.</p>
+		<h3>Performing Arithmetic</h3>
+		<p>When you create a var, it will stay at it's default value forever until you perform an operation on it. To do this, you will use the <code>Op()</code> command.</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Op("@.<mark>[var name]</mark>", "<mark>[operation]</mark>", <mark>[new value]</mark>); <br>
+&nbsp;&nbsp;}</p>
+		<p>"<code><mark>[var name]</mark></code>" is the name of the var you are changing. The "<code><mark>[operation]</mark></code>" in the middle is the mathematical operation you want to perform. And the "<code><mark>[new value]</mark></code>" is the second term of your equation.</p>
+		<p>There are several different operations to perform on variables.</p>
+		<table>
+			<tr><th>Operation</th><th>Code Symbol</th></tr>
+			<tr><td>Assignment</td><td class="r">=</td></tr>
+			<tr><td>Addition</td><td class="r">+</td></tr>
+			<tr><td>Subtraction</td><td class="r">-</td></tr>
+			<tr><td>Multiplication</td><td class="r">*</td></tr>
+			<tr><td>Division</td><td class="r">/</td></tr>
+			<tr><td>Modulus</td><td class="r">%</td></tr>
+			<tr><td>Bitwise OR</td><td class="r">|</td></tr>
+			<tr><td>Bitwise AND</td><td class="r">&amp;</td></tr>
+			<tr><td>Bitwise Exclusive OR</td><td class="r">^</td></tr>
+		</table>
+		<p>Let's take a look at some examples. The first operation "Assignment" is fairly straight forward. It will take the variable you specify, then assign its value to the "<code><mark>[new value]</mark></code>", regardless of whatever the variable's previous value was.</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Op("@.numunits", "=", 20);<br>
+&nbsp;&nbsp;}</p>
+		<p>So in this case, we set the variable "<code>@.numunits</code>" to be 20.</p>
+		<p>The next few operations are pretty self explanatory in what they do. Addition and subtraction can increment and decrement variables by a given amount, and multiplication and division do their respective thing. So another exmaple:</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Op("@.score", "*", 2);<br>
+&nbsp;&nbsp;}</p>
+		<p>Here, we take the variable "<code>@.score</code>" and multiply it by 2, doubling it.</p>
+		<p>Arithmetic can also be performed on float variables. They use the same syntax, and support decimals too. This example will increment the "<code>@.floatvar</code>" var by 7.25.</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Op("@.floatvar", "+", 7.25);<br>
+&nbsp;&nbsp;}</p>
+		<p>Note that string variables do not support arithmetic. Only the assignment operation can be performed on them. Also, you must enclose the "<code><mark>[new value]</mark></code>" in <code>""</code> quotation marks.</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Op("@.locname", "=", "Location A");<br>
+&nbsp;&nbsp;}</p>
+		<p>Lastly, you can substitute the "<code><mark>[new value]</mark></code>" with the name of another variable. You can use this to add two variables together, or dynamically change a multiplier for example.</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Op("@.var1", "+", "@.var2");<br>
+&nbsp;&nbsp;}</p>
+		<p>This will add the amount of "<code>@.var2</code>" to "<code>@.var1</code>". Don't forget that this will change the value of <code>@.var1</code>, meaning performing this operation a second time will yield a different result!</p>
+		<h3>Using Variables</h3>
+		<p>Once you've created a variable, there are several ways to utilize them. The most common way you'll be using is as a conditional.</p>
+		<p id="codestring">CreateObjectType("<mark>[objective name]</mark>"), "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("If", "@.<mark>[var name]</mark>", "<mark>[operator]</mark>", <mark>[value]</mark>);<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>The "<code>If</code>" condition is a versatile method of testing variables, and is structured very similarly to the <code>Op()</code> command. It will perform a comparison between a given variable and a value depending on its operator. The "<code><mark>[var name]</mark></code>" is the variable you are testing. It can be any variable, including strings. The "<code><mark>[operator]</mark></code>" in the middle is the relational operator you want to use, and the "<code><mark>[value]</mark></code>" is the value you want to test the variable against.</p>
+		<p>A list of operators can bee seen here.</p>
+		<table>
+			<tr><th>Operator</th><th>Code Symbol</th></tr>
+			<tr><td>Greater than</td><td class="r">&gt;</td></tr>
+			<tr><td>Less than</td><td class="r">&lt;</td></tr>
+			<tr><td>Equal to</td><td class="r">==</td></tr>
+			<tr><td>NOT Equal to</td><td class="r">!=</td></tr>
+			<tr><td>Greater than OR Equal to</td><td class="r">&gt;=</td></tr>
+			<tr><td>Less than OR Equal to</td><td class="r">&lt;=</td></tr>
+		</table>
+		<p id="codestring">CreateObjectType("<mark>[objective name]</mark>"), "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("If", "@.kills", "&gt;", 99);<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>In this example, we grab the variable named "<code>@.kills</code>" and test whether it is greater than 99. If it is, then the condition becomes true and the <code>Action()</code> statement is executed. Remember, if the condition is not true, then it will remain dormant until it does become true.</p>
+		<p>You can also compare a variables to another variable. So in this example:</p>
+		<p id="codestring">CreateObjectType("<mark>[objective name]</mark>"), "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("If", "@.kills", "&lt;", "@.loses");<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>We test if the "<code>@.kills</code>" variable becomes less than the value of the "<code>@.loses</code>" variable.</p>
+		<p>Floats and strings can also be compared to each other in this way. However, different variable types cannot be compared to each other, so for example you can't test an integer against a float, or vice versa. Also, string variables only support "Equal to" and "NOT Equal to" comparisons.</p>
+		<p>There is also a way to tie a float variable to a timer. When using a "<code>Timer</code>" condition, you can specify the name of a float to use:</p>
+		<p id="codestring">CreateObjectType("objective_countdown", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("Timer")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Time(300);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Var("@.timeleft");<br>
+&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>In this example, the Timer will begin at 300 seconds (five minutes) and while counting down, and will keep the variable named "<code>@.timeleft</code>" updated to the current time left. Doing this, you can then create objectives that will become true once the timer reaches a specific value. So for example, this objective will become true once the timer from <code>objective_countdown</code> reaches 150 seconds (two and a half minutes) or below:</p>
+		<p id="codestring">CreateObjectType("objective_halftime"), "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("If", "@.timeleft", "&lt;=", 150);<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>Also, by tying a timer condition to a variable, you can then display that variable on screen. This will let you show the player how much time remains for the timer in real time. Note that tying a variable to a timer condition alone is not enough to get a timer to display onscreen. For that, you'll need to define the interface element. See Section 7.1: <a id="badlink" href="chapter7-1.html">Mods and Rulesets - Getting Started</a> for more information.</p>
+		<p>There is one more way to test a variable with an objective. When using an "<code>If</code>" condition, the objective remains dormant until the condition becomes true or is abandoned. That, and every command in the action statement is executed. One way to get around this is to have a timer objective that chains into several if objectives. Alternatively, you can use a simple <code>If()</code> statement in the action statement itself.</p>
+		<p id="codestring">CreateObjectType("<mark>[objective name]</mark>", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("Timer")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Time(15);<br>
+&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If("@.tankilled", ">", 5)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Else()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>Just like with the conditional method, this will test a variable. Here, we are testing if the <code>@.tankilled</code> variable is greater than 5. If it is, we execute the actions under the <code>If</code> statement's brackets. Otherwise, execute the actions under the <code>Else()</code> statement. This method is helpful for directly branching your objectives without having to chain multiple objectives together to utilize different conditions. In the example, the integer is tested after 15 seconds have passed, and this will happen only once and only requires a single objective!</p>
 	</div>
 	<iframe src="../footer.html"></iframe>
-	
-
 </body></html>
