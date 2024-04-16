@@ -1,0 +1,44 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-12</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Creating a Single Player Mission</h1>
+		<h2>List of Strategic Scripts (5.12)</h2>
+		<p>These are all the scripts that are available to use in the base game. Unlike in Dark Reign 2, Army Men RTS has no pointer file for including the scripts in bulk. Therefore, for each script you want to use in your mission, you will need to include the script file through your <dsb>strategic.cfg</dsb> file.</p>
+		<dl>
+			<dt><dsb>squad_move_spawntoregion.cfg</dsb> - <code>squad.move.spawntoregion</code></dt>
+			<dd>This script will spawn a recruit type at a source region, then move them to a destination region.</dd>
+			<dt><dsb>squad_move_spawntoregion_tag.cfg</dsb> - <code>squad.move.spawntoregion_tag</code></dt>
+			<dd>Same as above, but this script will also assign the spawned units to a given tag, which can be used to keep track of the units later.</dd>
+			<dt><dsb>squad_move_spawntotrail.cfg</dsb> - <code>squad.move.spawntotrail</code></dt>
+			<dd>This script will spawn a recruit type at a region, then make them follow a trail.</dd>
+			<dt><dsb>squad_move_spawntotrail_tag.cfg</dsb> - <code>squad.move.spawntotrail.tag</code></dt>
+			<dd>Same as above, but the spawned units will be assigned to a tag.</dd>
+			<dt><dsb>squad_move_tagtoregion.cfg</dsb> - <code>squad.move.tagtoregion</code></dt>
+			<dd>This script takes the given tagged units and moves them to a region.</dd>
+			<dt><dsb>squad_move_tagtotrail.cfg</dsb> - <code>squad.move.tagtotrail</code></dt>
+			<dd>This script takes the given tagged units and makes them follow a trail.</dd>
+			<dt><dsb>squad_move_typebasetotrail.cfg</dsb> - <code>squad.move.typebasetotrail</code></dt>
+			<dd>This script will recruit a recruit type from an AI base, then make them follow a trail.</dd>
+			<dt><dsb>squad_move_typebasetotrail_tag.cfg</dsb> - <code>squad.move.typebasetotrail_tag</code></dt>
+			<dd>Same as above, but the recruited units will be assigned to a tag.</dd>
+			<dt><dsb>squad_move_typetoregion.cfg</dsb> - <code>squad.move.typetoregion</code></dt>
+			<dd>This script will recruit a recruit type from a source region within a certain distance. Then the recruited units will move to a destination region.</dd>
+			<dt><dsb>squad_transport_tagtoregion.cfg</dsb> - <code>squad.transport.tagtoregion</code></dt>
+			<dd>This is a left over from Dark Reign 2. It will take the given tagged units, then make them board a transport unit from the team. The transport unit will then deliver its payload to a destination region. Transport units do not naturally exist in Army Men RTS, so while the script does fully function, it is practically useless.</dd>
+			<dt><dsb>squad_turn_tagtoregion.cfg</dsb> - <code>squad.turn.tagtoregion</code></dt>
+			<dd>This script takes the given tagged units and makes them turn to face towards a region.</dd>
+			<dt><dsb>unit_move_spawntospline.cfg</dsb> - <code>unit.move.spawntospline</code></dt>
+			<dd>This script will spawn a recruit type and make it follow a cineractive curve. For information on curves, see Section 5: <a href="chapter5-13.html">Creating a Single Player Mission - Cineractives</a>.</dd>
+		</dl>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>

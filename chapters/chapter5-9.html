@@ -1,0 +1,75 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-9</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Creating a Single Player Mission</h1>
+		<h2>Enemy AI - Scripting Attacks (5.9)</h2>
+		<p>Now that you've established some recruit types you can begin sending them out to attack. AI movement is handled through the standard objective actions that trigger other game events. Thus, you can trigger attacks when the player enters a region, a tag is destroyed, or a certain amount of time elapses, just to name a few. AI objectives can be placed in the <dsb>objectives_ai.cfg</dsb> file you created earlier, along with the rest of the AI's scripts. AI scripts can be broken down into sub-sections: type of movement, type of recruitment and type of destination. Certain variants can be added to modify these types.</p>
+		<p>All AI scripts follow a similar pattern, with certain variables supplementing the standard syntax. The objective action <code>ExecuteScript</code> is used to trigger AI movement, and is used in the same manner as other objective actions:</p>
+		<p id="codestring">CreateObjectType("ai_patrol", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("Timer")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Time(120);<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ExecuteScript("<mark>[script name]</mark>", "squad.move.tagtoregion")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.tag", "=", "<mark>[tag name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.region", "=", "<mark>[region name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>The above example utilizes the same format you used to create player objectives. The objective is given a unique name (in this case, "<code>ai_patrol</code>") and an objective condition (a Timer). After the Timer counts down, the AI script is executed. The script itself breaks down as follows. Each script is given a unique name, followed by the script type (in this case, <code>squad.move.tagtoregion</code>). This type requires two variables, the tag to recruit and the region to travel to. In this example, 120 seconds after the objective is assigned to the AI, it will recruit the tag specified and have it travel to the region.</p>
+		<p>Scripts break down into four different methods of recruiting to fulfill their orders. Thus, you may have squad.move.spawn, squad.move.tag, squad.move.type and squad.move.typebase scripts in your missions. They will all order AI units to travel the map and attack enemies, but they differ in how they fill out their squads. The four types are as follows:</p>
+		<ul>
+			<li><dsb>Spawn</dsb> - As the name implies, spawn scripts do not recruit units from the map, but instead create them at a specified region.
+			<li><dsb>Tag</dsb> - Tag scripts recruit a specific tag (usually named in the Studio) for the squad.
+			<li><dsb>Type</dsb> - Type scripts recruit units from a defined recruit type (as created in <dsb>recruit_types.cfg</dsb>). Units recruited via type scripts are still counted as part of the base by the AI, so it will not create more units to replace them until they are killed.
+			<li><dsb>Typebase</dsb> - Typebase scripts are a variant of Type scripts. They function identically, but with typebase recruiting the AI no longer considers the recruited units to be part of the base. Thus, the AI will produce new units immediately to replace them.
+		</ul>
+		<p>All scripts need a destination. The two types of destinations are regions and trails. A squad sent to a region will remain in that region until destroyed unless drawn out in pursuit of an enemy. Squads sent on one-way trails will follow that trail, then remain at the end point. Squads sent on other trails will remain on them indefinitely, leaving only long enough to engage enemy forces.</p>
+		<p>Some examples of script types are as follows:</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ExecuteScript("<mark>[script name]</mark>", "squad.move.typetoregion")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.types", "=", "<mark>[recruit type]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.region.src", "=", "<mark>[region name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.region.dst", "=", "<mark>[region name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.acceptInsufficient","=", 1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}</p>
+		<p>In the above example, the AI will attempt to form the squad from the recruit type specified ("<code>types</code>") located within 100 meters of the source region ("<code>region.src</code>"). It will then send the squad to its destination, specified in "<code>region.dst</code>". In the event there are not enough units to fulfill the recruit type, it will launch the squad anyway. If you want the AI to wait until the recruit type is completely filled, remove the "<code>acceptInsufficient</code>" line.</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ExecuteScript("<mark>[script name]</mark>", "squad.move.typebasetoregion")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.types", "=", "<mark>[recruit type]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.base", "=", "<mark>[base name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.region", "=", "<mark>[region name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}</p>
+		<p>In this example, the AI is executing a similar move. Instead of recruiting the type from a specific region, however, it is taking whichever units are available from the team (typebase). The squad will then move to the region specified.</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ExecuteScript("<mark>[script name]</mark>", "squad.move.spawntoregion")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.types", "=", "<mark>[recruit type]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.region.src", "=", "<mark>[region name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.region.dst", "=", "<mark>[region name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}</p>
+		<p>And in this example, the AI will not recruit the units at all. Instead, it will create the recruit type directly at the source region, before moving the squad to the destination region.</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>

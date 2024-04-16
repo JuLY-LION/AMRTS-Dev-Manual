@@ -22,7 +22,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text("<mark>[text that will be displayed]</mark>");<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;}</p>
-		<p>"<mark>name of display objective</mark>" is the name you are giving the objective as far as the script is concerned (it won't be displayed in game). "<code>Text</code>" is what is actually shown in the pause window.</p>
+		<p>"<mark>[name of display objective]</mark>" is the name you are giving the objective as far as the script is concerned (it won't be displayed in game). "<code>Text</code>" is what is actually shown in the pause window.</p>
 		<p>To remove a display objective, use the "<code>Remove</code>" argument instead:</p>
 		<p id="codestring">&nbsp;&nbsp;Action()<br>
 &nbsp;&nbsp;{<br>
@@ -47,7 +47,7 @@
 &nbsp;&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;CreateObjectiveIcon("<mark>[icon name]</mark>", "<mark>[region name]</mark>");<br>
 &nbsp;&nbsp;}</p>
-		<p>"<code><mark>[icon name]</mark></code>" refers to the unique script name for the icon. If you want to remove it at a later point, this is how you would reference it. "<code><mark>[region name]</mark></code>" is the name of a region that you will create on the map. This will mark the rough location on the mini-map, so your region doesn't need to be particularly precise.</p>
+		<p>"<mark>[icon name]</mark>" refers to the unique script name for the icon. If you want to remove it at a later point, this is how you would reference it. "<mark>[region name]</mark>" is the name of a region that you will create on the map. This will mark the rough location on the mini-map, so your region doesn't need to be particularly precise.</p>
 		<p>To remove an icon, you simply need to use the following command:</p>
 		<p id="codestring">&nbsp;&nbsp;Action()<br>
 &nbsp;&nbsp;{<br>
@@ -72,14 +72,14 @@
 &nbsp;&nbsp;&nbsp;&nbsp;Type("Sound::Stream");<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Add("<mark>[sound file name]</mark>");<br>
 &nbsp;&nbsp;}</p>
-		<p>Again, just like with the Interval, you should always leave the sound type set as "<code>Sound::Stream</code>". Basically it means the sound will be played immediately regardless of any other messages currently playing, such as your units talking to you. "<code><mark>[sound file name]</mark></code>" is the filename of the sound you want to play. It can be .WAV or .MP3 format. If it's a custom sound file, don't forget to put it in your mission folder.</p>
+		<p>Again, just like with the Interval, you should always leave the sound type set as "<code>Sound::Stream</code>". Basically it means the sound will be played immediately regardless of any other messages currently playing, such as your units talking to you. "<mark>[sound file name]</mark>" is the filename of the sound you want to play. It can be .WAV or .MP3 format. If it's a custom sound file, don't forget to put it in your mission folder.</p>
 		<p>Now let's take a look at <code>Message</code>:</p>
 		<p id="codestring">&nbsp;&nbsp;Message()<br>
 &nbsp;&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Type("Message::Console");<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Add("<mark>[Message text that will be displayed]</mark>");<br>
 &nbsp;&nbsp;}</p>
-		<p>Once more, leave the type set to "<code>Message::Console</code>". This prints the text in green to the chat. "<code><mark>[Message text that will be displayed]</mark></code>" will be printed to chat. Keep in mind that normally chat only exists in multiplayer.</p>
+		<p>Once more, leave the type set to "<code>Message::Console</code>". This prints the text in green to the chat. "<mark>[Message text that will be displayed]</mark>" will be printed to chat. Keep in mind that normally chat only exists in multiplayer.</p>
 		<p>Messages can also use both sound and text at the same time.</p>
 		<p id="codestring">ConfigureGameMessage("<mark>[message name]</mark>")<br>
 {<br>
@@ -148,7 +148,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
 &nbsp;&nbsp;}<br>
 }</p>
-		<p>Like with Objective Icons, "<code><mark>[region name]</mark></code>" refers to the name of a region on the map. The blip will appear in that location on the mini-map.</p>
+		<p>Like with Objective Icons, "<mark>[region name]</mark>" refers to the name of a region on the map. The blip will appear in that location on the mini-map.</p>
 		<p>While location messages are largely obseleted by objective icons, they still have some use. One common way they used to be used was to create a contantly blinking marker on the mini-map. This can be done using an objective that loops while triggering the message each iteration.</p>
 		<p id="codestring">CreateObjectType("location_message1", "Objective")<br>
 {<br>

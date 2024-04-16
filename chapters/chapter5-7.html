@@ -41,8 +41,8 @@
 &nbsp;&nbsp;&nbsp;&nbsp;CreateVarInteger("@.<mark>[var name]</mark>", <mark>[initial value]</mark>, <mark>[lower bounds]</mark>, <mark>[upper bounds]</mark>);<br>
 &nbsp;&nbsp;}</p>
 		<p>This will create an integer variable. Integers store a whole number, either positive or negative. These can be used to count things, but more often then not you will be using them as a "pseudo-boolean" when nothing else will fit the situation.</p>
-		<p>A variable created this way will have two parts to its reference name. The first part is simply the name of the team that created it; That is, the team running the objective. "<code><mark>var name</mark></code>" is the second half of the name. So for example, the team "<code>Team3</code>" would create a var named "<code>@Team3.counter</code>". Variables can only have TWO periods in the name, no more (i.e. <code>@.ab.bc-cd</code> will work, but <code>@.ab.bc.cd</code> will not).</p>
-		<p>"<code><mark>initial value</mark></code>" is the value the variable starts at. For integers, this is 0 by default. "<code><mark>lower bounds</mark></code>" and "<code><mark>upper bounds</mark></code>" are the lowest and highest values a variable can reach via operation. Integers are stored internally as a signed 32-bit value: In layman's terms, that means the default upper and lower bounds are 2,147,483,647 and -2,147,483,648 respectively, much more than you should ever need to work with.</p>
+		<p>A variable created this way will have two parts to its reference name. The first part is simply the name of the team that created it; That is, the team running the objective. "<mark>[var name]</mark>" is the second half of the name. So for example, the team "<code>Team3</code>" would create a var named "<code>@Team3.counter</code>". Variables can only have TWO periods in the name, no more (i.e. <code>@.ab.bc-cd</code> will work, but <code>@.ab.bc.cd</code> will not).</p>
+		<p>The "<mark>[initial value]</mark>" is the value the variable starts at. For integers, this is 0 by default. "<mark>[lower bounds]</mark>" and "<mark>[upper bounds]</mark>" are the lowest and highest values a variable can reach via operation. Integers are stored internally as a signed 32-bit value: In layman's terms, that means the default upper and lower bounds are 2,147,483,647 and -2,147,483,648 respectively, much more than you should ever need to work with.</p>
 		<p>So for example, if you wanted an integer that starts at 5 and is clamped to the values -5 to 20, you would use a command like this:</p>
 		<p id="codestring">&nbsp;&nbsp;Action()<br>
 &nbsp;&nbsp;{<br>
@@ -74,7 +74,7 @@
 &nbsp;&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Op("@.<mark>[var name]</mark>", "<mark>[operation]</mark>", <mark>[new value]</mark>); <br>
 &nbsp;&nbsp;}</p>
-		<p>"<code><mark>[var name]</mark></code>" is the name of the var you are changing. The "<code><mark>[operation]</mark></code>" in the middle is the mathematical operation you want to perform. And the "<code><mark>[new value]</mark></code>" is the second term of your equation.</p>
+		<p>"<mark>[var name]</mark>" is the name of the var you are changing. The "<mark>[operation]</mark>" in the middle is the mathematical operation you want to perform. And the "<mark>[new value]</mark>" is the second term of your equation.</p>
 		<p>There are several different operations to perform on variables.</p>
 		<table>
 			<tr><th>Operation</th><th>Code Symbol</th></tr>
@@ -88,7 +88,7 @@
 			<tr><td>Bitwise AND</td><td class="r">&amp;</td></tr>
 			<tr><td>Bitwise Exclusive OR</td><td class="r">^</td></tr>
 		</table>
-		<p>Let's take a look at some examples. The first operation "Assignment" is fairly straight forward. It will take the variable you specify, then assign its value to the "<code><mark>[new value]</mark></code>", regardless of whatever the variable's previous value was.</p>
+		<p>Let's take a look at some examples. The first operation "Assignment" is fairly straight forward. It will take the variable you specify, then assign its value to the "<mark>[new value]</mark>", regardless of whatever the variable's previous value was.</p>
 		<p id="codestring">&nbsp;&nbsp;Action()<br>
 &nbsp;&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Op("@.numunits", "=", 20);<br>
@@ -105,12 +105,12 @@
 &nbsp;&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Op("@.floatvar", "+", 7.25);<br>
 &nbsp;&nbsp;}</p>
-		<p>Note that string variables do not support arithmetic. Only the assignment operation can be performed on them. Also, you must enclose the "<code><mark>[new value]</mark></code>" in <code>""</code> quotation marks.</p>
+		<p>Note that string variables do not support arithmetic. Only the assignment operation can be performed on them. Also, you must enclose the "<mark>[new value]</mark>" in <code>""</code> quotation marks.</p>
 		<p id="codestring">&nbsp;&nbsp;Action()<br>
 &nbsp;&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Op("@.locname", "=", "Location A");<br>
 &nbsp;&nbsp;}</p>
-		<p>Lastly, you can substitute the "<code><mark>[new value]</mark></code>" with the name of another variable. You can use this to add two variables together, or dynamically change a multiplier for example.</p>
+		<p>Lastly, you can substitute the "<mark>[new value]</mark>" with the name of another variable. You can use this to add two variables together, or dynamically change a multiplier for example.</p>
 		<p id="codestring">&nbsp;&nbsp;Action()<br>
 &nbsp;&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Op("@.var1", "+", "@.var2");<br>
@@ -126,7 +126,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<mark>[action]</mark>;<br>
 &nbsp;&nbsp;}<br>
 }</p>
-		<p>The "<code>If</code>" condition is a versatile method of testing variables, and is structured very similarly to the <code>Op()</code> command. It will perform a comparison between a given variable and a value depending on its operator. The "<code><mark>[var name]</mark></code>" is the variable you are testing. It can be any variable, including strings. The "<code><mark>[operator]</mark></code>" in the middle is the relational operator you want to use, and the "<code><mark>[value]</mark></code>" is the value you want to test the variable against.</p>
+		<p>The "<code>If</code>" condition is a versatile method of testing variables, and is structured very similarly to the <code>Op()</code> command. It will perform a comparison between a given variable and a value depending on its operator. The "<mark>[var name]</mark>" is the variable you are testing. It can be any variable, including strings. The "<mark>[operator]</mark>" in the middle is the relational operator you want to use, and the "<mark>[value]</mark>" is the value you want to test the variable against.</p>
 		<p>A list of operators can bee seen here.</p>
 		<table>
 			<tr><th>Operator</th><th>Code Symbol</th></tr>

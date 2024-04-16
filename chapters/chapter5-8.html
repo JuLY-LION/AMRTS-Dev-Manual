@@ -1,0 +1,68 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-8</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Creating a Single Player Mission</h1>
+		<h2>Enemy AI - Setting Up (5.8)</h2>
+		<p>The following sections will assume you already have a map ready to go, with a pre-build enemy base.</p>
+		<p>If you haven't already created a <dsb>strategic.cfg</dsb> file, go ahead and make one now. It should be empty, but not for long. We'll start by including these three files in the <dsb>strategic.cfg</dsb> file:</p>
+		<p id="codestring">#include "base_army.cfg"<br>
+#include "base_army_orderers.cfg"<br>
+#include "base_army_plans.cfg"</p>
+		<p>These three files contain the default configurations of an AI base. They are pretty basic, but they'll work for us for now. We can modify them later.</p>
+		<p>Next we need to tell the script to create the AI base for the mission. This is typically done in the initial start objective for the AI team. The Action scope would look like this:</p>
+		<p id="codestring">CreateObjectType("objective_start_AI", "Objective")<br>
+{<br>
+&nbsp;&nbsp;Condition("TRUE");<br><br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;AddBase("<mark>[base name]</mark>", "army")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Region("<mark>[region name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Orientation(180);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;AssignBaseConstructors("<mark>[base name]</mark>")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tag("<mark>[tag name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;AssignBaseUnits("<mark>[base name]</mark>")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tag("<mark>[tag name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>The <mark>[base name]</mark> is the script identifier of the base and can be anything you wish. Where it says "army" is which base config to use, in which "army" is the default we included earlier. The <mark>[region name]</mark> is the location on the map the base considers home. If it buys new buildings, it will use center of this region as a reference point for placement. If no region is given, then it will assume the start region set in the studio, and if that isn't given, then the AI will fail, crashing the game!<br>
+		<code>Orientation</code> is the compass angle the base faces. While buildings can only face the four cardinal directions, more precise angles will be reflected in exact cell placements, such as for towers. If an orientation isn't specified, it will default towards the center of the map. The number increases the angle in a clockwise fashion. The four cardinals are as follows:<br>
+		<ul>
+			<li><code>0</code> - North
+			<li><code>90</code> - East
+			<li><code>180</code> - South
+			<li><code>270</code> - West
+		</ul><br>
+		The two tag designations are for categorizing your pre-placed units on the map, it tells the game which units should be considered part of the base and which shouldn't.</p>
+		<p>If you just have one AI base, put all buildings and units that should be a part of that base into one tag, and use that tag name for both the above <mark>[tag name]</mark>. If you have multiple AI bases, you would have another set of specifications just like the one above, in the same action scope, but designate the correct tags and name for the other base. Enemy units placed far away from the main base typically aren't included in the base tag, but can be.</p>
+		<p>Finally, you'll need to add one more .cfg file to your mission folder. Make a new text file and call it "<dsb>recruit_types.cfg</dsb>". Then, open your <dsb>strategic.cfg</dsb> file, and include it by adding the line:</p>
+		<p id="codestring">#include "recruit_types.cfg"</p>
+		<p>The <dsb>recruit_types.cfg</dsb> file is where you configure all your 'recruit types'. A recruit type is a set group of units that can be referred to as often as needed from your main script. When your main script is recruiting units from the AI base to send them out to attack, it will be doing so by recruit types. Here's the standard format for configuring a recruit type. This goes in recruit_types.cfg, just as appears:</p>
+		<p id="codestring">CreateRecruitType("<mark>[recruit name]</mark>")<br>
+{<br>
+&nbsp;&nbsp;Type("army.unit.grunt", 1);<br>
+}</p>
+		<p>The above recruit type just contains one grunt. So if an attack script called for this recruit type, it would just be sending out one grunt. The number can be changed to anything, but it's a good idea to not have the number exceed the amount of the unit being built in the orderers config. The units are specified by type name (you can view the type name of all objects in the studio by clicking the "type names" button in the Objects menu). You can list as many unit types as you want in one recruit type, just add more lines. For example:</p>
+		<p id="codestring">CreateRecruitType("<mark>[recruit name]</mark>")<br>
+{<br>
+&nbsp;&nbsp;Type("army.unit.machinegunner", 3);<br>
+&nbsp;&nbsp;Type("army.unit.bazooka", 2);<br>
+&nbsp;&nbsp;Type("army.unit.mortar", 1);<br>
+}</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>

@@ -1,0 +1,54 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-10</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Creating a Single Player Mission</h1>
+		<h2>Enemy AI - Trails/Weighting (5.10)</h2>
+		<h3>Trails</h3>
+		<p>Trails are used to establish AI patrol paths. Create and name your trails as explained in <a href="chapter3-8.html">Section 3.8</a>. Trails don't need to belong to the team that uses them. These trails can then be used in your scripts.</p>
+		<p id="codestring">&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ExecuteScript("<mark>[script name]</mark>", "squad.move.typebasetotrail")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.types", "=", "<mark>[recruit type]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.base", "=", "<mark>[base name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.trail", "=", "<mark>[trail name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}</p>
+		<p>In this example, the recruit type does not have a source region. Instead, it is recruiting from "the base," all units available to the AI team, irrespective of distance. The squad will then move to the specified trail and follow it.</p>
+		<h3>Weightings</h3>
+		<p>All scripts are created equally in the AI's eyes. It will attempt to hand out units by equally dividing them between new squads. For example, if you execute three identical scripts that require four units each in the same objective, each will be assigned one unit at a time. Thus, each will get one unit before any of them get a second. As a result, even if there are ten units available, no squad will get enough to execute. To prevent this, you can assign weightings to the scripts.</p>
+		<p> Weightings have two values and are noted after the squad type in the objective action. The first rates its weighting importance within its ranking, the second is its ordinal ranking. Ordinal rankings are absolute numbers and determine the absolute order in which scripts will be executed. The weighting determines how assets are allocated between squads with the same ordinal ranking. Unlike the ordinal ranking, the weighting number is relative to other numbers among squads with identical ordinal ranks.</p>
+		<p>In the example below, assuming the scripts are executed simultaneously, "<code>script-3</code>" will be assigned all of its units first. This is due to its ordinal ranking of "4." The other two scripts will then be assigned units simultaneously. However, "<code>script-2</code>" will gain units at twice the rate of "<code>script-1</code>", since its weight of 2000 is twice that of script 1's weighting of 1000.</p>
+		<p id="codestring">&nbsp;&nbsp;Action<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ExecuteScript("script-1", "squad.move.typebasetotrail", 1000, 5)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.types", "=", "<mark>[recruit type]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.base", "=", "<mark>[base name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.trail", "=", "<mark>[trail name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;ExecuteScript("script-2", "squad.move.typebasetotrail", 2000, 5)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.types", "=", "<mark>[recruit type]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.base", "=", "<mark>[base name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.trail", "=", "<mark>[trail name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;ExecuteScript("script-3", "squad.move.typebasetotrail", 500, 4)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.types", "=", "<mark>[recruit type]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.base", "=", "<mark>[base name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Op("%.trail", "=", "<mark>[trail name]</mark>");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>
