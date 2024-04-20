@@ -1,0 +1,64 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>6-1</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Configuration Files</h1>
+		<h2>Creating Objects (6.1)</h2>
+		<p>All of the units and buildings in Army Men RTS are configured using a fairly simple scripting language. The unit files are referred to as "configs". This chapter will teach you how to create new config scripts. We will first take a look at a very basic config, the Grunt unit, and break it down.</p>
+		<h3>Creating Objects</h3>
+		<p>The first step to creating a unit is giving it an object name that will be recognized by the game. In this case:</p>
+		<p id="codestring">CreateObjectType("army.unit.grunt", "Unit")</p>
+		<p>The first pair of <code>""</code> quotation marks will be the name of the unit. The base units use <mark>localization keys</mark> to display their localized name. However, you won't be able to create your own, so your best bet is to simply write your unit's name as it will appear ingame. After the name, you need to specify any particular traits this unit is going to have with the second pair of <code>""</code> quotation marks. The Grunt is the standard type, "<code>Unit</code>". Other possibilities include "<code>Restore</code>", "<code>Trap</code>", or "<code>Wall</code>". We'll get into what that means later.</p>
+		<p>Before moving on, you should make sure that this new unit is included in the "<dsb>types_mission</dsb>" file.</p>
+		<h3>GameObj</h3>
+		<p>Once the object is created, you need to make a new scope (using a "{") and add the <code>GameObj</code>.</p>
+		<p id="codestring">CreateObjectType("army.unit.grunt", "Unit")<br>
+{<br>
+&nbsp;&nbsp;GameObj()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ThinkInterval(1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;IdleTask("Tasks::UnitIdle");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Properties()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Filter::Army");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Filter::Biological");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Filter::Weapon");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Filter::Unit");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Filter::Transportable");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}</p>
+		<p>This is the top level object from which all the other objects are built. You will see a GameObj in everything from units to rocks and trees on the map. Inside the GameObj, you can specify the following things:</p>
+		<ul>
+			<li><code>ThinkInterval</code> - This dictates the processing intervals for the object, or how often it thinks. Don't mess with it.
+			<li><code>IdleTask</code> - Pretty self-explanatory. This gives the idle task that the unit will perform when not carrying out an order. "<code>UnitIdle</code>" should be used for any standard combat unit. Other IdleTasks include "<code>UnitConstructor</code>" for buildings that produce units, "<code>WallIdle</code>" for buildings that connect with fences, "<code>UnitCollect</code>" for Collectors, and so on. The best thing to do is to find a unit that performs a similar role and copy its IdleTask over.
+			<li><code>Properties</code> - This is where you specify filters, abilities, and other aspects of the unit. A few examples are provided for each.<br>
+			<font id="insectred">TODO: Just make a lookup table of all the used and unused properties.</font>
+			<ul>
+				<li><code>Filters</code> - Filters are used for several things. Healing units use it to determine whether or not they can restore (ex: Medics can't heal objects without "<code>Filter::Biological</code>", "<code>Filter::Mechanical</code>", or "<code>Filter::MechanicalFlyer</code>", such as Blintz's Acid Guns). The Narrorator uses it to determine what message to speak (ex: "<code>Filter::Building</code>" says "Base under attack").
+				<li><code>Abilities</code> - Abilities give units buttons on the context menu, such as "Recycle" and "Self Destruct". To give a unit the ability to self-destruct, just add "<code>Ability::SelfDestruct</code>". "Ability::Construction::Reverse" is used by the Mine Layer, allowing it to construct mines while facing the opposite direction.
+				<li><code>Client</code> - This is used only in the context of "<code>Client::FacilityBar</code>". Put it on a building if you want it to appear on the facility bar on the bottom left corner of the screen when it is constructed.
+			</ul>
+		</ul>
+		<p>All the other Obj's that you will add to this config are built off the GameObj. It is all object-oriented in this respect. The hierarchy looks like this:</p>
+		<p>GameObj<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;MapObj<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PropObj<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SourceObj<br>
+		ProjectileObj<br>
+		ExplosionObj<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UnitObj<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RestoreObj<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TransportObj<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WallObj<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TrapObj</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>

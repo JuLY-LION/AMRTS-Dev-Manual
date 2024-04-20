@@ -1,0 +1,75 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>6-2</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Configuration Files</h1>
+		<h2>MapObj (6.2)</h2>
+		<p>Next comes the <code>MapObj</code>. This is where the attributes are defined for the unit's placement on the map.</p>
+		<p id="codestring">&nbsp;&nbsp;MapObj()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GodFile("army_grunt.god");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PhysicsModel("Walker");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TractionType("ground");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GrainSize(1);<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;ArmourClass("infantry");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;HitPoints(200);<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;TypeDisplay()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Image("if_game_portraits.tga", 0, 84, 42, 42);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mode("Centre");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GenericFX()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Weapon::Fire", "weapon.grunt.fire");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("MapObj::Death", "death.infantry");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("MapObj::AddToMap", "damage.grunt");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Restore::Target::Process", "restore-small");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("MapObj::AddToMap2", "restore-small-puff");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Add("UnitObj::Engine", "water.ripple");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// ShadowFile("army_grunt-shadow");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;RotateShadow(0); // default is 1<br><br>
+&nbsp;&nbsp;}</p>
+		<p>Let's go through each section one at a time.</p>
+		<p><code>GodFile</code> - The all-important .god file is defined here. The .god contains the geometry for the object as well as all textures and animation. Creating .god files is a very complicated business that I'll only touch on here. The art asset can be made in either SoftImage or 3DSMax and exported as a .xsi. The .xsi then gets brought into the proprietary MeshViewer tool and converted into the .god format.</p>
+		<p><code>PhysicsModel</code> - The physics model affects how the unit will move on the map. It defines whether or not it tilts when it moves on slopes, how fast its speed is affected by slopes, whether it moves on the surface of water, under the water, or if it flies over the water. The Grunt is a "Walker", so it moves on the ground plain, does not tilt when going up a hill, and has its speed diminished 25% by slopes. To find a list of all physics types, look in <mark>base.x\misc\types_physics.cfg.</mark></p>
+		<p><code>TractionType</code> - This entry goes hand-in-hand with the <code>PhysicsModel</code> in defining on-map behavior. It determines if a unit is allowed over each type of terrain. As explained elsewhere, each terrain texture allows certain units to pass over it. The basics are, base, basenoair, and impassable. Placing water on the map automatically overrides whatever texture is on the ground beneath it, and the cell becomes one of the six types of water terrain, depending on its depth and distance from the shore. To view all the traction types, look in <mark>base.x\misc\types_traction.cfg</mark>. Here is a brief explanation of each type of terrain:
+		<ul>
+			<li><code>Base</code> - Default setting used by the base texture in each world.
+			<li><code>BaseNoAir</code> - Same as base, but blocking air units (used only by footprinted objects).
+			<li><code>Impassable</code> - Ground units cannot pass over it, but air can.
+			<li><code>ImpassableAll</code> - Neither ground nor air can pass.
+			<li><code>ShallowShoreline</code> - Cell is partially above ground, partially underwater, and submerged portion is no more than 1 meter in depth.
+			<li><code>MediumShoreline</code> - Cell is partially above ground, partially underwater, and submerged portion is no more than 2.5 meters in depth.
+			<li><code>DeepShoreline</code> - Cell is partially above ground, partially underwater, and submerged portion is greater than 2.5 meters at its deepest point.
+			<li><code>ShallowWater</code> - Cell is completely submerged and no more than 1 meter in depth.
+			<li><code>MediumWater</code> - Cell is completely submerged and no more than 2.5 meters in depth.
+			<li><code>DeepWater</code> - Cell is completely submerged and more than 2.5 meters at its deepest point.
+		</ul><font id="insectred">TODO: Does MediumShoreline + MediumWater still exist in AMRTS? Does water become "deep" at 2.5 meters or something else?</font></p>
+		<p><code>GrainSize</code> - Setting this to 1 makes a unit only occupy a quarter of a cell's space, like infantry. Otherwise, the unit will occupy the entire cell, like vehicles.</p>
+		<p><code>ArmourClass</code> - This is where a unit's susceptibility to weapon damage is defined. You will notice later on that each weapon has an explicit entry for its damage effect to each of the five "armor" classes: infantry, vehicle, structure, flyer, and mines. If one of these classes isn't specified in the <code>MapObj</code>, the unit cannot take damage.</p>
+		<p><code>HitPoints</code> - Fairly self-explanatory and very important. This sets the strength of each unit. It is displayed as the green HP.</p>
+		<p><code>TypeDisplay</code> - This is where you specify the art asset that will be used to represent the unit on the build menu. This is called the unit icon. It is only needed if the unit you are making can be created by the player. The four numbers after the file name explain where on the image the icon can be found. This is needed because several icons can be fit onto a single image. The first two numbers give the X and Y coordinates for the upper left corner of the icon. The next two numbers give the length and height of the icon in pixels.</p>
+		<p><code>GenericFX</code> - The effects that can be run on a unit must all be listed here. Things such as damage, death, recycling, constructing, restore, and others all need to be entered. The best thing to do is to just copy these effects over from a similar unit.</p>
+		<p><code>ShadowFile</code> - This is the texture that is drawn on the ground for the unit's shadow. The game will automatically use a texture based on the .god file's filename. However you can override that texture and define any texture you want with this. All infantry use method this to borrow the Grunt's shadow file. The default shadow filename follows this naming convention: <mark>.god filename</mark>-shadow.tga</p>
+		<p><code>RotateShadow</code> - This determines whether the shadow will rotate as the unit rotates. Infantry set this to 0, while vehicles don't.</p>
+		<h3>SourceObj</h3>
+		<p>The resource objects have their own Obj that is built off the MapObj. It is very simple, with only four entries.</p>
+		<p><code>Mode</code> - This is the setting for what kind of resource the object is. You have three options: StaticDepleting, StaticNonDepleting, and Collectable. StaticDepleting is the most common type: sources that have a static amount and can be emptied. StaticNonDepleting source types have an infinite amount to give. And Collectable sources are only plastic blobs. They have a static amount, but units can refill it by dying nearby the source, also the source will be deleted once depleted.</p>
+		<p><code>Resource</code> - Self-explanatory. Does this source have plastic or electricity?</p>
+		<p><code>Capacity</code> - This specifies how much the resource starts with.</p>
+		<p><code>LoadRate</code> - While mining, every second a Dump Truck will be given this amount.</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>

@@ -1,0 +1,24 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>5-15</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Creating a Single Player Mission</h1>
+		<h2>Tips on Cineractives (5.15)</h2>
+		<ul>
+			<li>Complicated camera movements are difficult to create and can often be distracting to the player. Use them sparingly. Concentrate instead on scripting exciting interactions between units on-screen during the cineractive. Sometimes just a static camera point and focal point is best.
+			<li>Don't do too much in a mid-mission cineractive. If the player has already taken control of units on the map, there are a lot of variables you cannot control. Also, the player is usually not interested in pretty shots once the mission has begun. Use the cineractives only to explain what the player must do. Go in, go out, and once again keep it simple.
+			<li>If you really want to jazz up a cineractive, you can trigger animations and effects on some units. Most of the humanoid units have at least 2 idle animations that they can play using the "<code>Animate</code>" command. The animations are always titled "<code>IDLE</code>" and "<code>IDLE2</code>". You can also trigger weapon effects, explosion effects and so forth on units using the "<code>TriggerFX</code>" command. For examples of both of these, look at the <dsb>S02</dsb> mission reinforcements cineractive.
+			<li>If the units in the game don't do exactly what you want them to do, you can drop custom versions of the units into your mission files using the existing names. If it is in your mission file, it will supersede the version of the unit in the base.x archive, allowing you to do whatever you want with it. You can speed them up or slow them down, make them not claim cells so they can stand anywhere, you can raise or lower the altitude of flying units, make them invulnerable to weapon damage, and so on. If the cineractive is a stand-alone mission that never gives control to the player, go nuts.
+			<li>If you're trying to match the camera path movement up with units running on the map and you can't get the speed right, dump a custom config in for that unit and set its running speed to 28.8. That number will make them move at exactly 1 cell per second, allowing you to know exactly where they will be at what time. This is, of course, only for the insanely fanatical cineractive-maker.
+		</ul>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>
