@@ -1,0 +1,111 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>6-3</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Configuration Files</h1>
+		<h2>UnitObj (6.3)</h2>
+		<p>The next section of the config is called the <code>UnitObj</code>, and as the name implies, it defines the more complex nature of a unit or building on the map.</p>
+		<p id="codestring">&nbsp;&nbsp;UnitObj()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TopSpeed(45);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TurnSpeed(1440);<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;SeeingRange(65);<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;ResponseEvents()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Attack")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_attack-1.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_attack-2.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_attack-3.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_attack-4.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Attacked")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_attacked-0.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_attacked-1.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_attacked-2.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Move")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_move-0.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_move-1.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_move-2.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_move-3.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_move-4.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_move-5.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_move-6.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Select")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_select-0.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_select-1.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_select-2.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_select-3.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_select-4.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_select-5.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Spotted")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_spotted-0.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.unit.grunt_spotted-1.wav");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Constructor("army.building.barracks1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ConstructionTime(10);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;CreateSource("resource.blob.infantry1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;CommandCost(1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ResourceCost()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Plastic", 50);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Electricity", 0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Prereqs()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("army.building.barracks1");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Weapon("army.weapon.grunt");<br>
+&nbsp;&nbsp;}</p>
+		<p><code>TopSpeed</code> - This is the top speed in kilometers per hour at which a unit moves across a flat surface. For reference, a speed of 28.8 will make a unit move at exactly 1 cell per second.</p>
+		<p><code>TurnSpeed</code> - This is the speed in degrees per second at which a unit rotates. It is best not to exceed 1440.</p>
+		<p><code>SeeingRange</code> - This is the distance in meters at which a unit can see. The number is rounded down to the nearest 8 meter cell, thus a range of 89 meters would become 11 cells.</p>
+		<p><code>ResponseEvents</code> - These are the sound files a unit will play when an event occurs involving it. You can specify any sound file, even custom ones, so units can have unique voices. The events that use this method are the following:
+		<ul>
+			<li><code>Attack</code> - When you order this unit to attack something.
+			<li><code>Attacked</code> - When this unit gets attacked by an enemy.
+			<li><code>Build</code> - When you order this unit to construct a building.
+			<li><code>Move</code> - When you order this unit to move somewhere.
+			<li><code>Restore</code> - When you order this unit to heal something.
+			<li><code>Select</code> - When you select this unit.
+			<li><code>Spotted</code> - When this unit sees an enemy.
+		</ul>Note that if a unit doesn't have any sounds specified, then that alert will be silent if it comes from this unit. The two exceptions to this are "Spotted", which has a default Narrator line, and "Attacked", which can be overridden with the "Base under attack" Narrator line using the <code>GameObj</code> properties, as seen in Chapter 1: <a href="chapter6-1.html">Creating Objects</a>.</p>
+		<p><code>Constructor</code> - Specifies which unit it is being constructed by.</p>
+		<p><code>ConstructionTime</code> - How long it takes for the unit to be constructed.</p>
+		<p><code>CreateSource</code> - Which type of plastic blob this unit leaves behind on death. When dying, a unit will drop up to 50% of its purchase price into a blob. If the is filled to the max, any overflow is discarded. Also, while electricity blobs do not exist naturally, they would also work in the same way.</p>
+		<p><code>CommandCost</code> - This is the value of the unit as it affects the unit limit. The default limit is 70. Everything the player can own costs 1 towards the limit, even things they can't normally build, such as Heroes.</p>
+		<p><code>ResourceCost</code> - This specifies what the unit costs to build.</p>
+		<p><code>Prereqs</code> - This lists which units must already be constructed by the player in order to build this unit. It is not necessary to list every unit in the build tree, just the highest level. For example, if a unit requires an hq3 and a barracks2, you would only list those two buildings and not the hq1, hq2, and barracks1 that are needed to get there.</p>
+		<p><code>Weapon</code> - This defines the weapon that is attached to this unit. The weapon is its own object. We will go through the weapon part of the config a little later in Chapter 5: <a href="chapter6-5.html">Creating a Weapon</a>.</p>
+		<p>These are just the ones used by the Grunt, but there are also several more different attributes you can use under <code>UnitObj</code>:</p>
+		<p><code>FireIndirect</code> - This entry doesn't appear in the Grunts's config. It is used for units that do not need to have direct line-of-sight on something in order to fire at it - namely artillery. Put in "<code>FireIndirect(1);</code>" to give a unit the ability to fire at objects using the LOS of other units.<br>
+		<font id="insectred">TODO: This behaves significantly different in AMRTS. Figure out the exact implications of using this attribute!</font></p>
+		<p><code>SeeingHeight</code> - <font id="insectred">TODO: What does this do? Used by the AA Gun and the bug jar in Mission 14???.</font></p>
+		<p><code>Upgrades</code> - This lists the upgrades to a building. Upgrades are their own objects, meaning they can have their own <code>UnitObj</code> and possibly prereqs.</p>
+		<p><code>MoveIntoRange</code> - <font id="insectred">TODO: What does this do? Used by Snipers, Mine Sweepers, Medics, and the Bulldozer???</font></p>
+		<p><code>Wound</code> - This setting is for Hero units. Set this to 1, and when the unit dies, instead of leaving being destroyed, it plays its animation called "Wounded". Then it becomes intangible and sticks around forever.</p>
+		<p><code>AutoTargetable</code> - Setting this to 0 will prevent a player's units from automatically acquring this unit as a target. Used by Barbed Wire Posts. Units controlled by computer players will ignore this property.</p>
+		<p><code>Altitude</code> - This will make the unit fly or hover above the ground at the specified altitude.<br>
+		<font id="insectred">TODO: Accepts two numbers, what's the difference?</font></p>
+		<p><code>RefundConstructor</code> - Set this to 1 for a building, and when it recycles it will generate a new copy of the unit used to buy it. For example, recycle and HQ to get a free Bulldozer.</p>
+		<p><code>Selectable</code> - Setting this to 0 means this unit cannot be selected, and it's name and healthbar will not be visible either.</p>
+		<p><code>Companion</code> - When a building has finished construction, it will come with this unit for free. For example, a Resource Depot comes with a free Dump Truck.</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>

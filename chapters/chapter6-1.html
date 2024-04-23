@@ -42,8 +42,8 @@
 			<li><code>Properties</code> - This is where you specify filters, abilities, and other aspects of the unit. A few examples are provided for each.<br>
 			<font id="insectred">TODO: Just make a lookup table of all the used and unused properties.</font>
 			<ul>
-				<li><code>Filters</code> - Filters are used for several things. Healing units use it to determine whether or not they can restore (ex: Medics can't heal objects without "<code>Filter::Biological</code>", "<code>Filter::Mechanical</code>", or "<code>Filter::MechanicalFlyer</code>", such as Blintz's Acid Guns). The Narrorator uses it to determine what message to speak (ex: "<code>Filter::Building</code>" says "Base under attack").
-				<li><code>Abilities</code> - Abilities give units buttons on the context menu, such as "Recycle" and "Self Destruct". To give a unit the ability to self-destruct, just add "<code>Ability::SelfDestruct</code>". "Ability::Construction::Reverse" is used by the Mine Layer, allowing it to construct mines while facing the opposite direction.
+				<li><code>Filters</code> - Filters are used for several things. Healing units use it to determine whether or not they can restore (ex: Medics can't heal objects without any of "<code>Filter::Biological</code>", "<code>Filter::Mechanical</code>", or "<code>Filter::MechanicalFlyer</code>", such as Blintz's Acid Guns). The Narrorator uses it to determine what message to speak (ex: "<code>Filter::Building</code>" says "Base under attack").
+				<li><code>Abilities</code> - Abilities give units buttons on the context menu, such as "Recycle" and "Self Destruct". To give a unit the ability to self-destruct, just add "<code>Ability::SelfDestruct</code>". "<code>Ability::Construction::Reverse</code>" is used by the Mine Layer, allowing it to construct mines while facing the opposite direction.
 				<li><code>Client</code> - This is used only in the context of "<code>Client::FacilityBar</code>". Put it on a building if you want it to appear on the facility bar on the bottom left corner of the screen when it is constructed.
 			</ul>
 		</ul>

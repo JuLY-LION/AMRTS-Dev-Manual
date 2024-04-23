@@ -1,0 +1,94 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>6-4</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Configuration Files</h1>
+		<h2>Sub-UnitObj's (6.4)</h2>
+		<p>When a unit has a specific ability beyond just a simple weapon, it needs a separate Obj that is built off the <code>UnitObj</code>. We'll go through each one.</p>
+		<h3>RestoreObj</h3>
+		<p>This Obj must be included in order for a unit to heal. The following bit comes from the Medic's config.</p>
+		<p id="codestring">&nbsp;&nbsp;RestoreObj()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;AddHitPoints(6);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Distance(24);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;RestoreRadius(12);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TargetProperties()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Filter::Biological");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Filter::Mechanical");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Filter::MechanicalFlyer");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}</p>
+		<p><code>AddHitPoints</code> - Number of hit points added per heal cycle.</p>
+		<p><code>Distance</code> - Maximum range at which it can heal a unit.</p>
+		<p><code>RestoreRadius</code> - The "splash" radius of the healing.</p>
+		<p><code>TargetProperties</code> - This is where you define what can be healed by the unit you are creating. Each filter type you add will give it the ability to heal all units that have that filter at the beginning of their config. In the case of the Medic, it can heal all biologicals, and mechanicals both on the ground and in the air. This covers every unit currently in the game.</p>
+		<h3>WallObj</h3>
+		<p>A <code>WallObj</code> is needed if a unit is to emit a fence that attaches to other wall posts. Let's look at the wall config from the Guard Tower.</p>
+		<p id="codestring">&nbsp;&nbsp;WallObj()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//OriginHardPoint("HP-WIRE");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Range(4);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//BeamOffset(4.5);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;BeamOffsetPrimary(6.0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;BeamOffsetSecondary(2.0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DeviationMin(1.0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;DeviationMax(10.0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Properties();<br>
+&nbsp;&nbsp;}</p>
+		<p><code>OriginHardPoint</code> - Origin for beams.</p>
+		<p><code>Range</code> - Number of cells that the laser fence can extend.</p>
+		<p><code>BeamOffset</code> - Distance from the Hardpoint (Origin).</p>
+		<p><code>BeamOffsetPrimary</code> - Distance from the beam offset for the first beam.</p>
+		<p><code>BeamOffsetSecondary</code> - Distance from the beam offset for the second beam.</p>
+		<p><code>DeviationMin</code> - Defaults at 1. Don't mess with it.</p>
+		<p><code>DeviationMax</code> - The maximum height differential in meters between two posts. So in this case, if a post is placed on a hill that is more than 10 meters above this unit, it will not be able to connect.</p>
+		<p><code>Properties</code> - This is where you would place a filter if you wanted the unit to only be able to connect with other walls of a certain type. For example, if you wanted to make a special wall post that was twice as tall as the others and had a much wider beam, you would put a "<code>Filter::Wall::Bigpost</code>" into the properties at the top of the config, and add the same filter to the properties in here. That would prevent the unit from being able to connect with standard wall posts.</p>
+		<h3>TrapObj</h3>
+		<p>This Obj exists specifically for traps. Let's look at the config for the Mine that is layed by the Minelayer.</p>
+		<p id="codestring">&nbsp;&nbsp;TrapObj()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Distance(12);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SelfDestruct(1);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Properties()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Filter::Biological");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Filter::Mechanical");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}</p>
+		<p><code>Distance</code> - Maximum proximity at which the trap will detonate when a unit enters.</p>
+		<p><code>SelfDestruct</code> - A flag that specifies whether or not the trap destroys itself when it triggers.</p>
+		<p><code>Properties</code> - Specifies which types of units can trigger the trap (see RestoreObj).</p>
+		<p><code>ChargeTime</code> - Minimum delay between triggerings, assuming the trap does not self-destruct.<br>
+		<font id="insectred">TODO: Does this attribute still exist in AMRTS?</font></p>
+		<h3>TransportObj</h3>
+		<p>Lastly, this Obj handles units that can carry other units. No transport units exist in the base game however. The following is taken from Dark Reign 2's Telepad's config.</p>
+		<p id="codestring">&nbsp;&nbsp;TransportObj()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Spaces(6);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Properties()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("Filter::Transportable");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ChargeTime(90);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PortalType("jda.building.telepadportal");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PortalTime(20);<br>
+&nbsp;&nbsp;}</p>
+		<p><code>Spaces</code> - How many units can fit inside.</p>
+		<p><code>Properties</code> - Specifies which units can enter (see RestoreObj).</p>
+		<p><code>Distance</code> - Maximum distance a unit needs to get within before it can enter (used by mobile transports).</p>
+		<p><dsb>NOTE:</dsb> The following three entries only apply to transports that teleport units:</p>
+		<p><code>ChargeTime</code> - Minimum delay between teleports.</p>
+		<p><code>PortalType</code> - Refers to the unit that is created on the other end of the teleport, so that units on the other end can pass back through.</p>
+		<p><code>PortalTime</code> - Duration that the portal on the other end will exist before disappearing.</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>
