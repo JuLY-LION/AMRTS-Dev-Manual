@@ -1,0 +1,95 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>6-6</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Configuration Files</h1>
+		<h2>Projectiles/Explosions (6.6)</h2>
+		<h3>Attaching a Projectile</h3>
+		<p>If you are creating a projectile weapon, you will need to attach a projectile object. This is not just an Obj, but an entire object with the ProjectileObj in it. Here is what the Bazooka Man's projectile looks like.</p>
+		<p id="codestring">CreateObjectType("army.proj.bazooka", "Projectile")<br>
+{<br>
+&nbsp;&nbsp;MapObj()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GodFile("army_mortar_shell.god");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GenericFX()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("ProjectileObj::Trail", "weapon.bazooka.proj");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;ProjectileObj()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;TopSpeed(200);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ProjectileModel("GuidedTrajectory");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;HomingRate(120);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;WaverTurn(30);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;WaverRate(180);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;AccelerationTime(2);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Explosion("army.exp.bazooka");<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>Add the projectile's visual effect, which you will define later, to the <code>GenericFX</code> list, then create the <code>ProjectileObj</code>.</p>
+		<p><code>ProjectileModel</code> - This defines how the projectile moves. There are three types:
+		<ul>
+			<li><code>StraightTrajectory</code> - The simplest option. The projectile moves straight until it hits a target or expires.
+			<li><code>ArcTrajectory</code> - The projectile is fired at an upward angle and curves toward its target. This is used on the Grenadier and Mortar Man. Setting the speed for this type of projectile is difficult, as it is based entirely on range. The longer the range, the faster the projectile will move.
+			<li><code>GuidedTrajectory</code> - A homing weapon that curves toward its target. Used by the Bazooka Man and insectoid units.
+		</ul></p>
+		<p><code>TopSpeed</code> - Final speed of the projectile, once it has transitioned from the speed set in the weapon definition. This field only works for straight and guided trajectories.</p>
+		<p><code>AccelerationTime</code> - Rate at which projectile transitions from its starting speed to it top speed.</p>
+		<p><code>HomingRate</code> - Number of degrees per second that the projectile will turn in order to hit its target.</p>
+		<p><code>WaverTurn</code> - Degree to which the projectile turns while moving. This is purely a visual effect and does not enhance the weapon's effectiveness.</p>
+		<p><code>WaverRate</code> - Rate at which the projectile turns while moving. Also purely a visual effect.</p>
+		<p><code>Explosion</code> - The name of the explosion that is created when the projectile hits its target. Should point to an existing explosion object.</p>
+		<p><code>Impact</code> - This flag is set by default. It causes the projectile to detonate on impact. If a fuse is set then the projectile cannot detonate on impact and this flag is ignored.</p>
+		<p><code>Fuse</code> - Time before the projectiles detonates in seconds.</p>
+		<p><code>Proximity</code> - If the projectiles gets within this meter distance to its target, it detonates. This can be used in conjunction with the Impact and Fuse flags.</p>
+		<h3>Attaching an Explosion</h3>
+		<p>If an explosion is not specified in a projectile, it will refer to the weapon and do the damage specified in its damage field. If an explosion is specified, it will ignore all other damage amounts and create the explosion. Note that an explosion can also be attached to a unit's death or self-destruction. See the DumDum config for an example of how this is done.</p>
+		<p id="codestring">CreateObjectType("army.exp.bazooka", "Explosion")<br>
+{<br>
+&nbsp;&nbsp;MapObj()<br><br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Mesh();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GenericFX()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add("ExplosionObj::Explode", "weapon.bazooka.exp");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;ExplosionObj()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Damage()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount(45);<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Effective("infantry", 50%);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Effective("vehicle", 100%);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Effective("structure", 100%);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Effective("flyer", 100%);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Effective("mine", 100%);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;AreaInner(4);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;AreaOuter(8);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Weapon("army.weapon.bazooka");<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>Add the explosion's visual effect, which you will define later, to the <code>GenericFX</code> list, then create the <code>ExplosionObj</code>.</p>
+		<p><code>Damage</code> - This works the same as it does inside the weapon.</p>
+		<p><code>AreaInner</code> - This is the radius in meters of the inner area of the explosion. Everything within this radius will take the full amount of damage specified in the damage field.</p>
+		<p><code>AreaOuter</code> - This is the outer rim of the explosion radius. The amount of damage given will fall from 100% at the edge of the inner radius to 0% at the edge of the outer radius.</p>
+		<p><code>BlindTargetTime</code> - The number of seconds to make victims of this explosion blindly target other units.<br>
+		<font id="insectred">TODO: Does this effect even still exist in AMRTS? Pretty sure it doesn't...</font></p>
+		<p><code>Persist</code> - How long the explosion persists for. It does the full amount of a damage for every 1/10 of a second that you specify. A value of 4 would be 4/10 of a second, thus it would inflict the full damage 4 times before disappearing.</p>
+		<p><font id="insectred">TODO: Almost every projectile in AMRTS now refers back to its parent using <code>Weapon</code>. Why?</font></p>
+		<h3>Adding Effects</h3>
+		<p>The final aspect of a config is adding the effects. This can be very simple or very complicated. In either case, we're going to let the existing configs do the talking. There are dozens of particles and explosions defined. Take one of the existing ones and tweak it to your needs. What you've learned from the other config types should answer any questions that come up. Good Luck!<br>
+		<font id="insectred">TODO: Straight from the DR2 guide lol Actually write a real one for AMRTS.</font></p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>

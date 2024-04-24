@@ -1,0 +1,86 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>6-5</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Configuration Files</h1>
+		<h2>Creating a Weapon (6.5)</h2>
+		<p>The weapon is usually referenced at the bottom of the UnitObj, under "Weapon". The weapon config is generally much simpler than the object that creates it. Here is the Grunt's weapon config.</p>
+		<p id="codestring">CreateWeaponType("army.weapon.grunt")<br>
+{<br>
+&nbsp;&nbsp;Style("Instant");<br><br>
+&nbsp;&nbsp;MaxRange(56);<br><br>
+&nbsp;&nbsp;Delay(1);<br><br>
+&nbsp;&nbsp;Damage()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Amount(8);<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Effective("infantry", 100%);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Effective("vehicle", 100%);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Effective("structure", 100%);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Effective("flyer", 100%);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Effective("mine", 0%);<br>
+&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;FirePoints()<br><br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Add("HP-FIRE");<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p><code>Style</code> - There are two distinct styles of weapon that are used in the game:
+		<ul>
+			<li><code>Instant</code> - This is the simpler form that doesn't actually travel from the weapon to the target. It just damages the target the moment it is fired.
+			<li><code>Projectile</code> - When a projectile weapon is fired, it creates another object which travels to its target and does damage when it hits. If no explosion is specified, the projectile will default to the damage amounts specified in the weapon. If an explosion is created, it will use those damage numbers and ignore the ones inside the weapon. Explosions will be explained later on in Chapter 6: <a href="chapter6-6.html">Projectiles/Explosions</a>.
+		</ul></p>
+		<p><code>NodeStyle</code> - If the art asset you are creating is going to move in any way, namely as a turret, it needs to have a node style specified in the config to dictate how it moves. Here are all the node styles, pilfered directly from the technical manual.
+		<ul>
+			<li><code>NULL</code> - The NULL node stlyle indicates that no manipulation is required. This is the default. There should be no nodes specified for this node style.
+			<li><code>XYZ</code> - The XYZ node style freely rotates about a single node. There should be one node specified for this node style.
+			<li><code>X</code> - The X node style rotates only about the X (right) axis. There should be one node specified for this node style.
+			<li><code>Y</code> - The Y node style rotates only about the Y (up) axis. There should be one node specified for this node style.
+			<li><code>Y_Z</code> - The Y_X node style rotates about the Y (up) axis and then about the X (right) axis. There should be two nodes specified for this node style.
+		</ul></p>
+		<p><code>Nodes</code> - This is where you list the nodes that are used by the asset. All nodes should be prefixed by "CP-". For example, the two nodes for the Tank would be listed as follows.</p>
+		<p id="codestring">&nbsp;&nbsp;Nodes("CP-Turret__h", "CP-Barrel__h");</p>
+		<p><code>MaxRange</code> - Self-explanatory. This specifies the maximum distance that the weapon can fire.</p>
+		<p><code>MinRange</code> - This defines a minimum distance for firing: enemies that are closer than this distance cannot be targeted. Since self damage no longer exists, this is pretty useless. Snipers still use this however.</p>
+		<p><code>HorizAngle</code> - "The centre of the allowed firing frustrum measured in degrees from right increasing anti-clockwise." What that means in layman's terms is: the direction the unit fires. Keep it at 90.</p>
+		<p><code>HorizSeparation</code> - "The seperation from the HorizAngle of the allowed firing frustrum in degrees." Another way of saying that would be: the width of the cone around the HorizAngle.</p>
+		<p><code>VertAngle</code> - "The centre of the allowed firing frustrum measured in degrees from directly up." Keep it at 90 to shoot straight ahead. Lower it to point the weapon higher.</p>
+		<p><code>VertSeparation</code> - "The seperation from the VertAngle of the allowed firing frustrum in degress." Same as Horiz.</p>
+		<p><code>Damage</code> - The all-important damage list.<blockquote>
+			<p><code>Amount</code> - How much damage is done with each shot.</p>
+			<p><code>Effective</code> - Percentage of the total damage amount that the weapon can do against a specific armor type. The default is 0%, so every armor type that you want to damage must be listed. Keep in mind that hit point numbers vary widely between different unit categories, so giving equal effectiveness against infantry and vehicles will still allow vehicles to last longer under fire. Also, flyers generally have very low hit points, so doing a relatively small amount of damage will still be effective. The game has five armor types, listed as follows.
+			<ul>
+				<li><code>Infantry</code> - Units that are on foot. This generally falls in line with units that have the biological filter, though there are some exceptions.
+				<li><code>Vehicle</code> - Any ground unit that has wheels or tracks. It corresponds to the unit having some kind of armored shell that must be pierced in order for the unit to be destroyed.
+				<li><code>Structure</code> - Used for buildings and turrets. Most anything that doesn't move has this armor type. Mortar Men can only target this armor type.
+				<li><code>Flyer</code> - Air units. This armor type is very important, as there aren't as many units that can hit it.
+				<li><code>Mine</code> - This is used for mines. It also used to be used in Dark Reign 2 for units that didn't want to harm themselves when firing, but this is no longer the case in Army Men RTS. Notably, Grunts cannot target this armor type.
+			</ul></p>
+		</blockquote></p>
+		<p><code>Delay</code> - Rate of fire. Multiply the amount of damage a unit does by its effectiveness % against a targeted unit, then multiply that number by the delay to get its damage per second against a specific armor type.</p>
+		<p><code>FirePoints</code> - This connects the weapon that we are creating to the hardpoint on the art asset. In order for it to work, the art asset needs to have an existing hardpoint with the name that is referenced inside the FirePoint's scope.<blockquote>
+			<p><dsb>VERY IMPORTANT NOTE:</dsb> Many units have multiple hardpoints, such as the Pillbox and the AA Gun. If the weapon it is firing is a Projectile, you must divide the amount of damage it does per shot by the number of hardpoints to get the total damage done per shot.<blockquote>
+				<p><i>Example: Say you want the AA Gun to do 80 points of damage every time it fires. Looking at the art asset, you will notice that it fires from 2 different hardpoints. So you must divide the amount of damage done by 2, thus doing 40 points of damage from each hardpoint each time it fires.</i></p>
+			</blockquote></p>
+			<p><dsb>VERY IMPORTANT SUB-NOTE:</dsb> Dividing the damage amounts between hardpoints does not apply if it is an Instant weapon. Instant weapons do not create projectiles, so no matter how many hardpoints it has, you still list the total amount of damage per shot. See the Chopper config for an example of this.</p>
+		</blockquote></p>
+		<p><code>TurnRate</code> - Number of degrees per second that the turret rotates. The unit must have a turret in the art asset and have the nodes properly configured for this to work.</p>
+		<p><code>Ammunition</code> - Number of shots that a unit can fire. This is unused in the game, but it is still fully functional. The unit will automatically display its ammo as a yellow bar at the top of its HUD if this entry is used.</p>
+		<p><code>Fixed</code> -  A unit with the Fixed flag set will always fire in the direction its hardpoint is pointed.</p>
+		<p><code>KillUser</code> - If this flag is set, the unit will automatically self-destruct when it fires. It is used by the DumDum.</p>
+		<p><code>HighTrajectory</code> - Fires arc projectiles at a steeper angle. Arc projectiles are defined in the ProjectileObj. This flag is only used by the Mortar Man.</p>
+		<p><code>OneShot</code> - Fires once and then stops firing.</p>
+		<p><code>LeadAngle</code> - Weapon will fire at the predicted position of the target. Can make hitting of moving targets better. Used on most projectile weapons.</p>
+		<p><code>PotShot</code> - Allows unit to fire while moving. Used to great affect on the Tank and the Half-Track, as well as the Chopper.</p>
+		<p><code>Speed</code> - The initial speed of projectiles in kilometers per hour.</p>
+		<p><code>Projectile</code> - The name of the projectile that is fired by the weapon. Should point to an existing projectile object.</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>
