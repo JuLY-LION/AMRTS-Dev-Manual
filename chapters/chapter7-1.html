@@ -1,0 +1,202 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>7-1</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Mods and Rulesets</h1>
+		<h2>Getting Started (7.1)</h2>
+		<h2 style="color:#ff8080;">Under construction! Come back later!</h2>
+		<h3>Getting Started</h3>
+		<p>This section assumes basic knowledge of the Army Men RTS scripting language learned in Section 5: <a href="chapter5-1.html">Creating a Single Player Mission</a>, and it is highly recommended you read through that section before proceeding.</p>
+		<p>Scripting and making rulesets for multiplayer has quite a few differences than single player, and involves thinking from every player's viewpoint rather than an individual team's. In SP, most of your scripts explicitly call a team by their name, which, while possible in MP, is not recommended and usually leads to making separate configs for each team. Instead, you should be calling teams using <code>Relation()</code> and <code>@.engine.name</code>, two things we'll discuss below. Another difference in SP vs. MP is compatibility with allies. This involves using the <code>Relation()</code> tag quite a bit, as well as making sure the scripts, especially triggers, work correctly for ALL allies. These will all be covered in this document.</p>
+		<p>It is recommended you unpack (using Dr Packer) a ruleset, such as King of the Hill (<dsb>koth.x</dsb>), and look at the files as we go along.</p>
+		<h3>How Scripts Run</h3>
+		<p>As mentioned earlier, SP and MP scripting differs quite a bit. SP is much more focused on specific teams, while an MP script must be duplicated for every team that is playing, and thus the way you use variables, <code>Team()</code>, <code>Relation()</code>, and a few other things is a bit different. <code>StartActionAvailable()</code> is used to define what variables and objectives are given to the available players. These objectives are located in whatever types file you have defined.</p>
+		<h3>Multilanguage tools &amp; rulesets</h3>
+		<p>In all of AMRTS's rulesets and SP missions, you will find messages like <code>#game.message.whatever</code>. These are references to a Multilanguage file, called "<dsb>[language].cfg</dsb>" where language is what language it is in (such as <dsb>English.cfg</dsb>). The purpose of this is to make all of AMRTS have no references to one language. This file is the only file that should not be modified, and not have a special version in a ruleset's directory. You should just write in plain text, and have somebody help convert your mod to other languages if necessary.</p>
+		<h3>File Structure</h3>
+		<p>Before you begin making your ruleset, you should have a good idea of how the files are laid out, so that you know what is available to you. Rulesets are broken down into four different config file types:</p>
+		<blockquote>
+			<p><dsb>Mod.cfg</dsb><br>
+			The <dsb>mod.cfg</dsb> file contains the basic information about the ruleset, as well as what variables are needed by the players, the system, and what files to include in the ruleset.</p>
+			<p><dsb>Types file</dsb><br>
+			Generally named after the ruleset, such as '<dsb>protect_types.cfg</dsb>', the types file can contain all the objectives of the particular ruleset, as well as special object configs, particle configs, etc, that you don't want to store in another file. It's basically the Jack-of-all-trades file. You can include many types files if you feel the need to organize them that way (for instance, an objects file, a particles file, etc.)</p>
+			<p><dsb>Exec file</dsb><br>
+			Exec files are used for manipulating variables, interface controls, keybindings, and other functions not in the types file.</p>
+			<p><dsb>AI file</dsb><br>
+			If necessary, you may include AI files into the game. This is mostly used in Personalities, but can be used in rulesets as well.</p>
+		</blockquote>
+		<h3>Mod.cfg Breakdown</h3>
+		<p>Here is a quick overview of the <dsb>mod.cfg<dsb> file:</p>
+		<blockquote>
+			<p><code>Description("#mods.ruleset.protecthq.title");</code><br>
+			Description is to give your ruleset a name when selecting it. Unfortunately, you cannot use the Multilanguage tool to put in your description, so you just have to type in the name here.</p>
+			<p><code>Author("Army Men RTS Team");</code><br>
+			Self Explanatory. Put your name in here.</p>
+			<p><code>Homepage("http://www.pandemicstudios.com");</code><br>
+			Another easy one - if you have a homepage, put it here.</p>
+			<p><code>Private(1);</code><br>
+			A holdover from Dark Reign 2, where you could potentially choose a ruleset to play a map with. Setting this to 1 would restrict this ruleset to only maps that require it. Since rulesets always work this way now, you can use any value, or just drop this line entirely.</p>
+			<p><code>Files("Type")</code><br>
+			This includes all Type files into the ruleset. Type files are things that appear ingame, most often objectives and objects.</p>
+			<p id="codestring">Files("Type")<br>
+{<br>
+&nbsp;&nbsp;Add("koth_types.cfg");<br>
+&nbsp;&nbsp;Add("koth_countdown.cfg");<br>
+}</p>
+			<p><code>Files("Exec")</code><br>
+			This includes any exec files into the ruleset. Exec files are interface elements, or commands to execute, such as binding keys.</p>
+			<p id="codestring">Files("Exec")<br>
+{<br>
+&nbsp;&nbsp;Add("koth_exec.cfg");<br>
+}</p>
+			<p><code>Files("AI")</code><br>
+			This includes any AI settings you want. AI files are specifically things used by AI logic, meaning formations, scripts, recruit types. Personalities use them, but rulesets mostly don't.</p>
+			<p id="codestring">Files("AI")<br>
+{<br>
+&nbsp;&nbsp;Add("assault_AI.cfg");<br>
+}</p>
+			<p><code>StartActionClient()</code><br>
+			Action given to the client team, used for global mission variables. This StartAction only gets created once. Notice Global variables have a ~. In front of them instead of @.</p>
+			<p id="codestring">StartActionClient()<br>
+{<br>
+&nbsp;&nbsp;CreateVarFloat("~.koth.pretimerh", 300);<br>
+&nbsp;&nbsp;CreateVarInteger("~.koth.preminutesh", 4);<br><br>
+&nbsp;&nbsp;CreateVarFloat("~.koth.timerh", 240);<br>
+&nbsp;&nbsp;CreateVarInteger("~.koth.minutesh", 4);<br>
+}</p>
+			<p><code>StartActionTeam("Team")</code><br>
+			Action given to a team based on name (used to specify a particular team to get objectives). Generally this is used to specify special teams that are not controlled by a player.</p>
+			<p id="codestring">StartActionTeam("worship")<br>
+{<br>
+&nbsp;&nbsp;NewObjective("assault.countdown");<br>
+&nbsp;&nbsp;NewObjective("assault.counttimer");<br>
+}</p>
+			<p><code>StartActionAvailable()</code><br>
+			Action given to a team based on the 'Available To Players' button pressed in the team setup.</p>
+			<p id="codestring">StartActionAvailable()<br>
+{<br>
+&nbsp;&nbsp;CreateVarFloat("@.timeleft", 180);<br>
+&nbsp;&nbsp;NewObjective("protecthq.check");<br>
+&nbsp;&nbsp;NewObjective("common.killallenemy");<br>
+&nbsp;&nbsp;NewObjective("common.aivictory");<br>
+&nbsp;&nbsp;NewObjective("common.eliminate");<br>
+}</p>
+			<p><code>StartActionAll()</code><br>
+			Action given to all teams.</p>
+			<p id="codestring">StartActionAll()<br>
+{<br>
+&nbsp;&nbsp;NewObjective("koth.objective");<br>
+&nbsp;&nbsp;NewObjective("koth.prebuild");<br>
+&nbsp;&nbsp;NewObjective("common.eliminate");<br>
+&nbsp;&nbsp;NewObjective("common.aivictory");<br>
+&nbsp;&nbsp;NewObjective("common.killallenemy");<br>
+}</p>
+		<p><code>StartActionSide("Side")</code><br>
+		Action given to a team based on side. Mostly useless in Army Men RTS, even if you create a custom side.</p>
+		</blockquote>
+		<h3>Standard Rulesets vs. Map Specific Rulesets</h3>
+		<p>One of the first things to decide when making a Ruleset is if you want it to work on ANY map or only maps that are made specifically for it. Map Specific rulesets give you much more flexibility to create, but you sacrifice having many maps to play on. There are quite a few ways of using different map features work well with a ruleset:</p>
+		<blockquote>
+			<p><dsb>Regions</dsb><br>
+			These are probably used the most in Map Specific Rulesets. Using the <code>InRegion()</code> function, you can trigger events when any specific type of unit, enemy, ally or self, moves in a region. You can also spawn units in regions. For an example of a complex <code>InRegion()</code> check, look at King of the Hill's <dsb>koth_types.cfg</dsb> file.</p>
+			<p><dsb>Tags</dsb><br>
+			Tags are useful for attaching to units or other assets that you want to control later on in your mod. To create them, see Section 4: <a href="chapter4-2.html">Creating a Multiplayer Map - Making Good MP Maps</a>.</p>
+			<p><dsb>Assets</dsb><br>
+			Using certain assets can help in any part of a ruleset. For instance, King of the Hill has picket fences blocking the hill that get deleted after five minutes.</p>
+			<p><dsb>Strategies &amp; Design</dsb><br>
+			See Section 4: <a href="chapter4-2.html">Creating a Multiplayer Map - Making Good MP Maps</a>.</p>
+		</blockquote>
+		<h3>Files that can be in a ruleset</h3>
+		<p>Just about any file can be placed in a ruleset's directory, from textures, configs and audio clips to 3d objects and more. If you want to override specific files the game uses, naming files the same name and placing them in the ruleset directory should work perfectly.</p>
+		<h3>Variables</h3>
+		<p>Variables are covered a bit in SP, but are used much more in MP. They're really essential to rulesets and let you do just about everything</p>
+		<blockquote>
+			<p><dsb>Global Variables</dsb><br>
+			A global variable is something that every player's objectives can affect and see. Defining a global variables is done on <code>StartActionClient()</code>. For instance, in King of the Hill, four global variables are set, two for both timers. All other teams can see these four variables, and if a team takes the hill, the objective tracks that team's remaining hill time into the variable. These are the best way to get each team's scripts to communicate with one another. (Ex: <code>~.koth.timerh</code>)</p>
+			<p><dsb>Local Variables</dsb><br>
+			Local variables are variables only seen by the one team running a script. All other teams cannot see what one team's local variables are. These are used mostly for triggers, timers and the like. (Ex: <code>@.timeleft</code>)</p>
+			<p><dsb>Special Variables</dsb><br>
+			If you want a team's specific name, listen up: <code>@.engine.name</code> gives the name of the team. All maps currently have teams named 'TeamX' where X is a number 1-8, except for assault, which has the team 'assault.' This variable can come in handy in all sorts of situations, such as Control Freak, which gives <code>@.engine.name</code> to a global variable, and checks to see if all five global variables for each control point are controlled by allies. In Assault, <code>@.engine.name</code> is used for the regions which a Dezigner piece is spawned.</p>
+			<p><dsb>CreateVarInteger</dsb><br>
+			This creates an integer variable that stores whole numbers. </p>
+			<p><dsb>CreateVarFloat</dsb><br>
+			This creates a floating-point variable, that can store any number or decimal.</p>
+			<p><dsb>CreateVarString</dsb><br>
+			This creates a string variable that you can store text and/or numbers in.</p>
+			<p><dsb>NOTE:</dsb> Variables can only have TWO periods in them, no more. (i.e. no <code>@.ab.bc.cd</code>, but <code>@.ab.bc-cd</code> will work)</p>
+			<p>More Information on variables is available in Section 5: <a href="chapter5-7.html">Creating a Single Player Mission - Variables</a>.</p>
+		</blockquote>
+		<h3>Common Objectives</h3>
+		<p>Army Men RTS has a few common functions that you can call using <code>NewObjective()</code>. These are all defined in <dsb>types_common.cfg</dsb> (in case you want to look at them directly.) They are as follows:</p>
+		<blockquote>
+			<p><code>common.timer.win</code><br>
+			Win condition (triggers end of game). This gives a 3 second delay between satisfying the victory conditions and getting the win condition (delay is there to allow for self destruction of units and other win condition objectives you want completed, such as earthquakes or whatnot.)</p>
+			<p><code>common.timer.lose</code><br>
+			Lose condition (triggers end of game). This also has a 3 second delay. If you feel it's easier to have teams lose than have the other team(s) win, you can use this. Keep in mind that this will end the game for ALL players, not just those who lost!</p>
+			<p><code>common.timer.eliminate</code><br>
+			This eliminates a specific player (and thus their team), but allows the game to continue. 4 second delay.</p>
+			<p><code>common.eliminate</code><br>
+			This checks to see if a player's units have been destroyed, at which point that player will get <code>common.timer.eliminate</code>.</p>
+			<p><code>common.killallenemy</code><br>
+			This checks to see if all other enemy player's have been destroyed. If so, player gets <code>common.timer.win</code>.</p>
+			<p><code>common.aivictory</code><br>
+			This checks to see if an AI player has won, and if so, triggers <code>common.timer.win</code>. An AI "wins" if it has no living human opponents left, so if two humans are playing with two computer allies each, the first player to die will trigger this objective, ending the game entirely.</p>
+		</blockquote>
+		<h3><a id="greenlink" href="https://pandemic.bzscrap.org/dr2/tools/const_kit/manual/types/objectiveobj.html#tally">Logging Types (cash, kills, etc)</a></h3>
+		<p>In some rulesets, a condition known as 'Tally' will allow you to load up a variable with information about how many units a player constructed, destroyed, etc, how much taelon they collected, etc. These can be very useful not only for simple rulesets using one of these as a win condition, but for advanced ruleset/map combinations that involve a series of tallies to trigger actions.</p>
+		<p id="codestring">&nbsp;&nbsp;Condition("Tally")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Statistic("KillsSelf");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Amount(10);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Operator(">=");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Var("@.self");<br>
+&nbsp;&nbsp;}</p>
+		<h3><a href="chapter5-6.html">Radio Events &amp; Objective Text</a></h3>
+		<p>An important part in a ruleset is to make sure players know what they are supposed to do, and if they've done something right or wrong. Combining messages seen in the console and at the top of the screen with Objective Text in pause menu will let you get your message across clearly.</p>
+		<p>Two types of Radio Events exist, <a id="greenlink" href="https://pandemic.bzscrap.org/dr2/tools/const_kit/manual/types/message.html#ConfigureLocationMessage">Location Messages</a> and <a id="greenlink" href="https://pandemic.bzscrap.org/dr2/tools/const_kit/manual/types/message.html">Game Messages</a>. You can attach a variable to a message if you need.</p>
+		<p>Often times the naming convention of messages usually follows what your mod is called. In King of the Hill, for example, all objectives and radio events began with '<code>koth.</code>', such as '<code>koth.radio.</code>' This is not required, but is recommended to help you debug.</p>
+		<p>As we've learned, variables play a very big part in rulesets. You can use variables in Radio Events as shown below:</p>
+		<p id="codestring">ConfigureRadioEvent("modname.radio")<br>
+{<br>
+&nbsp;&nbsp;Messages()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;LocationMessage::Self("modname.selfhelp", "@.engine.name");<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+ConfigureLocationMessage("modname.selfhelp")<br>
+{<br>
+&nbsp;&nbsp;Interval();<br>
+&nbsp;&nbsp;Sound();<br>
+&nbsp;&nbsp;Message()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("Message::Console");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Add("You, {1:s}, need some serious help.");<br>
+&nbsp;&nbsp;}<br>
+}</p>
+		<p>Notice that a variable was called in the message using <code>{1:s}</code>. Since <code>@.engine.name</code> will show up as a STRING, you must use <code>{1:s}</code>. If you had an integer, it would be <code>{1:i}</code> and if you had a float it would be <code>{1.0:f}</code>.</p>
+		<p>If you want to call a specific player or team in a message, using <code>#player</code> and <code>#team</code> in the variable section in <code>GameMessage::</code> and <code>LocationMessage::</code> will give you the player's name, and if you use <code>#team</code>, the player's team will show (not used at all in mods, but it's there.)</p>
+		<p><dsb>NOTE:</dsb> If a string variable is used in a message, no other variables will work in it.</p>
+		<p>Also, if you JUST want a blip to show up, you do not have to fill in the <code>Message()</code> at all, instead you can add '<code>BlipColor()</code>' with an appropriate RGBA color. Only Location Messages give blips, so this is not useful for a Game Message.</p>
+		<p id="codestring">ConfigureLocationMessage("modname.beep")<br>
+{<br>
+&nbsp;&nbsp;Interval();<br>
+&nbsp;&nbsp;Sound();<br>
+&nbsp;&nbsp;Message();<br>
+&nbsp;&nbsp;BlipColor(255, 100, 0, 100);<br>
+}</p>
+		<p>Remember, Location Messages require a region to give a blip. So when you are calling a location message, you MUST give a region (that has been defined in the studio) for that message to show up on.</p>
+		<p id="codestring">&nbsp;&nbsp;&nbsp;&nbsp;TriggerTeamRadio("modname.beep")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Region("beepland");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>

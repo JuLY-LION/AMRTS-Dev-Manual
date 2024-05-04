@@ -1,0 +1,200 @@
+<html><head>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../wrapper.css">
+	<title>7-2</title>
+</head><body>
+	<iframe src="../header.html"></iframe>
+	<div class = "topbutton">
+		<a class = "noborder" href="../contents.html">
+			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
+		</a>
+	</div>
+	<div id = "content_wrapper">
+		<h1>Mods and Rulesets</h1>
+		<h2>Protect HQ Example File (7.2)</h2>
+		<p>This is the <dsb>protecthq_types.cfg</dsb> file that comes with Army Men RTS:</p>
+		<p id="codestring"><i>//////////////////////////////////////////////////////////////////////////////<br>
+//<br>
+// Copyright Pandemic Studios<br>
+//<br>
+// Army Men RTS<br>
+//<br><br><br>
+// This is just the check at the start. It's a separate objective<br>
+// so that you don't get your ally 3min base messages. It isn't renamed<br>
+// because some maps have protecthq.check forced instead of using a<br>
+// ruleset. Bad mapmakers! (or alternatively, bad studio!)</i><br><br>
+CreateObjectType("protecthq.check", "Objective")<br>
+{<br>
+&nbsp;&nbsp;<i>// Do I NOT have a fully-constructed HQ?</i><br>
+&nbsp;&nbsp;Condition("HaveType")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("army.building.hq1")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operator("==");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.clear");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Cmd("exec music_common_list.cfg");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Cmd("sound.player.play");<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// objective</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;DisplayObjective("Add","dobj_base",0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text("#mods.ruleset.protecthq.objective2");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Light the fuse</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;NewObjective("protecthq.timer");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// tell everybody about it</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;TriggerTeamRadio("3minself");<br><br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Check to see if they start building a hq</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;NewObjective("protecthq.build");<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Is this us ?</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;If("@@.engine.name", "==", "*@.engine.name")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>// Display the time</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("iface.activate protecthq_timer");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Add a display objective</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;DisplayObjective("Add", "buildHQ")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text("#mods.ruleset.protecthq.objective");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<i>//<br>
+// This is the real one :)<br>
+// See the above objective for the start version of this</i><br><br>
+CreateObjectType("protecthq.checkgame", "Objective")<br>
+{<br>
+&nbsp;&nbsp;<i>// Do I NOT have a fully-constructed HQ?</i><br>
+&nbsp;&nbsp;Condition("HaveType")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("army.building.hq1")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operator("==");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Light the fuse</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;NewObjective("protecthq.timer");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// tell everybody about it</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;TriggerTeamRadio("3min");<br><br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Check to see if they start building a hq</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;NewObjective("protecthq.build");<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Is this us ?</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;If("@@.engine.name", "==", "*@.engine.name")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Display the time<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("iface.activate protecthq_timer");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Add a display objective</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;DisplayObjective("Add", "buildHQ")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Text("#mods.ruleset.protecthq.objective");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}<br><br><br>
+CreateObjectType("protecthq.timer", "Objective")<br>
+{<br>
+&nbsp;&nbsp;<i>// Tick down the timer and when it finishes, boom</i><br>
+&nbsp;&nbsp;Condition("Timer")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Time(180);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Var("@.timeleft");<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Remove the timer</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;If("@@.engine.name", "==", "*@.engine.name")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>// Remove the time</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("iface.deactivate protecthq_timer");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Ensure no one can give this team any units</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;KnockOut();<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Destroy all the players units</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;SelfDestruct();<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+CreateObjectType("protecthq.build", "Objective")<br>
+{<br>
+&nbsp;&nbsp;<i>// Do I NOT have a fully-constructed HQ?</i><br>
+&nbsp;&nbsp;Condition("HaveType")<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("army.building.hq1")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Operator(">");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Amount(0);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;Action()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Blow out the fuse</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;ObjectiveAbandoned("protecthq.timer");<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Remove the timer</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;If("@@.engine.name", "==", "*@.engine.name")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>// Remove the time</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cmd("iface.deactivate protecthq_timer");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// We have to keep checking for the hq, so use the game check, not the start check</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;NewObjective("protecthq.checkgame");<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Remove the display objective</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;DisplayObjective("Remove", "buildHQ");<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>// Reset the time</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Op("@.timeleft", "=", 180);<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+<i>// 3min messages</i><br>
+ConfigureRadioEvent("3min")<br>
+{<br>
+&nbsp;&nbsp;Messages()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GameMessage::Self("3min.self");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GameMessage::Ally("3min.ally", "#player");<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+ConfigureRadioEvent("3minself")<br>
+{<br>
+&nbsp;&nbsp;Messages()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GameMessage::Self("3min.self");<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+ConfigureGameMessage("3min.self")<br>
+{<br>
+&nbsp;&nbsp;Interval();<br>
+&nbsp;&nbsp;Sound()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("Sound::Primary");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Add("protecthq_hq.wav");<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Message()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("Message::Console");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Add("#mods.ruleset.protecthq.3minself");<br>
+//&nbsp;&nbsp;&nbsp;&nbsp;Add("You have 3 minutes to build a HQ");<br>
+&nbsp;&nbsp;}<br>
+}<br><br>
+ConfigureGameMessage("3min.ally")<br>
+{<br>
+&nbsp;&nbsp;Interval();<br>
+&nbsp;&nbsp;Sound()<br>
+&nbsp;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("Sound::Primary");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Add("protecthq_hq.wav");<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;Message()<br>
+&nbsp;&nbsp;{<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Type("Message::Console");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Add("#mods.ruleset.protecthq.3minally");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//Add("Your ally, {1:s}, has 3 minutes to build a HQ");<br>
+&nbsp;&nbsp;}<br>
+}</p>
+	</div>
+	<iframe src="../footer.html"></iframe>
+</body></html>
