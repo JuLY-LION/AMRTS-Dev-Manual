@@ -3,21 +3,16 @@
 	<link rel="stylesheet" type="text/css" href="../wrapper.css">
 	<title>2-1</title>
 	<style>
-		table {
-			border:2px outset #000000;
-		}
-		th {
-			text-align: left;
-			padding: 0px 4px;
-			border: 2px inset #000000;
-		}
-		td {
-			padding: 2px 4px;
-			border: 2px inset #000000;
-		}
-		td.r {
-			text-align: right;
-		}
+	th {
+		width: 60px;
+	}
+	img.world {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 30;
+		height: 23;
+	}
 	</style>
 </head><body>
 	<iframe src="../header.html"></iframe>
@@ -26,78 +21,82 @@
 			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
 		</a>
 	</div>
-	
-	
-	
-	
 	<div id = "content_wrapper">
 		
-		<h1>Menu Tools</h1>
-		<h2>Basic Tools (2.1)</h2>
-		
-		<p>The menu tools are accessed by clicking the "Tools" button in the lower left corner.</p>
-		
+		<h1>Tools Menu</h1>
+		<h2>Tools Menu (2.1)</h2>
+		<p>The tools menu is accessed by clicking the "Tools" button in the lower left corner of the screen, or by simply pressing T on the keyboard.</p>
+		<img src="c_images/21-menu.png" alt="The tools menu expanded to display all list items.">
+		<p>There are 14 different tools available, so let's go through each of them here.</p>
 		<h3>New</h3>
-		
-		<p>Creates a new mission from scratch.</p>
-			<image src="c_images/new_mission.png">
-			<p>For <dsb>size</dsb>, enter a single numeric value. Size is measured in meters*. The map will be this size squared, so if you enter 500, the map will be 500x500 meters. Most maps included in AMRTS are around 1024x1024, although that includes unplayable areas, like the kitchen floor in mission 7. For reference:</p>
+		<img src="c_images/21-new.png" alt="The dialog window for creating new missions." style="width:259px;height:131px;">
+		<p>Use this tool to create a new mission from scratch. There are two settings you can adjust when doing so:</p>
+		<p><dsb>Size</dsb> - Accepts a numeric value. This will be the size of the map squared, so entering 500 will result in a size 500x500 map. Size is measured by ingame meters, with one cell being 8x8 meters. The map will be this size squared, so if you enter 500, the map will be 500x500 meters. The two most common sizes used for maps in Army Men RTS is either 992 m&sup2;, or 1024 m&sup2;. Keep in mind though, that this is the size of the <dsb>entire map</dsb> including areas outside the playable space, such as the kitchen floor in Mission 7. A full list of all maps and their sizes can be found <a id="badlink" target="_blank" href="http://www.pandemicstudios.com">below</a>.<br>
+		<dsb>World</dsb> - This is the list of asset groups your mission can choose from. They determine what textures appear on the terrain and what props can be placed down. Worlds are mutually exclusive, so you can only use one at a time. A list with examples of the default worlds can be seen below:</p>
 		<table>
 			<tr>
-			<th>Camera and Movement</th><td>/bc_p/T1.x</td><td class="r">768x768</td>
-			</tr><tr>
-			<th>Behind the Tan Curtain</th><td>/story/S2.x</td><td class="r">992x992</td>
-			</tr><tr>
-			<th>Baths of Glory</th><td>/story/S10.x</td><td class="r">1024x1024</td>
-			</tr><tr>
-			<th>Flooded Follies</th><td>/gb/flooded.x</td><td class="r">1024x1024</td>
-			</tr><tr>
-			<th>DumDum Frenzy</th><td>/mp/2dumdums.x</td><td class="r">736x736</td>
-			</tr><tr>
-			<th>Take the 8-Train</th><td>/mp/8train.x</td><td class="r">1248x1248</td>
-			</tr><tr>
-			<th>Gehenna Conventions</th><td>(by TommyCD1)</td><td class="r">2048x2048</td>
+				<th><a href="c_images/world_bedroom.jpg" class="noborder">bedroom</a></th>
+				<th><a href="c_images/world_kitchen.jpg" class="noborder">kitchen</a></th>
+				<th><a href="c_images/world_basement.jpg" class="noborder">basement</a></th>
+				<th><a href="c_images/world_sandbox.jpg" class="noborder">sandbox</a></th>
+				<th><a href="c_images/world_bathroom.jpg" class="noborder">bathroom</a></th>
+				<th><a href="c_images/world_attic.jpg" class="noborder">attic</a></th>
+				<th><a href="c_images/world_yard.jpg" class="noborder">yard</a></th>
+				<th><a href="c_images/world_livingrm.jpg" class="noborder">livingrm</a></th>
+			</tr>
+			<tr>
+				<td><a href="c_images/world_bedroom.jpg" class="noborder"><img src="c_images/world_bedroom.gif" class="world"></a></td>
+				<td><a href="c_images/world_kitchen.jpg" class="noborder"><img src="c_images/world_kitchen.gif" class="world"></a></td>
+				<td><a href="c_images/world_basement.jpg" class="noborder"><img src="c_images/world_basement.gif" class="world"></a></td>
+				<td><a href="c_images/world_sandbox.jpg" class="noborder"><img src="c_images/world_sandbox.gif" class="world"></a></td>
+				<td><a href="c_images/world_bathroom.jpg" class="noborder"><img src="c_images/world_bathroom.gif" class="world"></a></td>
+				<td><a href="c_images/world_attic.jpg" class="noborder"><img src="c_images/world_attic.gif" class="world"></a></td>
+				<td><a href="c_images/world_yard.jpg" class="noborder"><img src="c_images/world_yard.gif" class="world"></a></td>
+				<td><a href="c_images/world_livingrm.jpg" class="noborder"><img src="c_images/world_livingrm.gif" class="world"></a></td>
 			</tr>
 		</table>
-		<! size="AA: 4.9cm 1.875in; AAA: 4.4cm 1.75in;">
-		<p>*What was considered a meter in DR2 obviously can't be measured the same in AMRTS, so the proper size is unknown.</p>
-		<!-- >
-		* AA battery tile = 3.26... cm / 1.286089 in
-		* AAA battery tile = 2.93... cm / 1.154856 in
-		* VHS tape tile = 6.23... cm / 2.454068 in
-		< -->
-		<p><font id="insectred">Author's Note: Trying to measure the tiles to real-world objects like batteries and VHS tapes was a rabbit hole that gave only inconclusive results.</font></p>
-
-		The <dsb>world</dsb> you select will determine your enviroment tileset and placeable assets. Your default options are sandbox, yard, basement, kitchen, livingrm, bathroom, bedroom, and attic. (Shell is used for non-gameplay screens.) Select one of these worlds in the dropdown box.
-		<p><font id="insectred">TODO: Show screenshot of each world!</font></p>
-			
+		<p>(Note: the <dsb>shell</dsb> world is a dummy world used for the main menu and debriefing screens. It contains no assets.)</p>
 		<h3>Load</h3>
-		Load an existing map.
-
+		<img src="c_images/21-load.png" alt="The dialog window for loading an existing missions." style="width:387px;height:273px;">
+		<p>This tool allows you to load a mission from the game. There are two options: "Load" and "SafeLoad".<br>
+		<font id="insectred">TODO: What EXACTLY does SafeLoad do? If a unit would crash normally, does SafeLoad ignore the unit???</font></p>
+		<p>Missions are located in different directories depending on how they are grouped. To change which directory to load from, click on the drop down menu above the list of maps shown. By default, the Boot Camp group is selected.</p>
 		<h3>Save</h3>
-		Save the current map.
-
-		<h3>Ruleset</h3>
-		This menu is used to set the default <dsb>ruleset</dsb> of the map. You probably know it better as a "gamemode". Select a ruleset from the dropdown menu. (AMRTS uses Protect HQ for standard multiplayer maps) You'll want to keep the result on none if you're creating a singleplayer mission, as you'll be either be picking out from the default objectives, or scripting your own later.
-		
-		<p><font id="insectred">TODO: List default rulesets and their win/elimination conditions!</font></p>
-
-		<h3>Teams, LightTime, & Weather</h3>
-		These will be covered in sections 2.2, 2.3, and 2.4 respectively.
+		<img src="c_images/21-save.png" alt="The dialog window for saving the current mission." style="width:259px;height:297px;">
+		<p>This tool is used to save the current map. Once the map has been saved for the first time, using this again will simply commit any changes you have made. As stated previously, missions are located in different directories. Like before, you can change which directory to save to by clicking on the drop down menu at the top of the window. Note that new directories must be created manually with file explorer.</p>
+		<h3>Rule Set</h3>
+		<img src="c_images/21-mission.png" alt="The dialog window for choosing the rule set of the current mission." style="width:259px;height:131px;">
+		<p>This tool is used to set the rule set, or "game mode" for the mission. Only multiplayer maps use rule sets in vanilla, although a single player mission can use a rule set without issue. For the base game, there are four different options to choose from:</p>
+		<ul>
+			<li><dsb>None</dsb> - No rule set. This is usually done if your mission will have custom specific scripts instead, such as every single player mission does. For example, <dsb>DumDum Frenzy!</dsb> does not use a rule set.
+			<li><dsb>Protect HQ</dsb> - The rule set used by all multiplayer maps, except for <dsb>DumDum Frenzy!</dsb> and <dsb>King of the Hill</dsb>. It is very simple: if you go 3 minutes without an HQ, you are eliminated.
+			<li><dsb>King of the Hill</dsb> - The rule set used by the multiplayer map of the same name. There is a key spot somewhere in the map, usually the center, surrounded by fences. After 5 minutes, the fences will be deleted, allowing players access. The first player to build an HQ in the region named "<code>HillTop</code>" and keep it there for 4 minutes will win the game.
+			<li><dsb>Protect Sarge</dsb> - An unused rule set. It is very simple: if you lose your Sarge, you are instantly eliminated.
+		</ul>
+		<h3>Teams</h3>
+		<img src="c_images/22-team-2.png" alt="The dialog window for editing teams." style="width:150px;height:117px;">
+		<p>This button toggles the team editor window. Use it to create and adjust teams. It is enabled by default on startup.<br>
+		See Chapter 2: <a href="chapter2-2.html">Teams</a> for more information.</p>
+		<h3>LightTime</h3>
+		<p>This button toggles the light editor window. Use it to adjust the lighting of the world.<br>
+		See Chapter 3: <a href="chapter2-3.html">LightTime</a> for more information.</p>
+		<h3>Weather</h3>
+		<p>This button toggles the weather editor window. Use it to create weather effects, such as rain, wind, or snow.<br>
+		See Chapter 4: <a href="chapter2-4.html">Weather</a> for more information.</p>
 		<h3>Connected Regions</h3>
-		<p><font id="insectred">Clicking this gives you a cookie IRL.</font></p><! Display pathable areas based on traction type.>
-
+		<p>Is currently broken within the source code, and cannot be used. Sorry!<br>
+		If it did work, it would let you view a special mini map that shows you disconnected regions of the map based on traction types.</p>
 		<h3>Minimap</h3>
-		Toggle the minimap in the studio. It's mostly non-functional in the current community versions.
-		
-		<h3>Option</h3>
-		Brings up the game options screen from the main menu, should you need it.
-
-		<h3>Play Mission, Main Menu, & Exit</h3>
-		Hopefully self explainatory.
- 
- 
- 
+		<img src="c_images/21-minimap.png" alt="A mockup of the mini map window if it were functional." style="width:146px;height:191px;">
+		<p>This button toggles the mini map window. You can use it to see a quick overhead view of the entire map. Although it does not render correctly in the current version of studio, it still displays the location of units.</p>
+		<h3>Options</h3>
+		<p>This button opens the options window. You can use it to adjust graphics settings, such as resolution. Unlike the main menu, this window allows you to adjust camera movement speed instead of music volume. You can also change the difficulty, which is useful for quickly playtesting them.</p>
+		<h3>Play Mission</h3>
+		<p>Press this to play the current mission. Multiplayer maps can be played this way, but they may not function as expected, so it is better to launch them naturally.</p>
+		<h3>Main Menu</h3>
+		<p>Press this to exit the studio and return to the main menu.</p>
+		<h3>Quit</h3>
+		<p>Press this button to close the game entirely.</p>
 	</div>
 	<iframe src="../footer.html"></iframe>
 </body></html>
