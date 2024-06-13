@@ -2,6 +2,13 @@
 	<link rel="stylesheet" type="text/css" href="../style.css">
 	<link rel="stylesheet" type="text/css" href="../wrapper.css">
 	<title>2-3</title>
+	<style>
+	img.ss {
+		width: 32%;
+		border: 4px groove #008000;
+		margin: 2px;
+	}
+	</style>
 </head><body>
 	<iframe src="../header.html"></iframe>
 	<div class = "topbutton">
@@ -9,40 +16,48 @@
 			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
 		</a>
 	</div>
-	
-	
-	
-	
 	<div id = "content_wrapper">
-		
-		<h1>Menu Tools</h1>
-		<h2>Light Time (2.3)</h2>
-		<p>This section will cover the Light Time menu found in tools.</p>
-		<h3>The menu</h3>
-		<p>Light times are used to set the times and colors for day/night cycle.</p>
-		<p><font id="insectred">TODO: Include image!</font></p>
-		<img>
-		<ul>
-			<li>Cycle Time - total day/night cycle time in seconds
-			<li>Start Time - The time from the start of the mission to begin the cycle
-			<li>Start of Day - the start of the day according to the game
-			<li>End of Day - the beginning of night according to game
-			<li>Start of Sunrise - starts blend of night to day
-			<li>End of Sunrise - finishes blend of night to day (building lights deactivated)
-			<li>Start of Sunset - starts blend of day to night (building lights activated)
-			<li>End of Sunset - finishes blend of day to night.
-			<li>Seasonal Shift - based on spring/summer/winter/fall. Don't worry about this ;)
-		</ul>
-
-		<p>Fraction of Day</p>
-		<ul>
-			<li>Ambient Color - set ambient rgb value
-			<li>Sunlight Color - set sunlight rgb value
-			<li>Fog Color - set fog rgb value
-		</ul>
+		<h1>Tools Menu</h1>
+		<h2>LightTime (2.3)</h2>
+		<p>The Light Editor is used to modify the lighting colors based on specific times of day. Although time no longer passes natively in Army Men RTS, you can still adjust the current time of day, and by effect, adjust the colors of the sun and ambiance with it.</p>
+		<img src="c_images/23-lighttime.png" alt="The Light Editor window." style="display: block;margin-left: auto;margin-right: auto;">
+		<h3>Time of Day</h3>
+		<p>The sliders on the left adjust different aspects of the day / night timing cycle. As time no longer passes in Army Men RTS, the only two settings you'll need to ever worry about are the Start time and the Season.</p>
+		<p><dsb>Cycle Time</dsb><br>
+		How long, in seconds, a day cycle would last.</p>
+		<p><dsb>Start</dsb><br>
+		The fraction of a cycle at which the mission starts at. So 0.5 would mean the mission starts at 12 PM.</p>
+		<p><dsb>Day start</dsb><br>
+		The fraction of a cycle at which day begins.</p>
+		<p><dsb>Day end</dsb><br>
+		The fraction of a cycle at which night begins.</p>
+		<p><dsb>Sunrise Start</dsb><br>
+		The fraction of a cycle at which the sun begins to rise.</p>
+		<p><dsb>Sunrise End</dsb><br>
+		The fraction of a cycle at which the sun has finished rising.</p>
+		<p><dsb>Sunset Start</dsb><br>
+		The fraction of a cycle at which the sun begins to set.</p>
+		<p><dsb>Sunset Start</dsb><br>
+		The fraction of a cycle at which the sun has set.</p>
+		<p><dsb>Season</dsb><br>
+		"based on spring/summer/winter/fall." Not sure what this does exactly, but it influences the direction of the sun.</p>
+		<p>Without the passage of time, the most these settings will do is affect which direction the sun faces, meaning which direction shadows are drawn. You can mess with them if you like, but you'll get more mileage out of the lighting colors.</p>
+		<h3>Fraction Colors</h3>
+		<p>This is where you're most likely going to go when it comes to changing a map's lighting. The fraction colors determine what colors the three ambient lights will be during a specific time of day. The list in the middle of the window lists all of the currently defined fractions. To the right, you'll be able to preview the three colors throughout the day cycle. Lastly, along the bottom of the window is a row of buttons used to edit the fraciton colors.</p>
+		<p>By default, there will already be a single defined fraction, and it will already be highlighted on the list. Click on the "Edit" button to edit the three ambient colors of the fraction. This will open a second window. Here you can adjust the fraction of day these colors appear at, as well as change the colors themselves. To edit the colors, click on the icon to the right of their respective labels.</p>
+		<p>The three colors each refer to different sources of light. The sun color is the most obvious: It is the color that sunlight casts. It is best to leave it as pure white. The ambient color can be seen as the opposite of the sun color. It is the color seen in the absence of light, or basically, the color of shadows. It is the most prominent color of the map's lighting, and should be adjusted with care. Lastly, the fog color is the color that the far plane blends into. It is mostly only seen during cutscenes, although there are circumstances where it can be seen during gameplay.</p>
+		<p>Some examples. In each of these images, the respective color has been set to red, while the other two colors are set to white. From left to right: ambient color, sun color, and fog color.</p>
+		<a href="c_images/23-ambient.jpg" class="noborder"><img src="c_images/23-ambient.jpg" alt="An image of the map Doubles, with ambient light color set to red." class="ss"></a>
+		<a href="c_images/23-sun.jpg" class="noborder"><img src="c_images/23-sun.jpg" alt="An image of the map Doubles, with sun light color set to red." class="ss"></a>
+		<a href="c_images/23-fog.jpg" class="noborder"><img src="c_images/23-fog.jpg" alt="An image of the map Doubles, with fog light color set to red." class="ss"></a>
+		<p>By adding new fractions, the color of both fractions will occur at their respective times of day. For the times between fractions, colors will be seamlessly blended. This creates the effect, for example, of the sunlight fading away as it sets or rises again. However, since time does not pass in Army Men RTS, the most you can do with this is create two fractions, then set time of day to a point inbetween the two fractions, resulting in a blended color.</p>
+		<p>Lastly, the row of buttons on the bottom of the window all pertain to editing fractions.</p>
+		<p><dsb>Add:</dsb> Create a new fraction and colors from scratch.<br>
+		<dsb>Copy:</dsb> Create a new fraction by copying the values of the currently selected fraction.<br>
+		<dsb>Delete:</dsb> Delete the currently selected fraction.<br>
+		<dsb>Edit:</dsb> Edit the currently selected fraction.<br>
+		<dsb>Smooth:</dsb> "Smooths" the colors between all fractions for a more seamless blend.<br>
+		<dsb>Done:</dsb> Closes the Light Editor.</p>
 	</div>
 	<iframe src="../footer.html"></iframe>
-	
-
-
 </body></html>
