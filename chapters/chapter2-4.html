@@ -9,54 +9,54 @@
 			<img id = "lrw" src="../images/top_arrow.png" style="width: 64px; height: 64px;">
 		</a>
 	</div>
-	
-	
-	
-	
 	<div id = "content_wrapper">
-		
-		<h1>Menu Tools</h1>
-		<h2>Weather Menu</h2>
-		<p>The Weather Menu within your tools is used to create and modify weather effects. You are allowed to create many different effects and trigger them when necessary. Weather effects can have splats that hit the ground and water when they fall. You can create many different splat types as well.</p>
-		<p><font id="insectred">TODO: Include image!</font></p>
-		<img>
-		<h3>Weather Settings</h3>
-		<ul>
-			<li>Rain - Enable/Disable rain/weather effects
-			<li>Sound - sound file played while rain is active
-			<li>Texture - rain texture file
-			<li>Blend - modulate
-			<li>Color - rain rgb value
-			<li>Fall - angle of rainfall
-			<li>Grid/Drop - size of rain grid/number of drops in grid
-			<li>Spd/Strike - speed of rain/frequency of lightning
-			<li>Wid/Hgt - dimensions of rain streak
-			<li>Scale - scale of streak
-		</ul><ul>
-			<li>Ground - Unknown
-			<li>Water - Unknown
+		<h1>Tools Menu</h1>
+		<h2>Weather Editor (2.4)</h2>
+		<p>The Weather Editor is responsible for, as the name implies, the weather. While unused, weather is still fully functional and very versatile.</p>
+		<p>Weather has three main components: the droplets that fall to the ground, and two different "splats" for when the droplets land on either ground or water.</p>
+		<image src="c_images/24-weather.png" style="float:left;padding-right:5;padding-bottom:5;width:378px;height:427px;">
+		<h3>Droplet Options</h3>
+		<p>At the top left corner, you'll see a set of three buttons as well as a list of any existing rain types. There are none by default, so you'll have to create one. Each button does as follows:</p>
+		<p><dsb>Rain</dsb> - Enables and disables the rain.<br>
+		<dsb>Create</dsb> - Create a new rain type.<br>
+		<dsb>Delete</dsb> - Delete the selected rain type.</p>
+		<p>Beyond that, the rest of the options pertain to how the droplets will look when falling from the sky.</p>
+		<ul style="list-style-position:inside">
+			<li><dsb>Sound:</dsb> What sound file to use when rain is happening.
+			<li><dsb>Texture:</dsb> What texture file to draw the rain with.
+			<li><dsb>Blend: </dsb> How the rain blends with other textures.<br><font id="insectred">NOTE: This is currently broken and must be manually edited inside the <dsb>game.cfg</dsb> file.</font>
+			<li><dsb>Pitch: </dsb> Steepness of droplets' trajectory.
+			<li><dsb>Yaw: </dsb> Angle of droplet's trajectory.
+			<li><dsb>Grids: </dsb> Spacing between droplets.
+			<li><dsb>Count: </dsb> Density of droplets per grid.
+			<li><dsb>Speed: </dsb> Speed at which droplets fall.
+			<li><dsb>Thunder: </dsb> Likelyhood of thunder occuring.
+			<li><dsb>Width: </dsb> Sprite width of droplet texture.
+			<li><dsb>Height: </dsb> Sprite height of droplet texture.
 		</ul>
-		<h3>Splat Settings</h3>
 		<ul>
-			<li>Splats - Enable/Disable splats
-			<li>Create - Create splat type
-			<li>Delete - Delete splat type
-		</ul><ul>
-			<li>Count - number of splats in grid
-			<li>Texture - splat texture file
-			<li>Blend - modulate
-			<li>Color - rgb value
-		</ul><ul>
-			<li>GroundSplat - Sets weather to splat on ground surfaces
-			<li>WaterSplat - Sets weather to splat on water surfaces
-		</ul><ul>
-			<li>Min W/H - minimum dimensions of splat
-			<li>Max W/H - maximum dimensions of splat
-			<li>Off/Life - life of splat
+			<li><dsb>Scale: </dsb> Size of droplets.
+			<li><dsb>Area: </dsb> Size of area around the camera where droplets render: The "draw distance" of rain.
+		</ul>
+		<h3>Splat Options</h3>
+		<p>The splats are the particles that appear when a droplet makes contact with the surface of the world. The two pulldown buttons decide which of the defined splats to use for hitting the ground or water. Under those to the left is the same three button &amp; list setup. Like with rain, the "Splat" button toggles the use of splats, while "Create" and "Delete" are used to create and delete splat definitions.</p>
+		<ul>
+			<li><dsb>Count:</dsb> How many instances of this splat can exist simultaneously.
+			<li><dsb>Texture:</dsb> What texture file to draw for this splat.
+			<li><dsb>Blend:</dsb>  How the splat blends with other textures.<br><font id="insectred">NOTE: This is currently broken and must be manually edited inside the <dsb>game.cfg</dsb> file.</font>
+			<li><dsb>Min Width:</dsb> Starting width of splat texture.
+			<li><dsb>Min Height:</dsb> Starting height of splat texture.
+			<li><dsb>Max Width:</dsb> Ending width of splat texture.
+			<li><dsb>Max Height:</dsb> Ending width of splat texture.
+			<li><dsb>Offset:</dsb> Render distance of splats from camera.
+			<li><dsb>Lifetime:</dsb> How long the splat takes to decay.
+		</ul>
+		<p>Finally, there are an adittional two buttons labeled "Ground Splat" and "Water Splat". These buttons are mutually exclusive, and dictate whether a given splat definition is a ground splat or water splat. Ground splats appear as a 2D sprite that expands over its lifetime. Water splats appear on the surface of water and also expand.</p>
+		<h3>Additional Notes</h3>
+		<ul>
+			<li>The sound file the rain plays will play on loop for as long as the rain is active. It will also always play at max volume, so pick something that won't get annoying quickly.
+			<li>Be mindful of what texture you use for droplets. Droplets are not squares, meaning the texture you pick may or may not get cutoff at the corners.
 		</ul>
 	</div>
 	<iframe src="../footer.html"></iframe>
-	
-
-
 </body></html>
