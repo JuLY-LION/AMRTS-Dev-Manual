@@ -72,8 +72,7 @@ hili {
 }
 mark {
 	color: ffff80;
-	background-color: transparent;
-	background-image: url("colors/darkgray_opacity50.png");
+	background-color: #40404080;
 	padding: 2px 0px;
 }
 img.dl {
@@ -85,7 +84,7 @@ img.dl {
 }
 code {
 	color: aqua;
-	background-image: url("colors/black_opacity50.png");
+	background-color: #00000080;
 	
 	font-family: "Lucida Console";
 	
@@ -115,13 +114,13 @@ code {
 #insectred {
 	color: #b3321c;
 	font-family: "Brush Script MT", cursive;
-	background-image: url("colors/lightgray_opacity50.png");
+	background-color: #ffffff80;
 	padding: 0px 4px;
 	border-radius: 1440px;
 }
 #codestring {
 	color: aqua;
-	background-image: url("colors/black_opacity50.png");
+	background-color: #00000080;
 	
 	font-family: "Lucida Console";
 	
