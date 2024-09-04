@@ -1,7 +1,7 @@
 <html><head>
 	<link rel="stylesheet" type="text/css" href="../style.css">
 	<link rel="stylesheet" type="text/css" href="../wrapper.css">
-	<title>2-2</title>
+	<title>[2.2] Teams | AMRTS Dev Manual</title>
 </head><body>
 	<iframe src="../header.html"></iframe>
 	<div class = "topbutton">
@@ -15,6 +15,7 @@
 		<image src="c_images/22-team-2.png" alt="The Teams Tool window."style="float:right;padding-left:5;padding-bottom:5;width:150px;height:117px;">
 		<p>The Teams Tool and Teams Editor are used to create and modify teams respectively.</p>
 		<p>The teams tool should be opened by default when loading the studio. If it isn't, you can open it via the tools menu at the bottom left.</p>
+		
 		<h3>Teams Tool</h3>
 		<p>The Teams Tool window is the small window normally located at the top right of the screen. It has a list of current teams, as well as four buttons. Each button functions as follows:</p>
 		<p><dsb>Create New Team:</dsb> Press this button to create a new team. You will be prompted to name it upon creation. Team names cannot be changed once set within the studio. You may have a maximum of eight teams at any time.<br>
@@ -22,42 +23,59 @@
 		<dsb>Delete Selected Team:</dsb> Press this button to delete the currently selected team. This will also delete all units / objects assigned to this team from the map. (Note that if you have script(s) that call on a team by name, deleting said team will cause errors unless you update your code accordingly!)<br>
 		<dsb>Deselect Current Team:</dsb> Press this button to deselect the currently selected team. By doing so, units placed will become neutral again.</p>
 		<p>To select a team, click on it in the list. You can also simply double click on a team to edit it, or right click anywhere on the list to deselect a team.</p>
+		
 		<h3>Teams Editor</h3>
 		<p>When editing a team's configuration, a new window will appear. This is the Teams Editor window, which contains all the relevant settings for a team. Let's go through them.</p>
 		<img src="c_images/22-team-1.png" alt="The Teams Editor window." style="display: block;margin-left: auto;margin-right: auto;">
+		
 		<h3>Color</h3>
-		<p>By clicking on the <img src="c_images/22-team-color.png" alt="The color button of the Teams Editor window."> icon, you may change a team's color. The color of a team is mostly used to distinguish factions from each other; most units that get assigned to teams will use these colors on their models, being the most prominent and visible color, although there are rare exceptions, such as Vikki.</p>
+		<table><tr><td>
+			<img src="c_images/22-team-color.png" alt="The color button of the Teams Editor window.">
+		</td><td>
+			<p style="margin-left:10px;">By clicking on the this icon, you may change a team's color. The color of a team is mostly used to distinguish factions from each other; most units that get assigned to teams will use these colors on their models, being the most prominent and visible color, although there are rare exceptions, such as Vikki.</p>
+		</td></tr></table>
+		
 		<p>You will choose a color using an RGB color scale. The campaign, great battles, and special operations missions all use the same color scheme of green vs. tan. The colors they use are as follows:
 		<ul>
-			<li>The Green army uses <code style="color:#5ef241;">94, 242, 65</code>.
-			<li>The Tan army uses <code style="color:#fcc26b;">252, 194, 107</code>.
-			<li>The ants use <code style="color:#b3321c;">179, 50, 28</code>.
+			<li style="margin:2px 0px;">The Green army uses <code style="color:#5ef241;">94, 242, 65</code>
+			<li style="margin:2px 0px;">The Tan army uses <code style="color:#fcc26b;">252, 194, 107</code>
+			<li style="margin:2px 0px;">The ants use <code style="color:#b3321c;">179, 50, 28</code>
 		</ul></p>
 		<p>Keep in mind that units may appear more or less saturated than the raw color value their team uses. When picking a color, you should take the map's lighting and units' textures into consideration. Also, when launching a multiplayer map, the multiplayer setup will override a team's default color for player teams. Non-player teams will still use their given color.</p>
+		
 		<h3>Name</h3>
 		<p>The name of the currently selected team will be displayed next to the color button. Remember, once a team has been created, it cannot be changed inside the studio. You can change a team's name by editing the <dsb>game.cfg</dsb> file, but you must also take care to update any objects or scripts that assume the team's old name. Also, for the most part, a team's name is for internal use only. There are currently no situations in vanilla gameplay that would relay the team's name to a player. Therefore, you should try to name teams something descriptive based on their purpose, for example "player", "insects", or "team6".</p>
+		
 		<h3>Default Client</h3>
 		<p>This is the team the player is automatically given when playing a single player mission. Only one team can use this at a time, but luckily setting this for one team automatically unsets it for all other teams. This setting is ignored in multiplayer.</p>
+		
 		<h3>Available to Players</h3>
 		<p>This setting determines whether a team can be selected for multiplayer. That means, one of the bases a player can start as, or be selected on the minimap during setup. If this setting is disabled, then the team will not be taken into consideration for how many players a map supports. (e.g. a map with 4 bases + 1 unavailable team will still show as "Maximum of 4 players".)</p>
 		<p>Something else to consider: if a team is available to players, but the base goes unoccupied (e.g. playing a 6 player map with only 4 players), then that team will be completely nonexistant! That means that any units assigned to this team through studio will appear neutral ingame, and any scripts that point to this team specifically will encounter errors.</p>
 		<p>One last thing: a team that is not available to players will always exist, regardless of the multiplayer setup. This means that an ambient team that takes care of miscellanous scripts can be created, or a global enemy can be created to harass players or the like.</p>
 		<p>This setting has no purpose in single player, and can be disregarded.</p>
+		
 		<h3>Show in Debriefing</h3>
 		<p>Another multiplayer only setting. Teams that have this enabled will show up on the results screen after a mission. This includes players' teams and unavailable teams. Note that unavailable teams will always show up under the name "Computer".</p>
+		
 		<h3>Requires AI</h3>
 		<p>When this setting is enabled, it allows scripts to move a team's unit around. For example, if you have a script that moves Sarge to a specific region on the map, this setting would need to be enabled. Otherwise the script would execute, but Sarge would ignore the order entirely.</p>
 		<p>This setting only applies to human players, including during single player. If a team is controlled by the computer, such as in multiplayer, or enemy teams in single player, then this setting is redundant.</p>
+		
 		<h3>Side</h3>
 		<p>This determines which faction the team uses. There are two sides, "Army" and "Insect". The only aspect of vanilla gameplay that side determines is what units a team will start with when their side isn't fixed. (See below.) There are some other checks that look at a team's side, such as for rulesets or computer personalities, but they aren't really useful with the vanilla sides.</p>
+		
 		<h3>Fixed Side</h3>
 		<p>When a team is occupied, whether by a human or computer, it will spawn with its side's default units. The default units of the "army" side is Sarge and a bulldozer. The "insect" side has no default units.</p>
 		<p>By setting the side to "fixed", you can prevent these default units from spawning, even if a team is occupied. Keep in mind that units placed within the studio will always appear during gameplay, even if a side is fixed or unoccupied. Also, if a team does not have a spawn region set, then it will have nowhere to spawn the default units.</p>
+		
 		<h3>Storage</h3>
 		<p>Use this to set a team's starting resource values. The drop list on the left is the resource currently being set, while the input on the right is the value.</p>
+		
 		<h3>Spawn Region</h3>
 		<p>A team's spawn region is very important. It determines where the player's camera will initally be located when starting the mission. It determines where a side's default units will be created. And AI bases use it as their home location when no alternative is provided. The minimap marker for a base location during multiplayer setup is also automatically calculated for you based on that team's spawn region when saving a map.</p>
 		<p>There are two controls related to the spawn region. The button to the right of the label allows you to specify a region on the map to use. Pressing it will open a new window which will contain a list of all regions from which you can choose from. The second control is the panel located above the label. It will update to dynamically display the currently selected region name. Clicking on it will also jump the studio camera to the default position for that team. (You may have to save any changes to the team beforehand.)</p>
+		
 		<h3>Personality</h3>
 		<p>The personality is how a computer player behaves when the team is not occupied. This only applies to teams that aren't available to players, as multiplayer setup overrides this setting, and human players obviously aren't computer players.</p>
 		<p>There are three options to choose from:
@@ -66,14 +84,16 @@
 			<li><dsb>gb</dsb> - This is the Great Battles personality. It is similar to the default multiplayer AI. Good for an enemy that will harass a player occasionally, but won't be diligent in rebuilding its lost buildings.
 			<li><dsb>default</dsb> - This is the personality used by multiplayer computer players. Manually assigning it to an AI base will behave as expected.
 		</ul>If you have custom personalities installed, they will also appear in this list and can be selected. If a map calls for a personality that does not exist, then it will behave as if no personality is used. Remember: a base needs sufficient resources and something to build with!</p>
+		
 		<h3>Camera Angle</h3>
 		<p>By default, the camera will face due north. You can change this by using the slider if you want. Not recommended, but there if you need it.</p>
+		
 		<h3>Type Filtering</h3>
 		<p>Type filtering is a very useful tool. It is a whitelist of units that a team is allowed to purchase. You can use it to restrict a team to specific units, such as in the early campaign missions. To use type filtering, press the button at the top. This sets the flag that enables type filtering. Without it, a team will be able to buy anything, regardless if they have a whitelist given to them.</p>
 		<p>Below is a set of two lists. The small list at the top is a quick filter of groups of units. You can use it to quickly filter units of a specific category. The categories are as follows:
 		<ul>
 			<li><dsb>Everything</dsb> - This will select everything.
-			<li><dsb>Army Men</dsb> - This will select all units with the property "<code>Filter::Army</code>". Basically, it encompases all army men units but not things such as insects.
+			<li><dsb>Army Men</dsb> - This will select all units with the property <code>"Filter::Army"</code>. Basically, it encompases all army men units but not things such as insects.
 			<li><dsb>Air Strikes</dsb> - This includes the Radio Operator and the three air strikes.
 			<li><dsb>Mines</dsb> -  This includes the Mine Layer and the three mine types.
 			<li><dsb>Infantry</dsb> - This includes all the units that are built by the Barracks.
@@ -81,9 +101,10 @@
 			<li><dsb>Towers</dsb> - This includes the Guard Tower, Pillbox, AA Gun, and Barbed Wire Post.
 			<li><dsb>Facilities</dsb> - This includes the Bulldozer, HQ, Barracks, Garage, and respective upgrades.
 			<li><dsb>Economy</dsb> - This includes the Resource Depot and Dump Truck.
-			<li><dsb>Insects</dsb> - This will select all units with the property "<code>Filter::Insect</code>". Basically, it includes the Worker, Soldier, and Cockroach insects.
+			<li><dsb>Insects</dsb> - This will select all units with the property <code>"Filter::Insect"</code>. Basically, it includes the Worker, Soldier, and Cockroach insects.
 		</ul>Keep in mind that these groups are only considered "selected" if every unit within them is selected. This means if you allow all infantry, but filter the Sniper specifically, then the category of "Infantry" will appear unselected again.</p>
 		<p>The second list at the bottom is more specific. It lists every unit purchaseable, and can be used to individually restrict specific units, rather than in batches. Don't forget, this is a <dsb>whitelist</dsb>, not a blacklist! Any units that are NOT selected are the units that aren't allowed to be used by the team.</p>
+		
 		<h3>Mission Objectives</h3>
 		<p>The team's objectives are responsible for many things, such as victory conditions, AI logic, cineractives, medal goals, and more. All these objectives will be listed in the list below. By selecting it from the list, the team will begin the mission with that objective active. If you have custom scripts, this is how you would assign them to the teams ingame. For more information, see Section 5: <a href="chapter5-1.html">Creating a Single Player Mission</a>.</p>
 		<p>For now, the list will only contain the standard set of predefined objectives. Here is a quick list of their functions:
