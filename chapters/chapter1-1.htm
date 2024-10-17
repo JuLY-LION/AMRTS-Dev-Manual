@@ -47,6 +47,17 @@
 	
 <h3>Troubleshooting</h3>
 <p>If you have any issues downloading the files, try downloading directly from the <a href="https://www.clanexf.com/forums/viewtopic.php?t=2924">ExF forum post</a>, where <dsb>amrts_studio_files.7z</dsb> is hosted. It's ultimately the same link, but requesting the download from on the forums should force it to cooperate.</p>
+
+<p><dsb>October 2024 update:</dsb> It seems that Windows Security is now treating the executable that opens the Studio Editor as unwanted adware, and will quarentine the file upon opening trying to open it. <dsb>This is a false-positive anti-virus reaction.</dsb> DavidTheTech is aware of the issue and is working on a patch to satisfy Windows.</p>
+<img src="c_images/misc/false_positive1.webp">
+
+<p>As a temporary solution, you can tell Windows to make an exception for this file. Open the Windows start menu and go to Settings &gt; Update & Security &gt; Windows Security &gt; Open Security &gt; Virus & Threat Protection &gt; Protection history. From your options, look for the threat action relating to the Studio Launcher. Since its ordered by date, it's most likely on the top.</p>
+<p>When you open it, it should look similar to this:</p>
+<img src="c_images/misc/false_positive2.webp">
+
+<p>Restore the launcher by selecting that option from the actions button on the bottom right. Windows will place it back where it took it from and allow you to use it once more. Keep in mind it may still quarentine the executable if it finds it in another place on your PC.</p>
+
+<p></p>
 	</div>
 	<iframe src="../footer.html"></iframe>
 </body>
