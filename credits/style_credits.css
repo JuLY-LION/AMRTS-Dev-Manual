@@ -1,12 +1,42 @@
 @font-face { font-family: stencil; src: url('../fonts/StencilStd.otf'); }
 
+#content_wrapper {
+	width: 640px;
+	height: auto;
+	
+	border: 10px solid magenta;
+	margin: 20px auto;
+}
+
+td {
+	border: 2px solid lime;
+	font-size: 20px;
+}
+
 body {
   background-color: rgb(100,95,85);
   background-image: url('if_credits_background.png');
   background-size: 100vw 100vh;
+  background-attachment: fixed;
+  
   color: white;
-  text-align: center;
-  font-size: 30px;
+  font-size: 20px !important;
   font-family: arial;
-  text-shadow: 3px 3px 0px #000000C0;
+  text-shadow: 2px 2px 0px #00000080;
+}
+
+h1 {
+	text-align: center;
+	font-family: stencil;
+	font-size: 40px;
+	text-shadow: 4px 4px 0px #00000080;
+}
+
+a {
+	color: white;
+}
+
+named {
+	color: rgb(192,192,160) !important;
+	padding-left: 46px;
 }
