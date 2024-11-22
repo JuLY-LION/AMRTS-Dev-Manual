@@ -1,7 +1,7 @@
 <html><head>
 	<link rel="stylesheet" type="text/css" href="../style.css">
 	<link rel="stylesheet" type="text/css" href="../wrapper.css">
-	<title>4-1</title>
+	<title>[4.1] MP Map Basics | AMRTS Dev Manual</title>
 	<style>
 		table {
 			border:2px outset #000000;
@@ -29,6 +29,11 @@
 		}
 		#elec {
 			color: c0c0ff;
+		}
+		.resicon {
+			height: 15px;
+			position: relative;
+			top: 2px;
 		}
 	</style>
 </head><body>
@@ -77,13 +82,13 @@
 			</tr><tr>
 			<td>Requires AI</td><td><font id="no">Disabled</font></td>
 			</tr><tr>
-			<td>Plastic:Electricity</td><td><font id="plas">2000</font>:<font id="elec">800</font>**</td>
+			<td>Resources</td><td><span id="plas">2000</span><img src="c_images/plastic.png" class="resicon"> <span id="elec">800</span><img src="c_images/electricity.png" class="resicon">**</td>
 			</tr><tr>
 			<td>Region</td><td>(Starting region)</td>
 			</tr><tr>
-			<td>Personality</td><td>None</td>
+			<td>Personality</td><td>(Any)</td>
 			</tr><tr>
-			<td>Side</td><td>Army</td>
+			<td>Side</td><td><span id="armygreen">Army</span></td>
 			</tr><tr>
 			<td>Fixed Side</td><td><font id="no">Disabled</font></td>
 			</tr><tr>
@@ -92,13 +97,17 @@
 		</table>
 		
 		<p>*Set this to disabled for all except any 1 team.<br>
-		**Recommended values for teams are 2,000-P and 800-E. But you may choose anything you feel is best for your map, like 2,500-P and 1,000-E if you want to speed up base building, or 2,000-P and 200-E if electricity is meant to be scarce. Heck, 100k each is also an option if you want to make a maxrush map. Regardless, make sure it's the same for all teams for balance.</p>
+		**Recommended values for teams is <span id="plas">2000</span><img src="c_images/plastic.png" class="resicon"> or <span id="plas">2500</span><img src="c_images/plastic.png" class="resicon"> for plastic, and <span id="elec">800</span><img src="c_images/electricity.png" class="resicon"> or <span id="elec">1000</span><img src="c_images/electricity.png" class="resicon"> for electricity. But you may choose anything you feel is best for your map. 100k each is also an option if you want to make a maxrush map. Regardless, make sure it's the same for all teams for balance.</p>
 
-		<p>Before you forget, double-check you set a start region for each playable team. (so team1's region would be the "team1_start" region) Do not forget this step! <mark>Neglecting to assign regions to your playable teams may result in <dsb>game crashes</dsb> while trying to load the map into the studio editor!</mark> If this happens to you, you could try assigning the regions in the mission's game.cfg, but you'll more likely just have to delete all your teams there and reload the map.</p>
-
+		<p>Before you forget, double-check you set a start region for each playable team. (so team1's region would be the "team1_start" region) Do not forget this step! <mark>Neglecting to assign regions to your playable teams may result in <dsb>game crashes</dsb> while trying to load the map into the studio editor!</mark> If this happens to you, try going into the game.cfg file and setting the personality to <code>"None"</code> for the offending team.</p>
+		
+		<p>While the personality you set won't matter for teams available to players, it's recommended to it to <code>"default"</code> instead of nothing at all for debug reasons. It'll be overridden when a mutliplayer match starts anyways.</p>
+		
 		<p>Finally, you likely need to set a ruleset for the map. All of the standard multiplayer maps in AMRTS have "Protect HQ" as its ruleset, with 2 exceptions. (King of the Hill uses the ruleset of the same name, and DumDum Frenzy uses custom objectives in lue of a ruleset) Click "Tools" in the lower left. Select "Ruleset" and "Protect HQ" from the dropdown box.</p>
 
 		<p>Hopefully you've been saving your map perodically as you've been working on it. If not, it's a good habit when working on larger projects, especially beyond AMRTS. Quick-save your map with <dsb>Ctrl+S</dsb>. Save in the Multiplayer Missions folder, and your map should now show up on the menu when you run the game! Before distributing your map, you should zip the map folder with DrPacker or X File Utilities.</p>
+		
+		<p><span id="insectred">TODO: Add links to forum posts with those tools.</span></p>
 	</div>
 	<iframe src="../footer.html"></iframe>
 	
