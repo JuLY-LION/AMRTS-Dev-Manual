@@ -60,7 +60,7 @@
 		<ol>
 			<li>Create a New map, choose a size and world (Section 2.1)
 			<li>Create the map's terrain and texture (Section 3.1)
-			<li>Add water if map requires water (Section 3.4)
+			<li>Add water as desired (Section 3.4)
 			<li>Place ambient objects (Section 3.2)
 			<li>Color the map and apply additional textures (Sections 3.3 & 3.10)
 		</ol>
@@ -68,9 +68,9 @@
 
 		<p>You'll want to create a team for each player your map will support. What you name them won't matter, but it might help to name them based on their cardinal location on the map. (for example, "Team-NW") But just "team(x)" is fine.</p>
 
-		<p>Now we are going to mark the spots that are going to be the player's start locations. Hit the <dsb>[5]</dsb> key to get the Region panel. Left-click and drag on the terrain to create a region. It will look like a box. Make a small region at each start location define the box size, type a name in the field, then click "create". Your new Region should now appear in the list on the right of the screen. The center of the Region will be where the camera is looking at the start of the game, it will also be the spot where your starting rigs are spawned in. It's best to name the regions the same as your team names + "start". (like "team4_start")</p>
+		<p>Now we are going to mark the spots that are going to be the player's start locations. Hit the <dsb>[5]</dsb> key to get the region panel. Left-click and drag on the terrain to create a region. It will look like a box. Make a small region at each start location: define the box size, type a name in the field, then click "create". Your new region should now appear in the list on the right of the screen. The center of the region will be where the camera is looking at the start of the game, it will also be the spot where your starting units are spawned in. It's best to name the regions the same as your team names + "start". (like "team4_start")</p>
 
-		<p>Now, you'll need to go into each team's config and make some settings. Double click on the team name to get the team config menu. For EACH team do the following:</p>
+		<p>Now, you'll need to go into each team's config and update their settings. Double click on the team name to get the team config menu. For EACH team do the following:</p>
 
 		<table>
 			<tr><font id=""></font>
@@ -82,7 +82,7 @@
 			</tr><tr>
 			<td>Requires AI</td><td><font id="no">Disabled</font></td>
 			</tr><tr>
-			<td>Resources</td><td><span id="plas">2000</span><img src="c_images/plastic.png" class="resicon"> <span id="elec">800</span><img src="c_images/electricity.png" class="resicon">**</td>
+			<td>Resources</td><td><span id="plas">2000</span><img src="c_images/plastic.png" class="resicon"> <span id="elec">800</span><img src="c_images/electricity.png" class="resicon"></td>
 			</tr><tr>
 			<td>Region</td><td>(Starting region)</td>
 			</tr><tr>
@@ -96,16 +96,17 @@
 			</tr>
 		</table>
 		
-		<p>*Set this to disabled for all except any 1 team.<br>
-		**Recommended values for teams is <span id="plas">2000</span><img src="c_images/plastic.png" class="resicon"> or <span id="plas">2500</span><img src="c_images/plastic.png" class="resicon"> for plastic, and <span id="elec">800</span><img src="c_images/electricity.png" class="resicon"> or <span id="elec">1000</span><img src="c_images/electricity.png" class="resicon"> for electricity. But you may choose anything you feel is best for your map. 100k each is also an option if you want to make a maxrush map. Regardless, make sure it's the same for all teams for balance.</p>
-
-		<p>Before you forget, double-check you set a start region for each playable team. (so team1's region would be the "team1_start" region) Do not forget this step! <mark>Neglecting to assign regions to your playable teams may result in <dsb>game crashes</dsb> while trying to load the map into the studio editor!</mark> If this happens to you, try going into the game.cfg file and setting the personality to <code>"None"</code> for the offending team.</p>
+		<p>*Set this to disabled for all except any 1 team.</p>
 		
-		<p>While the personality you set won't matter for teams available to players, it's recommended to it to <code>"default"</code> instead of nothing at all for debug reasons. It'll be overridden when a mutliplayer match starts anyways.</p>
+		<p>Recommended starting resources for teams is <span id="plas">2000</span><img src="c_images/plastic.png" class="resicon"> or <span id="plas">2500</span><img src="c_images/plastic.png" class="resicon"> for plastic, and <span id="elec">800</span><img src="c_images/electricity.png" class="resicon"> or <span id="elec">1000</span><img src="c_images/electricity.png" class="resicon"> for electricity. But you may choose anything you feel is best for your map. 100k each is also an option if you want to make a maxrush map. Regardless, make sure it's the same for all teams for balance.</p>
+
+		<p>Before you forget, double-check you set a start region for each playable team. (so team1's region would be the "team1_start" region) <mark>Neglecting to assign regions to your playable teams may result in <dsb>game crashes</dsb> while trying to load the map into the studio editor!</mark> If this happens to you, try going into the game.cfg file and setting the personality to <code>"None"</code> for the offending team.</p>
+		
+		<p>While the personality you set won't matter for teams available to players, it's recommended to set it to <code>"default"</code> instead of nothing at all for debug reasons. It'll be overridden when a multiplayer match starts anyways.</p>
 		
 		<p>Finally, you likely need to set a ruleset for the map. All of the standard multiplayer maps in AMRTS have "Protect HQ" as its ruleset, with 2 exceptions. (King of the Hill uses the ruleset of the same name, and DumDum Frenzy uses custom objectives in lue of a ruleset) Click "Tools" in the lower left. Select "Ruleset" and "Protect HQ" from the dropdown box.</p>
 
-		<p>Hopefully you've been saving your map perodically as you've been working on it. If not, it's a good habit when working on larger projects, especially beyond AMRTS. Quick-save your map with <dsb>Ctrl+S</dsb>. Save in the Multiplayer Missions folder, and your map should now show up on the menu when you run the game! Before distributing your map, you should zip the map folder with <a href="https://clanexf.com/forums/viewtopic.php?p=14982" target="about:blank">DrPacker</a> or <a id="badlink">X File Utilities.</a></p>
+		<p>Hopefully you've been saving your map periodically as you've been working on it. If not, it's a good habit when working on larger projects, especially beyond AMRTS. Quick-save your map with <dsb>Ctrl+S</dsb>. Once in the Multiplayer Missions folder, and your map should now show up on the menu when you run the game! Before distributing your map, you should zip the map folder with <a href="https://clanexf.com/forums/viewtopic.php?p=14982" target="about:blank">DrPacker</a> or <a id="badlink">X File Utilities.</a></p>
 	</div>
 	<iframe src="../footer.html"></iframe>
 	
