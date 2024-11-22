@@ -42,13 +42,15 @@
 		<p>Now, one of the first choices you will make when making a map is if you want it to be symmetric or asymmetric. Symmetry solves the difficult problem of having to balance the map. If each side is the same, you don't have to worry about one side having an advantage. If you are just getting into map-making, you should start with symmetric maps before going onto more difficult asymmetric ones. Symmetry doesn't necessarily mean each cell is exactly the same as the next (often times this makes the map look bland); maps that have generally the same balances on both sides (like similar mountains blocking passes, etc) are just as good and won't have noticeable balance differences.</p>
 		
 		<h3>Terrain uniqueness</h3>
-		<p>Each map that you make should be unique in some ways from other maps. Nobody wants to play the 50th river map, with slightly different terrains and start locations, just because you made it. Temporarily deflate ego and place it in a good storage bin.</p>
-		
-		<p>What will set your map apart from others? Does it have a river surrounding it? Does it have player bases stranded in space with only a few connecting bridges? Having noticeable terrain features really sets a map apart from others. Using a theme such as a medieval siege upwards of a fortified base (2siege, 4siege), a base with a windy pass through the snow as a means of exit (8snowpass), or 2v2 bases all starting near each other with water in between (4seadevil) is a good way to keep your maps from being bland rip offs of others.</p>
+		<p>Each map that you make should be unique in some ways from other maps.
+		<!-- Nobody wants to play the 50th river map, with slightly different terrains and start locations, just because you made it. Temporarily deflate ego and place it in a good storage bin.
+		This is amazing but I don't think I'll keep it here XD -->
+		If you're having trouble picturing how you want yours to look, draw inspiration from one of the official maps (multiplayer or otherwise) without too closely resembling it.</p>
+		<p>Ask yourself: What will set your map apart from others? Consider how it might use choke points, traverable props, side paths, water, and vantage points. Use any and all props the chosen world has to offer in your map's theme.</p>
 		
 		<h3>Drawing in Photoshop</h3>
 		
-		<p>One way that I build many of my maps was to build the groundwork in Photoshop (or a similar program), using all the nifty tools for copying and pasting and symmetry, and then exporting it to the game engine. You lay the groundwork of where everything is in relation to everything else in this map, then go from there to build the whole map.</p>
+		<p>One option to consider before sculpting your terrain is to build to the groundwork in Photoshop, (or a similar program) using all the nifty tools for copying and pasting and symmetry, and then exporting it to the game engine. You lay the groundwork of where everything is in relation to everything else in this map, then go from there to build the whole map.</p>
 		
 		<p>The benefits of this is that you can create a general idea of how you want the map to look, and then import it on a variety of different map sizes, to test what the best size for your map is.</p>
 		
@@ -70,19 +72,19 @@
 		
 		<h3>Creating enough padding</h3>
 		
-		<p>One thing I have noticed with many user created maps is they extend out to just one or two cells before the end of the map. This is not advised because it really limits the camera movement. I usually like 6-10 cells of 'padding' between the boundaries of the map and the edge of the playable space. Make sure you use Impassable Air textures (such as Mountain_Air) so that no units can get onto this padding. The padding gives extra room for the camera to move around, which is needed if you are building your base in a corner. Make sure that on your map you can ALWAYS see the entirety of your starting area from the F3 view (default)</p>
+		<p>One thing that's common among novice user created maps is they extend out to just one or two cells before the end of the map. This is not advised because it really limits the camera movement. Try to leave 6-10 cells of padding between the boundaries of the map and the edge of the playable space. Make sure you use <code>move::block<mark>x</mark></code> regions so that no units can get onto this padding. The padding gives extra room for the camera to move around, which is needed if you are building your base in a corner. Make sure that on your map you can ALWAYS see the entirety of your map's playable area with unmodified camera controls.</p>
 		
 		<h3>Using height levels</h3>
 		
-		<p>One way of diversifying the landscape in your map and setting up strategic points is to vary the height of different areas of the map, using many planes of height. Perhaps a base is low down, the roads around the base are at average height, and resources are on even higher planes. Height is a big factor in DR2, and one of the strategies as a player is to secure the high ground, so why not give them some high ground to secure?</p>
+		<p>One way of diversifying the landscape in your map and setting up strategic points is to vary the height of different areas of the map, using many planes of height. Perhaps a base is low down, the roads around the base are at average height, and resources are on even higher planes. Even if you don't want height to be a big factor in your map, having perfectly flat terrain in the attic or outdoor worlds is really boring.</p>
 		
 		<h3>Don't make them move</h3>
 		
-		<p>Use your start locations as a recommended place where the player should build their base. Having to move around to find a good spot is tedious and players don't like it.</p>
+		<p>Use your start locations as a recommended place where the player should build their base. Players will be eager setup a base quickly, harvest the resources in the immediate area, and then either fight for more contested resources or go directly to invading enemy bases. Having to move around to find a good spot is tedious and doesn't make for a good map.</p>
 
-<h3>Alternate base locations</h3>
+		<h3>Alternate base locations</h3>
 		
-		<p>I like occasionally making a map that has other areas outside the regular base area to build another base. These are really helpful when you are losing and have to move your base elsewhere. Two examples of these are 4crazed (corners) and 4seadevil (top). Don't do it on every map, but the occasional alternate base location is always welcome.</p>
+		<p>One option is to give viable areas for constructing an additional/recovery base, clear from obstructions and decor. These are really helpful when you are losing and have to move your base elsewhere. No need to do this with every map, but the occasional alternate base location is always welcome.</p>
 		
 		<h3>Building placement</h3>
 		
@@ -120,7 +122,7 @@
 
 <h3>Water Maps</h3>
 		
-		<p>When making water maps, you have to consider a few more factors. If you're just adding a few small lakes and whatnot for scenery, don't worry about it. But if you're making a full-fledged water map or a mostly land map with some water tactics, listen up.
+		<p id="gray">When making water maps, you have to consider a few more factors. If you're just adding a few small lakes and whatnot for scenery, don't worry about it. But if you're making a full-fledged water map or a mostly land map with some water tactics, listen up.
 
     Not too complex
     Complexity of waterways was one thing I quickly learned didn't work well when making water maps. Since I drew nearly every map with Photoshop, it was easy to get carried away with small streams and islands. You have to remember that with 8m cells you really need to create somewhat wide waterways. Also, giving a few cells of movement for the boats really helps them move around and allows more area to build docks.
@@ -132,40 +134,37 @@
     This one is important, especially for thin rivers in water maps - make sure that docks can be built where you want them to be! Docks need a cell or two of relatively flat terrain around them to be built.
 
     Resources on islands
-    A fun way of spicing up a water map or even maps that emphasize land is separating some resources from the landmasses. Keep in mind that if you have an island without any bridges on it, you won't be able to get disruptors to protect it from air strikes unless you build a garage on the island and make one. Also, you may want to be kind to the players and give them space to build a refinery on the island. Generally people won't think of islands as needing to secure unless there is enough of a good reason to go there, so spice up the islands with taelon.
-
-    Shift-spacebar water height
-    To select the height of the water you have your mouse over, in the '4' menu, hold down shift when you press spacebar, and you will get the level of the water you are pointing at.
+    A fun way of spicing up a water map or even maps that emphasize land is separating some resources from the landmasses. Keep in mind that if you have an island without any bridges on it, you won't be able to get disruptors to protect it from air strikes unless you build a garage on the island and make one. Also, you may want to be kind to the players and give them space to build a refinery on the island. Generally people won't think of islands as needing to secure unless there is enough of a good reason to go there, so spice up the islands with taelon.</p>
 
 
-    Balancing Asymmetric Maps
+    <h3>Balancing Asymmetric Maps</h3>
     This is a tough one, and really depends on following the rules and thinking it all out in your head. With asymmetrical maps, you have start locations that share little in common in terms of look and function. Your goal is to give a player who is on one part of the map the same chance as the one on the other side. Sometimes you will balance all the following points separately and individually, and other times you may want to balance them out one for the other (i.e. 1 player has 5 entrances into his base, but has lots of taelon.) The latter is much more difficult. The following are what you need to consider when balancing an asymmetric map:
 
-    Resource locations
+    <h3>Resource locations</h3>
     The most important is does each player have enough resource around them, and are there an equal number of 'shared' resource points with other players. You may want some players to have more resources around them balancing out their poorer position on the map.
 
-    Choke points into bases
+    <h3>Choke points into bases</h3>
     If one player has only one entrance into their base, and the other has 4, there is a problem. Make sure each player has relatively the same amount of points to enter their base as the other players.
 
-    The locations of other players
+    <h3>The locations of other players</h3>
     You want all players to have an equal number of players around them. What you don't want is a player backed into the top right corner of a map with one nearby enemy and another in the center, surrounded by five enemies. Keeping the locations of players an equal distance away and keeping an equal number of nearby players to you is what you should aim for.
 
-    Base size
+    <h3>Base size</h3>
     You want to make sure players have a nice area to make their base. One player having lots of flat land and the next getting spawned into the hills just sucks. Remember, equal footing :)
 
-    High ground and low ground
+    <h3>High ground and low ground</h3>
     Making everybody's bases be at the same elevation, or at least having similar terrain advantages or disadvantages, is important to balancing start locations. You wouldn't want to have a base that can be attacked from above, and then have your enemy have a base so high up that you couldn't see what was in it. A notable exception to this is 2hilo, which has one player high up and the other low down. The balance to that is that the middle, fought over resource is closer to the lower person.
 
-    Painting Maps
+    <h3>Painting Maps</h3>
     This one is tough, because you have to have a good artist on hand to make them look REALLY good. A good map painter can turn a bland map into a work of art. Play around with the paint tool for a while and try to add subtle details to the map. That's all I can say because I'm not very good at it ;)
 
-    Naming Conventions
+   <h3>Naming Conventions</h3>
     This one is relatively straightforward. You may choose to name your map whatever you want, but having some sort of standard to it is really key. I named the maps in the same way DR1 did, with Xname, X being the number of players, and name being what I called it. Mod maps had the first letter of the mod before it (like c8snowpass for control freak.) If you want people to know it's yours or if you've got a mappack, you may want to add like Shmitz-8wallawalla.
 
-    Start Locations
+   <h3>Start Locations</h3>
     Make sure you give yourself some room when putting down the start location. There's no need to draw a huge region where the start location is, because it reads from the center (when you have the region menu selected, just click on the ground where you want it to be, and a single arrow will appear for your start location.) Generally I name them the name of the team, however, in the Assault mod I named them the 'teamX-start' because I was using the team name as a variable, and … okay we'll cover that in rulesets.
 
-    Maps for Mods
+   <h3>Maps for Mods</h3>
     This section is tricky, because you have to know exactly what the mod consists of for you to be able to make a good map for it. A Control Freak map, for instance, should use the control points as desirable locations as much as resources. An Assault map is all about making the player's life difficult in attacking the fortified base. A KOTH map stresses the middle as the most important area, bar none. Whatever mods you and your friends may come up with should take into account what strategies the new mod creates. If the mod is an infantry rush mod, for instance, you'd want to create shallow water areas and mucky textures to slow down the rushes, and to make the players micromanage their forces to get to you as fast as possible.
 
 </p>
