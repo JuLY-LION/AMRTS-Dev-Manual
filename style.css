@@ -92,6 +92,12 @@ code {
 	border-radius: 4px;
 	border: 2px solid #202020;
 }
+blockquote {
+	border-left: 4px groove #ffffff;
+	padding: 8px;
+	margin: 8px;
+}
+
 
 #hf {
 	width: 100%;
