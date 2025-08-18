@@ -4,16 +4,24 @@
 @font-face { font-family: capture; src: url('fonts/Capture-It.ttf'); }
 @font-face { font-family: gunplay; src: url('fonts/Gunplay-Rg.otf'); }
 
+#content_wrapper {
+	background-image: url("images/prop_wallbeam_seamless_darkest.png") !important;
+	background-size: 1024px 512px !important;
+
+	border: 5px solid #6e585b !important;
+	border-radius: 0px !important;
+}
 body {
 	background-color: black;
-	background-image: url("manual/placeholder_background.jpg");
-	background-size: 100%;
+	background-image: url("images/basement_prop_wall3.png");
+	background-size: 512px 512px;
 	color: white;
 	font-family: Arial;
 }
 h1 {
 	color: #f0f0d0;
 	font-family: "Times New Roman";
+	font-size: 40px;
 	
 	padding: 0px 10px;
 	border-left: 4px dotted #f0f0b0;
