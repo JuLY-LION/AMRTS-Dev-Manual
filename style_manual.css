@@ -1,0 +1,153 @@
+@font-face { font-family: droid; src: url('fonts/DroidSans.ttf'); }
+@font-face { font-family: droidbold; font-weight: bold; src: url('fonts/DroidSans-Bold.ttf'); }
+@font-face { font-family: stencil; src: url('fonts/StencilStd.otf'); }
+@font-face { font-family: capture; src: url('fonts/Capture-It.ttf'); }
+@font-face { font-family: gunplay; src: url('fonts/Gunplay-Rg.otf'); }
+
+body {
+	background-color: black;
+	background-image: url("manual/placeholder_background.jpg");
+	background-size: 100%;
+	color: white;
+	font-family: Arial;
+}
+h1 {
+	color: #f0f0d0;
+	font-family: "Times New Roman";
+	
+	padding: 0px 10px;
+	border-left: 4px dotted #f0f0b0;
+}
+h2 {
+	color: white;
+	font-family: capture;
+}
+h3 {
+	color: #ffffff;
+	font-family: gunplay;
+}
+a {
+	color: white;
+	padding: 2px 0px;
+	border-left: 2px dashed #80c0ff;
+	border-bottom: 2px dashed #80c0ff;
+}
+a:visited {
+	border-left: 2px dashed #c080ff;
+	border-bottom: 2px dashed #c080ff;
+}
+a.bad {
+	color: white;
+	padding: 2px 0px;
+	border-left: 2px dashed #ff4040;
+	border-bottom: 2px dashed #ff4040;
+}
+a.noborder {
+	color: auto;
+	padding: 0px;
+	border-left: 0px none #ffffff;
+	border-bottom: 0px none #ffffff;
+}
+
+div.topbutton {
+	position: absolute;
+	top: 32px;
+	left: 32px;
+}
+iframe {
+	width: 100%;
+	height: 32px;
+	
+	border: 0px none;
+	margin: 0px auto;
+	padding: 0px;
+}
+
+dsb {
+	font-family: droidbold;
+}
+hili {
+	color: ffff80;
+	background-image: url("colors/darkgray_opacity50.png");
+	padding: 2px 0px;
+}
+mark {
+	color: ffff80;
+	background-color: #40404080;
+	padding: 2px 0px;
+}
+img.dl {
+	width:32px;
+	height:32px;
+	
+	position: relative;
+	top: 0px;
+}
+code {
+	color: aqua;
+	background-color: #00000080;
+	
+	font-family: "Lucida Console";
+	
+	padding: 2px;
+	border-radius: 4px;
+	border: 2px solid #202020;
+}
+blockquote {
+	border-left: 4px groove #ffffff;
+	padding: 8px;
+	margin: 8px;
+}
+
+
+#hf {
+	width: 100%;
+	height: 19px;
+	
+	font-family: droidbold;
+	
+	border: 2px solid #b0b0b0;
+	border-radius: 4px;
+	margin: 0px auto;
+	padding: 4px;
+	background-image: url("images/if_interface_bkgnd.png");
+}
+#armygreen {
+	color: #5ef241;
+}
+#armytan {
+	color: #fcc26b;
+}
+#insectred {
+	color: #b3321c;
+	font-family: "Brush Script MT", cursive;
+	background-color: #ffffff80;
+	padding: 0px 4px;
+	border-radius: 1440px;
+}
+#codestring {
+	color: aqua;
+	background-color: #00000080;
+	
+	font-family: "Lucida Console";
+	
+	padding: 2px;
+	border-radius: 4px;
+	border: 2px solid #202020;
+}
+#badlink {
+	color: white;
+	padding: 2px 0px;
+	border-left: 2px dashed #ff4040;
+	border-bottom: 2px dashed #ff4040;
+}
+#lrw {
+	padding: 0px;
+	border: 6px outset #204060;
+}
+#captureit {
+	font-family: capture;
+}
+#gray {
+	color: #c0c0c0;
+}
