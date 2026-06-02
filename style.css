@@ -10,6 +10,12 @@ body {
 	color: white;
 	font-family: droid;
 }
+div.preh {
+	font-variant-caps: small-caps;
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: -20px;
+}
 h1 {
 	color: #f0f0d0;
 	font-family: stencil;
