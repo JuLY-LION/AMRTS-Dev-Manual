@@ -66,9 +66,7 @@ dsb {
 	font-family: droidbold;
 }
 hili {
-	color: ffff80;
 	background-image: url("colors/darkgray_opacity50.png");
-	padding: 2px 0px;
 }
 mark {
 	color: ffff80;
@@ -130,9 +128,12 @@ blockquote {
 	
 	font-family: "Lucida Console";
 	
-	padding: 2px;
+	padding: 4px;
 	border-radius: 4px;
 	border: 2px solid #202020;
+}
+#codestring > mark {
+	background-color: transparent;
 }
 #badlink {
 	color: white;
