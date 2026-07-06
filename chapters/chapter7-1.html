@@ -12,7 +12,7 @@
 	<div id = "content_wrapper">
 		<h1>Mods and Rulesets</h1>
 		<h2>Getting Started (7.1)</h2>
-		<h2 style="color:#ff8080;">Under construction! Come back later!</h2>
+		<!-- h2 style="color:#ff8080;">Under construction! Come back later!</h2 -->
 		<h3>Getting Started</h3>
 		<p>This section assumes basic knowledge of the Army Men RTS scripting language learned in Section 5: <a href="chapter5-1.html">Creating a Single Player Mission</a>, and it is highly recommended you read through that section before proceeding.</p>
 		<p>Scripting and making rulesets for multiplayer has quite a few differences than single player, and involves thinking from every player's viewpoint rather than an individual team's. In SP, most of your scripts explicitly call a team by their name, which, while possible in MP, is not recommended and usually leads to making separate configs for each team. Instead, you should be calling teams using <code>Relation()</code> and <code>@.engine.name</code>, two things we'll discuss below. Another difference in SP vs. MP is compatibility with allies. This involves using the <code>Relation()</code> tag quite a bit, as well as making sure the scripts, especially triggers, work correctly for ALL allies. These will all be covered in this document.</p>
